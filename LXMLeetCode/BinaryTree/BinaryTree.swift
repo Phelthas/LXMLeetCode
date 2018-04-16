@@ -24,6 +24,8 @@ public class TreeNode : NSObject {
     }
 }
 
+
+// MARK: - 先序遍历
 extension TreeNode {
     
     /* 递归的算法比较简单，迭代的算法关键是要弄清楚它是怎么迭代的，
@@ -97,6 +99,8 @@ extension TreeNode {
     
 }
 
+
+// MARK: - 中序遍历
 extension TreeNode {
     
     class func inorderTraverseRecursion(root: TreeNode?) -> [Int] {
@@ -177,5 +181,37 @@ extension TreeNode {
 }
 
 
-
+// MARK: - 后序遍历
+extension TreeNode {
+    
+    class func postorderTraverseRecursion(root: TreeNode?) -> [Int] {
+        var resultArray = [Int]()
+        
+        func postorderTraverse(node: TreeNode?) {
+            if let left = node?.left {
+                postorderTraverse(node: left)
+            }
+            
+            if let right = node?.right {
+                postorderTraverse(node: right)
+            }
+            if let node = node {
+                resultArray.append(node.val)
+            }
+        }
+        
+        postorderTraverse(node: root)
+        return resultArray
+    }
+    
+    class func postorderTraverseIteration(root: TreeNode?) -> [Int] {
+        var resultArray = [Int]()
+        guard let root = root else { return resultArray }
+        
+        var stackArray = [TreeNode]()
+        
+        return resultArray
+    }
+    
+}
 

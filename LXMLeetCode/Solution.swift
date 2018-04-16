@@ -60,4 +60,10 @@ class Solution {
         print(TreeNode.inorderTraverseRecursion(root: TestData().node1))
         print(TreeNode.inorderTraverseIteration(root: TestData().node1))
     }
+    
+    func postorderTraverseSolution() {
+        print("后序遍历")
+        print(TreeNode.postorderTraverseRecursion(root: TestData().node1))
+        print(TreeNode.postorderTraverseIteration(root: TestData().node1))
+    }
 }

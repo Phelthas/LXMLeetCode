@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         let solution = Solution()
         solution.preorderTraverseSolution()
         solution.inorderTraverseSolution()
+        solution.postorderTraverseSolution()
     }
     
 }
