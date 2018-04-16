@@ -15,7 +15,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        Solution().preorderTraverseSolution()
         
     }
 
@@ -24,6 +23,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func printSolution(_ sender: UIButton) {
+        let solution = Solution()
+        solution.preorderTraverseSolution()
+        solution.inorderTraverseSolution()
+    }
+    
 }
 

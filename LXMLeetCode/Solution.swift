@@ -21,13 +21,15 @@ class TestData {
     let node9 = TreeNode(9)
     
     /*
-                 1
-               /   \
-              2     3
-             / \   / \
-            4   5  6  7
-               /    \
-              8      9
+                      1
+               /             \
+              2               3
+          /       \       /        \
+         4        5      6          7
+                 /        \
+                8          9
+     *********************************
+        4    2  8  5  1  6 9  3     7
      */
     init() {
         node1.left = node2
@@ -51,5 +53,11 @@ class Solution {
         print("前序遍历")
         print(TreeNode.preorderTraverseRecursion(root: TestData().node1))
         print(TreeNode.preorderTraverseIteration(root: TestData().node1))
+    }
+    
+    func inorderTraverseSolution() {
+        print("中序遍历")
+        print(TreeNode.inorderTraverseRecursion(root: TestData().node1))
+        print(TreeNode.inorderTraverseIteration(root: TestData().node1))
     }
 }
