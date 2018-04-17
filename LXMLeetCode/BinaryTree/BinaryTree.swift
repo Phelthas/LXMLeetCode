@@ -210,6 +210,43 @@ extension TreeNode {
         
         var stackArray = [TreeNode]()
         
+        func postorderTraverse(node: TreeNode?) {
+            var current = node
+            while current != nil {
+                stackArray.append(current!)
+                current = current?.left
+            }
+        }
+        
+        var currentNode: TreeNode? = root
+        var lastNode: TreeNode? = nil
+        while true {
+            postorderTraverse(node: currentNode)
+            while stackArray.count != 0 {
+                currentNode = stackArray.last
+                // 最关键的是这里，判断输出的条件是：当前节点的右子树为空，或者右子树是刚刚访问过的，
+                // 这样才符合后续遍历 左-右-中 的顺序，
+                /*
+                 总的流程是：
+                 1，取栈顶节点，遍历找到最左下节点，并将途径节点依次入栈，如果该节点没有右子树，或者右子树==上次访问的子树，则执行2，否则执行3
+                 2，输出该节点，将该节点出栈，将上次访问的节点设置为该节点，然后执行1；
+                 3，这里说明该节点的右子树存在且不是上次访问过的节点，所以以该节点为栈顶元素，执行1
+                 
+                 */
+                if currentNode?.right == nil || currentNode?.right == lastNode {
+                    resultArray.append((currentNode?.val)!)
+                    lastNode = currentNode
+                    stackArray.removeLast()
+                } else {
+                    currentNode = currentNode?.right
+                    break
+                }
+            }
+            if stackArray.count == 0 {
+                break
+            }
+        }
+        
         return resultArray
     }
     
