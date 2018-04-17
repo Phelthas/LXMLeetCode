@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TreeNode : NSObject {
+public class TreeNode {
     public var val: Int
     public var left: TreeNode?
     public var right: TreeNode?
@@ -19,9 +19,9 @@ public class TreeNode : NSObject {
         self.right = nil
     }
     
-    public override var description: String {
-            return "\(self.val)"
-    }
+//    public override var description: String {
+//            return "\(self.val)"
+//    }
 }
 
 
@@ -233,7 +233,7 @@ extension TreeNode {
                  3，这里说明该节点的右子树存在且不是上次访问过的节点，所以以该节点为栈顶元素，执行1
                  
                  */
-                if currentNode?.right == nil || currentNode?.right == lastNode {
+                if currentNode?.right == nil || currentNode?.right === lastNode {
                     resultArray.append((currentNode?.val)!)
                     lastNode = currentNode
                     stackArray.removeLast()
@@ -251,4 +251,63 @@ extension TreeNode {
     }
     
 }
+
+// MARK: - 层序遍历
+extension TreeNode {
+    
+    class func levelOrder(root: TreeNode?) -> [[Int]] {
+        var resultArray = [[Int]]()
+        guard let root = root else { return resultArray }
+        
+        var currentLevel = [TreeNode]()
+        var nextLevel = [TreeNode]()
+        var subArray = [Int]()
+        
+        currentLevel.append(root)
+        
+        while currentLevel.count != 0 {
+            let currentNode = currentLevel.removeFirst()
+            subArray.append(currentNode.val)
+            if let left = currentNode.left {
+                nextLevel.append(left)
+            }
+            if let right = currentNode.right {
+                nextLevel.append(right)
+            }
+            if currentLevel.count == 0 {
+                resultArray.append(subArray)
+                subArray = [Int]()
+                if nextLevel.count == 0 {
+                    break
+                }
+                currentLevel = nextLevel
+                nextLevel = [TreeNode]()
+            }
+        }
+        return resultArray
+    }
+    
+    class func levelOrderTraverse(root: TreeNode?) -> [Int] {
+        var resultArray = [Int]()
+        guard let root = root else { return resultArray }
+        
+        var queueArray = [TreeNode]()
+        queueArray.append(root)
+        var currentNode: TreeNode? = root
+        while queueArray.count != 0 {
+            currentNode = queueArray.removeFirst()
+            resultArray.append((currentNode?.val)!)
+            if let left = currentNode?.left {
+                queueArray.append(left)
+            }
+            if let right = currentNode?.right {
+                queueArray.append(right)
+            }
+        }
+        return resultArray
+    }
+    
+}
+
+
 

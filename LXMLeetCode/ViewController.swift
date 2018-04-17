@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         solution.preorderTraverseSolution()
         solution.inorderTraverseSolution()
         solution.postorderTraverseSolution()
+        solution.levelOrderTraverseSolution()
     }
     
 }
