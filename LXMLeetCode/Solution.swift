@@ -72,4 +72,11 @@ class Solution {
         print(TreeNode.levelOrderTraverse(root: TestData().node1))
         print(TreeNode.levelOrder(root: TestData().node1))
     }
+    
+    func maxDepthSolution() {
+        print("最大深度")
+        print(TreeNode.maxDepthBottomToTop(ofNode: TestData().node1))
+        print(TreeNode.maxDepthTopToBottom(ofNode: TestData().node1))
+        
+    }
 }

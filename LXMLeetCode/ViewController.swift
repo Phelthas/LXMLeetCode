@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         solution.inorderTraverseSolution()
         solution.postorderTraverseSolution()
         solution.levelOrderTraverseSolution()
+        solution.maxDepthSolution()
     }
     
 }

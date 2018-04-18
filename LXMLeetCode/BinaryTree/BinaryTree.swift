@@ -310,4 +310,32 @@ extension TreeNode {
 }
 
 
+extension TreeNode {
+    
+    class func maxDepthBottomToTop(ofNode root: TreeNode?) -> Int {
+        guard let root = root else { return 0 }
+        let leftResult = maxDepthBottomToTop(ofNode: root.left)
+        let rirghtResult = maxDepthBottomToTop(ofNode: root.right)
+        return max(leftResult, rirghtResult) + 1
+    }
+    
+    class func maxDepthTopToBottom(ofNode root: TreeNode?) -> Int {
+        
+        var result: Int = 0
+        func topToBottom(node: TreeNode?, depth: Int) {
+            guard let node = node else { return }
+            if node.left == nil && node.right == nil {
+                result = max(result, depth + 1)
+            }
+            topToBottom(node: node.left, depth: depth + 1)
+            topToBottom(node: node.right, depth: depth + 1)
+        }
+        
+        topToBottom(node: root, depth: 0)
+        return result
+    }
+    
+}
+
+
 
