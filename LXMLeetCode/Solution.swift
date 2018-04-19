@@ -45,6 +45,23 @@ class TestData {
         node6.right = node9
     }
     
+    class func symmetricTestNode() -> TreeNode {
+        let node1 = TreeNode(1)
+        let node2 = TreeNode(2)
+        let node3 = TreeNode(2)
+        let node4 = TreeNode(3)
+        let node5 = TreeNode(3)
+        let node6 = TreeNode(4)
+        let node7 = TreeNode(4)
+        node1.left = node2
+        node1.right = node3
+        node2.left = node4
+        node2.right = node6
+        node3.left = node7
+        node3.right = node5
+        return node1
+    }
+    
 }
 
 class Solution {
@@ -77,6 +94,18 @@ class Solution {
         print("最大深度")
         print(TreeNode.maxDepthBottomToTop(ofNode: TestData().node1))
         print(TreeNode.maxDepthTopToBottom(ofNode: TestData().node1))
+    }
+    
+    func isSymmetricSolution() {
+        print("是否是对称二叉树")
+        print(TreeNode.isSymmetric(root: TestData.symmetricTestNode()))
+        print(TreeNode.isSymmetricRecursion(root: TestData.symmetricTestNode()))
+        print(TreeNode.isSymmetricIteration(root: TestData.symmetricTestNode()))
+        
+        print(TreeNode.isSymmetric(root: TestData().node1))
+        print(TreeNode.isSymmetricRecursion(root: TestData().node1))
+        print(TreeNode.isSymmetricIteration(root: TestData().node1))
         
     }
+    
 }

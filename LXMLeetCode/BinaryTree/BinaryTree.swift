@@ -337,5 +337,121 @@ extension TreeNode {
     
 }
 
+extension TreeNode {
+    
+     func copy() -> TreeNode {
+        let result = TreeNode(self.val)
+        if let left = self.left {
+            result.left = left.copy()
+        }
+        if let right = self.right {
+            result.right = right.copy()
+        }
+        return result
+    }
+    
+    class func invertTree(root: TreeNode?) -> TreeNode? {
+        //这里实际上是指针赋值，所以下面的操作都是在原指针上执行的，并没有产生新的指针
+        //如果想要一个跟原来数一模一样的新树，貌似只能遍历一般然后挨个新建了
+        if let left = root?.left {
+            _ = invertTree(root: left)
+        }
+        if let right = root?.right {
+            _ = invertTree(root: right)
+        }
+        let temp = root?.left
+        root?.left = root?.right
+        root?.right = temp
+        return root
+    }
+    
+    class func isSame(nodeOne: TreeNode?, nodeTwo: TreeNode?) -> Bool {
+        if nodeOne == nil && nodeTwo == nil {
+            return true
+        } else if nodeOne == nil || nodeTwo == nil {
+            return false
+        } else {
+            if let one = nodeOne, let two = nodeTwo, one.val == two.val {
+                let leftResult = isSame(nodeOne: one.left, nodeTwo: two.left)
+                let rightResult = isSame(nodeOne: one.right, nodeTwo: two.right)
+                if leftResult && rightResult {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        }
+    }
+    
+    class func isSymmetric(root: TreeNode?) -> Bool {
+        let inversedNode = TreeNode.invertTree(root: root?.copy())
+//        print(TreeNode.preorderTraverseIteration(root: root))
+//        print(TreeNode.preorderTraverseIteration(root: inversedNode))
+        return TreeNode.isSame(nodeOne: root, nodeTwo: inversedNode)
+    }
+    
+    
+    class func isSymmetricRecursion(root: TreeNode?) -> Bool {
+        guard let root = root else { return true }
+
+        func isSymmetric(nodeOne: TreeNode?, nodeTwo: TreeNode?) -> Bool {
+            if nodeOne == nil && nodeTwo == nil {
+                return true
+            } else if nodeOne == nil || nodeTwo == nil {
+                return false
+            } else {
+                if nodeOne?.left?.val == nodeTwo?.right?.val && nodeOne?.right?.val == nodeTwo?.left?.val {
+                    let sideResult = isSymmetric(nodeOne: nodeOne?.left, nodeTwo: nodeTwo?.right)
+                    let midResult = isSymmetric(nodeOne: nodeOne?.right, nodeTwo: nodeTwo?.left)
+                    return  sideResult && midResult
+                }
+                return false
+            }
+        }
+        
+        return isSymmetric(nodeOne: root.left, nodeTwo: root.right)
+    }
+    
+    class func isSymmetricIteration(root: TreeNode?) -> Bool {
+        guard let root = root else { return true }
+        
+        if root.left == nil && root.right == nil {
+            return true
+        } else if root.left == nil || root.right == nil {
+            return false
+        } else {
+            var leftStackArray = [root]
+            var rightStackArray = [root]
+            
+            while leftStackArray.count != 0 && rightStackArray.count != 0 {
+                if leftStackArray.count != rightStackArray.count {
+                    return false
+                }
+                var currentLeft: TreeNode? = leftStackArray.removeLast()
+                var currentRight: TreeNode? = rightStackArray.removeLast()
+                
+                while currentLeft != nil || currentRight != nil {
+                    if currentLeft?.val != currentRight?.val {
+                        return false
+                    }
+                    if let right = currentLeft?.right {
+                        leftStackArray.append(right)
+                    }
+                    currentLeft = currentLeft?.left
+                    
+                    if let left = currentRight?.left {
+                        rightStackArray.append(left)
+                    }
+                    currentRight = currentRight?.right
+                }
+            }
+            return true
+        }
+
+    }
+}
+
 
 

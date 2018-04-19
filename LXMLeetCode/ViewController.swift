@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         solution.postorderTraverseSolution()
         solution.levelOrderTraverseSolution()
         solution.maxDepthSolution()
+        solution.isSymmetricSolution()
     }
     
 }
