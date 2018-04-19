@@ -425,7 +425,7 @@ extension TreeNode {
             var leftStackArray = [root]
             var rightStackArray = [root]
             
-            while leftStackArray.count != 0 && rightStackArray.count != 0 {
+            while leftStackArray.count != 0 || rightStackArray.count != 0 {
                 if leftStackArray.count != rightStackArray.count {
                     return false
                 }
