@@ -310,6 +310,7 @@ extension TreeNode {
 }
 
 
+// MARK: - 最大深度
 extension TreeNode {
     
     class func maxDepthBottomToTop(ofNode root: TreeNode?) -> Int {
@@ -337,6 +338,8 @@ extension TreeNode {
     
 }
 
+
+// MARK: - 判断是否对称二叉树
 extension TreeNode {
     
      func copy() -> TreeNode {
@@ -454,4 +457,31 @@ extension TreeNode {
 }
 
 
+// MARK: - 路径总和
+extension TreeNode {
+    
+    class func hasPathSumRecursion(root: TreeNode?, sum: Int) -> Bool {
+        guard let root = root else { return false }
+        
+        var result = false
+        func preorderTraverse(node: TreeNode?, tempSum: Int) {
+            guard let node = node else { return }
+            let currentSum = tempSum + node.val
+            if let left = node.left {
+                preorderTraverse(node: left, tempSum: currentSum)
+            }
+            if let right = node.right {
+                preorderTraverse(node: right, tempSum: currentSum)
+            }
+            if node.left == nil && node.right == nil {
+                if currentSum == sum {
+                    result = true
+                }
+            }
+        }
+        preorderTraverse(node: root, tempSum: 0)
+        return result
+    }
+    
+}
 

@@ -105,6 +105,14 @@ class Solution {
         print(TreeNode.isSymmetric(root: TestData().node1))
         print(TreeNode.isSymmetricRecursion(root: TestData().node1))
         print(TreeNode.isSymmetricIteration(root: TestData().node1))
+    }
+    
+    func hasPathSumSolution() {
+        print("路径总和")
+        print(TreeNode.hasPathSumRecursion(root: TestData().node1, sum: 7))
+        print(TreeNode.hasPathSumRecursion(root: TestData().node1, sum: 16))
+        print(TreeNode.hasPathSumRecursion(root: TestData().node1, sum: 19))
+        print(TreeNode.hasPathSumRecursion(root: TestData().node1, sum: 11))
         
     }
     
