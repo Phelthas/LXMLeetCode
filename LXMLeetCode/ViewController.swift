@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         solution.maxDepthSolution()
         solution.isSymmetricSolution()
         solution.hasPathSumSolution()
+        solution.buildTreeWithInorderAndPostorderSolution()
     }
     
 }
