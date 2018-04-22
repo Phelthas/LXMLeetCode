@@ -490,44 +490,37 @@ extension TreeNode {
 extension TreeNode {
 
     
-    //这个题的核心点是：1，对后序遍历来说，最后一个节点一定是整个二叉树的根节点
+    //这个题的核心点是：
+    //1，对后序遍历来说，最后一个节点一定是整个二叉树的根节点
     //2，对中序遍历来说，跟节点的左子树全部在根节点左边，右子树全部在根节点右边
     class func buildTree(inorder: [Int], postorder: [Int]) -> TreeNode? {
         if inorder.count == 0 || postorder.count == 0 || inorder.count != postorder.count {
             return nil
-            
         }
-       
-        func helper(inorder: [Int], inorderStart: Int, inorderEnd: Int, postorder: [Int], postorderStart: Int, postorederEnd: Int) -> TreeNode? {
-            guard inorderStart <= inorderEnd && postorderStart <= postorederEnd else {
-                return nil
-            }
-            var mid: Int = 0
-            let rootVal = postorder[postorederEnd]
-            let rootNode = TreeNode(rootVal)
-            for i in inorderStart...inorderEnd {
-                if inorder[i] == rootVal {
-                    mid = i
-                    break
-                }
-            }
-            rootNode.left = helper(inorder: inorder,
-                                            inorderStart: inorderStart,
-                                            inorderEnd: mid - 1,
-                                            postorder: postorder,
-                                            postorderStart: postorderStart,
-                                            postorederEnd: postorderStart + mid - inorderStart - 1)
-            rootNode.right = helper(inorder: inorder,
-                                             inorderStart: mid + 1,
-                                             inorderEnd: inorderEnd,
-                                             postorder: postorder,
-                                             postorderStart: postorderStart + mid - inorderStart,
-                                             postorederEnd: postorederEnd - 1)
+        //postorederEnd是从postorder中取跟inorder相同个数的元素
+        func buildHelper(inorderStart: Int, inorderEnd: Int, postorderStart: Int, postorderEnd: Int) -> TreeNode? {
+            guard inorderStart <= inorderEnd && postorderStart <= postorderEnd else { return nil }
             
+            let rootVal = postorder[postorderEnd]
+            let rootNode = TreeNode(rootVal)
+            guard let index = inorder.index(of: rootVal) else { return nil }
+            let leftInorderCount = index - 1 - inorderStart
+            rootNode.left = buildHelper(inorderStart: inorderStart,
+                                        inorderEnd: index - 1,
+                                        postorderStart: postorderStart,
+                                        postorderEnd: postorderStart + leftInorderCount)
+            rootNode.right = buildHelper(inorderStart: index + 1,
+                                         inorderEnd: inorderEnd,
+                                         postorderStart: postorderStart + leftInorderCount + 1,
+                                         postorderEnd: postorderEnd - 1)
             return rootNode
         }
         
-        return helper(inorder: inorder, inorderStart: 0, inorderEnd: inorder.count - 1, postorder: postorder, postorderStart: 0, postorederEnd: postorder.count - 1)
+        return buildHelper(inorderStart: 0,
+                           inorderEnd: inorder.count - 1,
+                           postorderStart: 0,
+                           postorderEnd: postorder.count - 1)
+       
     }
     
    
