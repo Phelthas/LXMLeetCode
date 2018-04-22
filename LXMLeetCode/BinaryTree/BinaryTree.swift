@@ -488,8 +488,6 @@ extension TreeNode {
 
 // MARK: - 已知中序和后序排列，求原来的二叉树（假设没有相等的元素）
 extension TreeNode {
-
-    
     //这个题的核心点是：
     //1，对后序遍历来说，最后一个节点一定是整个二叉树的根节点
     //2，对中序遍历来说，跟节点的左子树全部在根节点左边，右子树全部在根节点右边
@@ -520,9 +518,39 @@ extension TreeNode {
                            inorderEnd: inorder.count - 1,
                            postorderStart: 0,
                            postorderEnd: postorder.count - 1)
-       
     }
+}
+
+// MARK: - 已知中序和前序排列，求原来的二叉树（假设没有相等的元素）
+extension TreeNode {
     
-   
+    class func buildTree(inorder: [Int], preorder: [Int]) -> TreeNode? {
+        if inorder.count == 0 || preorder.count == 0 || inorder.count != preorder.count {
+            return nil
+        }
+        //postorederEnd是从postorder中取跟inorder相同个数的元素
+        func buildHelper(inorderStart: Int, inorderEnd: Int, preorderStart: Int, preorderEnd: Int) -> TreeNode? {
+            guard inorderStart <= inorderEnd && preorderStart <= preorderEnd else { return nil }
+            
+            let rootVal = preorder[preorderStart]
+            let rootNode = TreeNode(rootVal)
+            guard let index = inorder.index(of: rootVal) else { return nil }
+            let leftInorderCount = index - 1 - inorderStart
+            rootNode.left = buildHelper(inorderStart: inorderStart,
+                                        inorderEnd: index - 1,
+                                        preorderStart: preorderStart + 1,
+                                        preorderEnd: preorderStart + 1 + leftInorderCount)
+            rootNode.right = buildHelper(inorderStart: index + 1,
+                                         inorderEnd: inorderEnd,
+                                         preorderStart: preorderStart + 1 + leftInorderCount + 1,
+                                         preorderEnd: preorderEnd)
+            return rootNode
+        }
+        
+        return buildHelper(inorderStart: 0,
+                           inorderEnd: inorder.count - 1,
+                           preorderStart: 0,
+                           preorderEnd: preorder.count - 1)
+    }
 }
 

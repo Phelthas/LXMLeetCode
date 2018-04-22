@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         solution.isSymmetricSolution()
         solution.hasPathSumSolution()
         solution.buildTreeWithInorderAndPostorderSolution()
+        solution.buildTreeWithInorderAndPreorderSolution()
     }
     
 }
