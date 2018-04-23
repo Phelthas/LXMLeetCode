@@ -554,3 +554,49 @@ extension TreeNode {
     }
 }
 
+// MARK: - 最近公共祖先
+extension TreeNode {
+    
+    class func isAncestor(rootNode: TreeNode, targetNode: TreeNode) -> Bool {
+        if isSame(nodeOne: rootNode, nodeTwo: targetNode) {
+            return true
+        }
+        var leftResult = false
+        var rightResult = false
+        if let left = rootNode.left {
+            leftResult = isAncestor(rootNode: left, targetNode: targetNode)
+            if leftResult == true {
+                return true
+            }
+        }
+        if let right = rootNode.right {
+            rightResult = isAncestor(rootNode: right, targetNode: targetNode)
+            if rightResult == true {
+                return true
+            }
+        }
+        return leftResult || rightResult
+    }
+    
+    class func lowestCommonAncestor(root: TreeNode, nodeOne: TreeNode, nodeTwo: TreeNode) -> TreeNode? {
+        
+        var currentAncesstor: TreeNode? = nil
+        func traverse(node: TreeNode?) {
+            if let node = node {
+                if isAncestor(rootNode: node, targetNode: nodeOne) && isAncestor(rootNode: node, targetNode: nodeTwo) {
+                    currentAncesstor = node
+                }
+            }
+            if let left = node?.left {
+                traverse(node: left)
+            }
+            if let right = node?.right {
+                traverse(node: right)
+            }
+        }
+        traverse(node: root)
+        return currentAncesstor
+    }
+}
+
+

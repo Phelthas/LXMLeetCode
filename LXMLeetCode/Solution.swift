@@ -113,7 +113,6 @@ class Solution {
         print(TreeNode.hasPathSumRecursion(root: TestData().node1, sum: 16))
         print(TreeNode.hasPathSumRecursion(root: TestData().node1, sum: 19))
         print(TreeNode.hasPathSumRecursion(root: TestData().node1, sum: 11))
-        
     }
     
     func buildTreeWithInorderAndPostorderSolution() {
@@ -134,4 +133,16 @@ class Solution {
         print(TreeNode.preorderTraverseIteration(root: rootNode))
     }
     
+    func lowestCommonAncestorSolution() {
+        print("最近公共祖先")
+        let root = TestData().node1
+        print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node3)?.val)
+        print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node4)?.val)
+        print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node5)?.val)
+        print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node6)?.val)
+        print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node7)?.val)
+        print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node8)?.val)
+        print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node9)?.val)
+        
+    }
 }

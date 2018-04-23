@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         solution.hasPathSumSolution()
         solution.buildTreeWithInorderAndPostorderSolution()
         solution.buildTreeWithInorderAndPreorderSolution()
+        solution.lowestCommonAncestorSolution()
     }
     
 }
