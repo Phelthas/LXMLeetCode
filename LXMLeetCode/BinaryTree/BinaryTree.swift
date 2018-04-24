@@ -22,6 +22,9 @@ public class TreeNode {
 //    public override var description: String {
 //            return "\(self.val)"
 //    }
+    
+    //目前仅右向节点的题目用到
+    public var next: TreeNode?
 }
 
 
@@ -554,7 +557,7 @@ extension TreeNode {
     }
 }
 
-// MARK: - 最近公共祖先
+// MARK: - 最近公共祖先  这个题目LeetCode上不支持swift，所以没用大量的测试用例测过
 extension TreeNode {
     
     class func isAncestor(rootNode: TreeNode, targetNode: TreeNode) -> Bool {
@@ -597,6 +600,41 @@ extension TreeNode {
         traverse(node: root)
         return currentAncesstor
     }
+}
+
+
+// MARK: - 右向节点    这个题目LeetCode上不支持swift，所以没用大量的测试用例测过
+extension TreeNode {
+    
+    class func connect(root: TreeNode?) {
+        guard let root = root else { return }
+        
+        if let left = root.left {
+            if let right = root.right {
+                left.next = right
+            } else if let next = root.next?.left {
+                left.next = next
+            } else if  let next = root.next?.right {
+                left.next = next
+            } else {
+                left.next = nil
+            }
+            connect(root: left)
+        }
+        
+        if let right = root.right {
+            if let next = root.next?.left {
+                right.next = next
+            } else if let next = root.next?.right {
+                right.next = next
+            } else {
+                right.next = nil
+            }
+            connect(root: right)
+        }
+        
+    }
+    
 }
 
 
