@@ -33,6 +33,8 @@ class ViewController: UIViewController {
         solution.buildTreeWithInorderAndPostorderSolution()
         solution.buildTreeWithInorderAndPreorderSolution()
         solution.lowestCommonAncestorSolution()
+        solution.isValidBSTSolution()
+        solution.searchBSTSolution()
     }
     
 }

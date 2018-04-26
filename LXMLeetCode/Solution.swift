@@ -62,6 +62,23 @@ class TestData {
         return node1
     }
     
+    class func binarySearchTreeNode() -> TreeNode {
+        let node1 = TreeNode(1)
+        let node2 = TreeNode(2)
+        let node3 = TreeNode(3)
+        let node4 = TreeNode(4)
+        let node5 = TreeNode(5)
+        let node6 = TreeNode(6)
+        let node7 = TreeNode(7)
+        node4.left = node2
+        node4.right = node6
+        node2.left = node1
+        node2.right = node3
+        node6.left = node5
+        node6.right = node7
+        return node4
+    }
+    
 }
 
 class Solution {
@@ -143,6 +160,18 @@ class Solution {
         print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node7)?.val)
         print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node8)?.val)
         print(TreeNode.lowestCommonAncestor(root: root, nodeOne: TestData().node2, nodeTwo: TestData().node9)?.val)
-        
+    }
+    
+    func isValidBSTSolution() {
+        print("验证二叉搜索树")
+        print(TreeNode.isValidBST(root: TestData.binarySearchTreeNode()))
+    }
+    
+    func searchBSTSolution() {
+        print("搜索二叉搜索树")
+        print(TreeNode.searchBST(root: TestData.binarySearchTreeNode(), val: 2)?.val)
+        print(TreeNode.searchBST(root: TestData.binarySearchTreeNode(), val: 6)?.val)
+        print(TreeNode.searchBST(root: TestData.binarySearchTreeNode(), val: 3)?.val)
+        print(TreeNode.searchBST(root: TestData.binarySearchTreeNode(), val: 5)?.val)
     }
 }

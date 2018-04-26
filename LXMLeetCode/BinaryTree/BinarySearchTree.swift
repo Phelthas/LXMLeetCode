@@ -65,3 +65,33 @@ extension TreeNode {
     }
     
 }
+
+
+// MARK: - 二叉搜索树的迭代器，没太明白题目的意思
+extension TreeNode {
+    
+}
+
+
+// MARK: - BST搜索
+extension TreeNode {
+    
+    class func searchBST(root: TreeNode?, val: Int) -> TreeNode? {
+        guard let root = root else { return nil }
+        if root.val == val {
+            return root
+        } else if root.val > val {
+            if let left = root.left {
+                return searchBST(root: left, val: val)
+            } else {
+                return nil
+            }
+        } else {
+            if let right = root.right {
+                return searchBST(root: right, val: val)
+            } else {
+                return nil
+            }
+        }
+    }
+}
