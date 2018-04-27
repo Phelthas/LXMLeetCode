@@ -94,4 +94,17 @@ extension TreeNode {
             }
         }
     }
+    
+    class func insertIntoBST(root: TreeNode?, val: Int) -> TreeNode? {
+        if let root = root {
+            if root.val < val {
+                root.right = insertIntoBST(root: root.right, val: val)
+            } else if root.val > val {
+                root.left = insertIntoBST(root: root.left, val: val)
+            }
+        } else {
+            return TreeNode(val)
+        }
+        return root
+    }
 }

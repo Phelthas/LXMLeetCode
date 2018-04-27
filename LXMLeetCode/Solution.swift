@@ -169,9 +169,16 @@ class Solution {
     
     func searchBSTSolution() {
         print("搜索二叉搜索树")
-        print(TreeNode.searchBST(root: TestData.binarySearchTreeNode(), val: 2)?.val)
-        print(TreeNode.searchBST(root: TestData.binarySearchTreeNode(), val: 6)?.val)
-        print(TreeNode.searchBST(root: TestData.binarySearchTreeNode(), val: 3)?.val)
-        print(TreeNode.searchBST(root: TestData.binarySearchTreeNode(), val: 5)?.val)
+        let root = TestData.binarySearchTreeNode()
+        print(TreeNode.inorderTraverseIteration(root: TreeNode.searchBST(root: root, val: 2)))
+        print(TreeNode.inorderTraverseIteration(root: TreeNode.searchBST(root: root, val: 6)))
+        print(TreeNode.inorderTraverseIteration(root: TreeNode.searchBST(root: root, val: 3)))
+        print(TreeNode.inorderTraverseIteration(root: TreeNode.searchBST(root: root, val: 5)))
+    }
+    
+    func insertBSTSolution() {
+        print("插入二叉搜索树")
+        let root = TreeNode.insertIntoBST(root: TestData.binarySearchTreeNode(), val: 8)
+        print(TreeNode.inorderTraverseIteration(root: root))
     }
 }

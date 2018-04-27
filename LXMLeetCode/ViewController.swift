@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         solution.lowestCommonAncestorSolution()
         solution.isValidBSTSolution()
         solution.searchBSTSolution()
+        solution.insertBSTSolution()
     }
     
 }
