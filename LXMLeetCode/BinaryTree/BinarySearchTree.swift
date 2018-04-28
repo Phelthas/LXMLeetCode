@@ -95,6 +95,13 @@ extension TreeNode {
         }
     }
     
+    
+    
+}
+
+
+// MARK: - BST插入
+extension TreeNode {
     class func insertIntoBST(root: TreeNode?, val: Int) -> TreeNode? {
         if let root = root {
             if root.val < val {
@@ -107,4 +114,156 @@ extension TreeNode {
         }
         return root
     }
+}
+
+// MARK: - BST删除
+extension TreeNode {
+    
+    class func deleteFromBST(root: TreeNode?, val: Int) -> TreeNode? {
+        guard let root = root else { return nil }
+        
+        var father: TreeNode? = nil
+        var isLeft = true
+        
+        func searchBST(root: TreeNode?, forTarget targetVal: Int) -> TreeNode? {
+            guard let root = root else { return nil }
+            if root.val == targetVal {
+                return root
+            } else if root.val > targetVal {
+                if let left = root.left {
+                    father = root
+                    isLeft = true
+                    return searchBST(root: left, forTarget: targetVal)
+                } else {
+                    father = nil
+                    return nil
+                }
+            } else {
+                if let right = root.right {
+                    father = root
+                    isLeft = false
+                    return searchBST(root: right, forTarget: targetVal)
+                } else {
+                    father = nil
+                    return nil
+                }
+            }
+        }
+        
+        guard let targetNode = searchBST(root: root, forTarget: val) else { return root }
+        
+        if targetNode.left == nil && targetNode.right == nil {
+            
+            if let fatherNode = father {
+                //如果目标节点没有子节点，直接删除
+                if isLeft {
+                    fatherNode.left = nil
+                } else {
+                    fatherNode.right = nil
+                }
+            } else {
+                return nil
+            }
+        }
+        else if targetNode.left == nil || targetNode.right == nil {
+            if let fatherNode = father {
+                //目标节只有一个子节点，将目标节点的子节点 放到目标节点位置即可
+                if isLeft {
+                    if let left = targetNode.left {
+                        fatherNode.left = left
+                    }
+                    if let right = targetNode.right {
+                        fatherNode.left = right
+                    }
+                } else {
+                    if let left = targetNode.left {
+                        fatherNode.right = left
+                    }
+                    if let right = targetNode.right {
+                        fatherNode.right = right
+                    }
+                }
+            } else {
+                if let left = targetNode.left {
+                    return left
+                } else {
+                    return targetNode.right
+                }
+            }
+            
+        }
+        else {
+            //目标节点有两个子节点，得找到目标节点的中序后继节点或者前驱节点来替换
+            var nextNode: TreeNode? = nil
+            if let next = inorderNextNode(root: root, targetVal: val) {
+                nextNode = next
+            } else {
+                nextNode = inorderPreNode(root: root, targetVal: val)
+            }
+            
+            /// 有两个子节点，其中序后继节点或者前驱节点必定存在
+            if let next = nextNode {
+                let temp = next.val
+                _ = deleteFromBST(root: root, val: temp)
+                targetNode.val = temp
+            }
+            if father == nil {
+                return targetNode
+            }
+        }
+        return root
+        
+    }
+ 
+    
+    /// 目标节点的中序后继节点
+    class func inorderNextNode(root: TreeNode, targetVal: Int) -> TreeNode? {
+        var stackArray = [TreeNode]()
+        var currentNode: TreeNode? = root
+        var find = false
+        
+        while true {
+            while currentNode != nil {
+                stackArray.append(currentNode!)
+                currentNode = currentNode?.left
+            }
+            if stackArray.count == 0 {
+                break
+            }
+            currentNode = stackArray.removeLast()
+            if find {
+                return currentNode
+            }
+            if currentNode!.val == targetVal {
+                find = true
+            }
+            currentNode = currentNode?.right
+        }
+        return nil
+    }
+    
+    /// 目标节点的中序前驱节点
+    class func inorderPreNode(root: TreeNode, targetVal: Int) -> TreeNode? {
+        var stackArray = [TreeNode]()
+        var currentNode: TreeNode? = root
+        var lastNode: TreeNode? = nil
+        
+        while true {
+            while currentNode != nil {
+                stackArray.append(currentNode!)
+                currentNode = currentNode?.left
+            }
+            if stackArray.count == 0 {
+                break
+            }
+            currentNode = stackArray.removeLast()
+            if currentNode!.val == targetVal {
+                return lastNode
+            }
+            lastNode = currentNode
+            currentNode = currentNode?.right
+        }
+        return nil
+    }
+
 }

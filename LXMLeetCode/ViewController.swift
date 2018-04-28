@@ -36,6 +36,9 @@ class ViewController: UIViewController {
         solution.isValidBSTSolution()
         solution.searchBSTSolution()
         solution.insertBSTSolution()
+        solution.deleteBSTSolution()
+        
+        solution.test()
     }
     
 }

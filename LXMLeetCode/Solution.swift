@@ -177,8 +177,26 @@ class Solution {
     }
     
     func insertBSTSolution() {
-        print("插入二叉搜索树")
+        print("二叉搜索树插入操作")
         let root = TreeNode.insertIntoBST(root: TestData.binarySearchTreeNode(), val: 8)
         print(TreeNode.inorderTraverseIteration(root: root))
+    }
+    
+    func deleteBSTSolution() {
+        print("二叉搜索树删除操作")
+        let root = TreeNode.deleteFromBST(root: TestData.binarySearchTreeNode(), val: 4)
+        print(TreeNode.inorderTraverseIteration(root: root))
+    }
+    
+    func test() {
+        print("test")
+        let root = TestData.binarySearchTreeNode()
+        print(TreeNode.inorderPreNode(root: root, targetVal: 1)?.val ?? "nil")
+        print(TreeNode.inorderPreNode(root: root, targetVal: 2)?.val ?? "nil")
+        print(TreeNode.inorderPreNode(root: root, targetVal: 3)?.val ?? "nil")
+        print(TreeNode.inorderPreNode(root: root, targetVal: 4)?.val ?? "nil")
+        print(TreeNode.inorderPreNode(root: root, targetVal: 5)?.val ?? "nil")
+        print(TreeNode.inorderPreNode(root: root, targetVal: 6)?.val ?? "nil")
+        print(TreeNode.inorderPreNode(root: root, targetVal: 7)?.val ?? "nil")
     }
 }
