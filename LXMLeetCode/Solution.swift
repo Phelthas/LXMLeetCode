@@ -190,7 +190,7 @@ class Solution {
     
     func kthLargestSolution() {
         print("数组中第k大元素")
-        let array = [4, 6, 3, 1, 5, 2, 7]
+        let array = [ 4, 6, 3, 1, 8, 5, 2, 7]
         print(TreeNode.kthLargestVal(array: array, targetK: 1))
         print(TreeNode.kthLargestVal(array: array, targetK: 2))
         print(TreeNode.kthLargestVal(array: array, targetK: 3))
@@ -198,6 +198,7 @@ class Solution {
         print(TreeNode.kthLargestVal(array: array, targetK: 5))
         print(TreeNode.kthLargestVal(array: array, targetK: 6))
         print(TreeNode.kthLargestVal(array: array, targetK: 7))
+        print(TreeNode.kthLargestVal(array: array, targetK: 8))
     }
     
     func test() {

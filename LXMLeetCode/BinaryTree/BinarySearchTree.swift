@@ -270,7 +270,7 @@ extension TreeNode {
 
 
 
-// MARK: - 求序列中的第k大元素
+// MARK: - BST求数组中的第k大元素，还没有用大量测试用例测过
 extension TreeNode {
     
     class func kthLargestVal(array: [Int], targetK: Int) -> Int {
@@ -298,6 +298,8 @@ extension TreeNode {
             if root.nodeCount == k && root.left == nil {
                 return root.val
             }
+            //其实左边右边的算法是一样的，都是判断右边节点的个数是否是k-1个，如果是，那么root就是第k大元素
+            //写法不一样只是因为：总节点数 = 左节点数 + 右节点数 + 1；
             if let right = root.right {
                 if right.nodeCount == k - 1 {
                     return root.val
@@ -311,7 +313,7 @@ extension TreeNode {
                 if left.nodeCount == root.nodeCount - k {
                     return root.val
                 } else if left.nodeCount > root.nodeCount - k {
-                    return kthLargestVal(root: left, k: k - 1)
+                    return kthLargestVal(root: left, k: left.nodeCount - (root.nodeCount - k))
                 } else {
                     return kthLargestVal(root: root.right!, k: k)
                 }
