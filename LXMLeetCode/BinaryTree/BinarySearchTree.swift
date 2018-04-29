@@ -267,3 +267,64 @@ extension TreeNode {
     }
 
 }
+
+
+
+// MARK: - 求序列中的第k大元素
+extension TreeNode {
+    
+    class func kthLargestVal(array: [Int], targetK: Int) -> Int {
+        
+        guard let firstVal = array.first else { return -1 }
+        
+        func insertBST(root: TreeNode?, val: Int) -> TreeNode? {
+            if let root = root {
+                if root.val > val {
+                    root.left = insertIntoBST(root: root.left, val: val)
+                } else {
+                    root.right = insertIntoBST(root: root.right, val: val)
+                }
+            } else {
+                return TreeNode(val)
+            }
+            return root
+        }
+        
+        func kthLargestVal(root: TreeNode, k: Int) -> Int {
+            guard k >= 1 && k <= root.nodeCount else { return -1 }
+            if root.right == nil && k == 1 {
+                return root.val
+            }
+            if root.nodeCount == k && root.left == nil {
+                return root.val
+            }
+            if let right = root.right {
+                if right.nodeCount == k - 1 {
+                    return root.val
+                } else if right.nodeCount > k - 1 {
+                    return kthLargestVal(root: right, k: k)
+                } else {
+                    return kthLargestVal(root: root.left!, k: k - 1 - right.nodeCount)
+                }
+            }
+            if let left = root.left {
+                if left.nodeCount == root.nodeCount - k {
+                    return root.val
+                } else if left.nodeCount > root.nodeCount - k {
+                    return kthLargestVal(root: left, k: k - 1)
+                } else {
+                    return kthLargestVal(root: root.right!, k: k)
+                }
+            }
+            return -1 
+        }
+        
+        let root = TreeNode(firstVal)
+        for i in 1 ..< array.count {
+            _ = insertBST(root: root, val: array[i])
+        }
+        return kthLargestVal(root: root, k: targetK)
+    }
+    
+    
+}

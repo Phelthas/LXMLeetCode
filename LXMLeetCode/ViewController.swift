@@ -37,8 +37,9 @@ class ViewController: UIViewController {
         solution.searchBSTSolution()
         solution.insertBSTSolution()
         solution.deleteBSTSolution()
+        solution.kthLargestSolution()
         
-        solution.test()
+//        solution.test()
     }
     
 }

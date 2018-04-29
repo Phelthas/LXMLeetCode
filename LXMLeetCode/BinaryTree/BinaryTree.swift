@@ -25,6 +25,19 @@ public class TreeNode {
     
     //目前仅右向节点的题目用到
     public var next: TreeNode?
+    
+    
+    /// 目前仅求第k大元素的题目中用到
+    public var nodeCount: Int {
+        var count = 1
+        if let left = self.left {
+            count += left.nodeCount
+        }
+        if let right = self.right {
+            count += right.nodeCount
+        }
+        return count
+    }
 }
 
 
