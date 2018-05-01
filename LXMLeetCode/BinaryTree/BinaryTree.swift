@@ -23,11 +23,11 @@ public class TreeNode {
 //            return "\(self.val)"
 //    }
     
-    //目前仅右向节点的题目用到
+    /// 当前节点的右向节点，目前仅右向节点的题目用到
     public var next: TreeNode?
     
     
-    /// 目前仅求第k大元素的题目中用到
+    /// 当前节点包含的节点数（包括自己）目前仅求第k大元素的题目中用到
     public var nodeCount: Int {
         var count = 1
         if let left = self.left {
@@ -37,6 +37,19 @@ public class TreeNode {
             count += right.nodeCount
         }
         return count
+    }
+    
+    
+    /// 当前节点的高度（包括自己）目前仅验证平衡二叉树的题目用到
+    public var height: Int {
+        var height = 1
+        if let left = self.left {
+            height = max(left.height + 1, height)
+        }
+        if let right = self.right {
+            height = max(right.height + 1, height)
+        }
+        return height
     }
 }
 
@@ -650,4 +663,33 @@ extension TreeNode {
     
 }
 
+
+// MARK: - 验证高度平衡二叉树
+extension TreeNode {
+    
+    class func isBalanced(root: TreeNode?) -> Bool {
+        func treeHeight(node: TreeNode?) -> Int {
+            guard let node = node else { return 0 }
+            var height = 1
+            height = max(treeHeight(node: node.left) + 1, height)
+            height = max(treeHeight(node: node.right) + 1, height)
+            return height
+        }
+        guard let root = root else { return true }
+        
+        var leftResult = true
+        var rightResult = true
+        if let left = root.left {
+            leftResult = isBalanced(root: left)
+        }
+        if let right = root.right {
+            rightResult = isBalanced(root: right)
+        }
+        let leftHeight = treeHeight(node: root.left)
+        let rightHeight = treeHeight(node: root.right)
+        return (abs(leftHeight - rightHeight) <= 1) && leftResult && rightResult
+        
+    }
+    
+}
 
