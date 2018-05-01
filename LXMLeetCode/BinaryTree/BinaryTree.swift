@@ -677,18 +677,36 @@ extension TreeNode {
         }
         guard let root = root else { return true }
         
-        var leftResult = true
-        var rightResult = true
-        if let left = root.left {
-            leftResult = isBalanced(root: left)
-        }
-        if let right = root.right {
-            rightResult = isBalanced(root: right)
-        }
-        let leftHeight = treeHeight(node: root.left)
-        let rightHeight = treeHeight(node: root.right)
-        return (abs(leftHeight - rightHeight) <= 1) && leftResult && rightResult
+        var stackArray = [TreeNode]()
+        var currentNode: TreeNode? = root
+        var lastNode: TreeNode? = nil
         
+        while true {
+            while currentNode != nil {
+                stackArray.append(currentNode!)
+                currentNode = currentNode?.left
+            }
+            while stackArray.count != 0 {
+                currentNode = stackArray.last
+                if let temp = currentNode, temp.right == nil || temp.right === lastNode {
+                    let leftHeight = treeHeight(node: temp.left)
+                    let rightHeight = treeHeight(node: temp.right)
+                    if abs(leftHeight - rightHeight) > 1 {
+                        return false
+                    }
+                    lastNode = currentNode
+                    stackArray.removeLast()
+                } else {
+                    currentNode = currentNode?.right
+                    break
+                }
+            }
+            if stackArray.count == 0 {
+                break
+            }
+        }
+        return true
+
     }
     
 }
