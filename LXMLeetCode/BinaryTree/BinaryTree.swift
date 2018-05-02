@@ -711,3 +711,29 @@ extension TreeNode {
     
 }
 
+
+// MARK: - 有序数组转换为BST
+extension TreeNode {
+    
+    class func sortedArrayToBST(array: [Int]) -> TreeNode? {
+        
+        func subArrayToTreeNode(startIndex: Int, endIndex: Int) -> TreeNode? {
+            if endIndex - startIndex == 0 {
+                return TreeNode(array[startIndex])
+            }
+            if endIndex - startIndex == 1 {
+                let node = TreeNode(array[endIndex])
+                node.left = TreeNode(array[startIndex])
+                return node
+            }
+            let centerIndex = (endIndex + startIndex) / 2
+            let node = TreeNode(array[centerIndex])
+            node.left = subArrayToTreeNode(startIndex: startIndex, endIndex: centerIndex - 1)
+            node.right = subArrayToTreeNode(startIndex: centerIndex + 1, endIndex: endIndex)
+            return node
+        }
+        guard array.count > 0 else { return nil }
+        return subArrayToTreeNode(startIndex: 0, endIndex: array.count - 1)
+    }
+}
+
