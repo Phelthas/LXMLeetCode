@@ -40,6 +40,8 @@ class ViewController: UIViewController {
         solution.kthLargestSolution()
         
 //        solution.test()
+        
+        ArraySolution.removeDuplicatesSolution()
     }
     
 }

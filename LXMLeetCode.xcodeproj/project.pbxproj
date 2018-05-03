@@ -14,6 +14,7 @@
 		436BFFC92081E7F400B5789A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 436BFFC72081E7F400B5789A /* LaunchScreen.storyboard */; };
 		436BFFD22081E93500B5789A /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436BFFD12081E93500B5789A /* BinaryTree.swift */; };
 		436BFFE2208207C700B5789A /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436BFFE1208207C700B5789A /* Solution.swift */; };
+		43C92367209AA089003AF850 /* ArraySolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C92366209AA089003AF850 /* ArraySolution.swift */; };
 		43DB715B209014D500D600B5 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB715A209014D500D600B5 /* BinarySearchTree.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		436BFFD92081EC1700B5789A /* LXMLeetCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXMLeetCodeTests.swift; sourceTree = "<group>"; };
 		436BFFDB2081EC1700B5789A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		436BFFE1208207C700B5789A /* Solution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
+		43C92366209AA089003AF850 /* ArraySolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArraySolution.swift; sourceTree = "<group>"; };
 		43DB715A209014D500D600B5 /* BinarySearchTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearchTree.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 		436BFFBD2081E7F400B5789A /* LXMLeetCode */ = {
 			isa = PBXGroup;
 			children = (
+				43C92365209AA039003AF850 /* Array */,
 				436BFFD02081E91500B5789A /* BinaryTree */,
 				436BFFBE2081E7F400B5789A /* AppDelegate.swift */,
 				436BFFC02081E7F400B5789A /* ViewController.swift */,
@@ -91,6 +94,14 @@
 				436BFFDB2081EC1700B5789A /* Info.plist */,
 			);
 			path = LXMLeetCodeTests;
+			sourceTree = "<group>";
+		};
+		43C92365209AA039003AF850 /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				43C92366209AA089003AF850 /* ArraySolution.swift */,
+			);
+			path = Array;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43C92367209AA089003AF850 /* ArraySolution.swift in Sources */,
 				436BFFC12081E7F400B5789A /* ViewController.swift in Sources */,
 				436BFFBF2081E7F400B5789A /* AppDelegate.swift in Sources */,
 				436BFFE2208207C700B5789A /* Solution.swift in Sources */,
