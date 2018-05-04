@@ -42,6 +42,7 @@ class ViewController: UIViewController {
 //        solution.test()
         
         ArraySolution.removeDuplicatesSolution()
+        ArraySolution.rotateRightSolution()
     }
     
 }
