@@ -712,7 +712,7 @@ extension TreeNode {
 }
 
 
-// MARK: - 有序数组转换为BST
+// MARK: - 有序数组转换为平衡二叉树
 extension TreeNode {
     
     class func sortedArrayToBST(array: [Int]) -> TreeNode? {
