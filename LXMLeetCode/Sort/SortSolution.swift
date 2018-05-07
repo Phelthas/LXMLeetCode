@@ -17,6 +17,7 @@ class SortSolution {
     
     func quickSort(array: inout [Int]) {
         
+        /// 填坑法
         func partition(array: inout [Int], low: Int, high: Int) -> Int {
             var i = low
             var j = high
@@ -39,9 +40,31 @@ class SortSolution {
             return i
         }
         
+        
+        /// 交换位置的方法
+        func partitionWithSwap(array: inout [Int], low: Int, high: Int) -> Int {
+            let key = array[low]
+            var left = low
+            var right = high
+            while left < right {
+                while left < right && array[right] >= key {
+                    right = right - 1
+                }
+                while left < right && array[left] <= key {
+                    left = left + 1
+                }
+                if left < right {
+                    array.swapAt(left, right)
+                }
+            }
+            array.swapAt(low, left)
+            return left
+        }
+        
         func helper(array: inout [Int], low: Int, high: Int) {
             if low < high {
-                let pivot = partition(array: &array, low: low, high: high)
+//                let pivot = partition(array: &array, low: low, high: high)
+                let pivot = partitionWithSwap(array: &array, low: low, high: high)
                 helper(array: &array, low: low, high: pivot - 1)
                 helper(array: &array, low: pivot + 1, high: high)
             }
@@ -51,11 +74,12 @@ class SortSolution {
     }
     
     class func quickSortSolution() {
+        print("快速排序")
         let sortSolution = SortSolution()
         var testArray = SortSolution.testArray()
         sortSolution.quickSort(array: &testArray)
-        print("快速排序")
         print(testArray)
+        
     }
     
 }
@@ -101,5 +125,11 @@ extension SortSolution {
         print("堆排序")
         print(testArray)
     }
+}
+
+
+extension SortSolution {
+    
+    
 }
 
