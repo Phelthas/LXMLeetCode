@@ -87,34 +87,55 @@ class SortSolution {
 extension SortSolution {
     func heapSort(array: inout [Int]) {
         
-        /// 对以第s个节点为跟的子树进行筛选
-        /// array[s ... m]中除array[s]外均满足堆定义
-        func heapAdjust(array: inout [Int], s: Int, m: Int) {
-            var s = s
-            let temp = array[s]
-            var j = 2 * s + 1
-            while j < m {
-                if j + 1 < m && array[j] < array[j + 1] {
+        /// 调整数组中以location为根节点的子树，使之满足堆定义
+        /// length需要进行调整的数组的范围，建立堆时length是完整的数组的长度；调整时length
+        func heapAdjust(array: inout [Int], location: Int, length: Int) {
+
+            let target = array[location]
+            var i = location
+            var j = 2 * i + 1
+            while j < length {
+                if j + 1 < length && array[j + 1] > array[j] {
                     j = j + 1
                 }
-                if temp > array[j] {
+                if target > array[j] {
                     break
                 }
-                array[s] = array[j]
-                s = j
-                j = j * 2 + 1
+                array.swapAt(i, j)
+                i = j
+                j = 2 * j + 1
             }
-            array[s] = temp
         }
         
+//        /// 对以第s个节点为跟的子树进行筛选
+//        /// array[s ... m]中除array[s]外均满足堆定义
+//        func heapAdjust(array: inout [Int], location: Int, length: Int) {
+//            var s = location
+//            let temp = array[s]
+//            var j = 2 * s + 1
+//            while j < length {
+//                if j + 1 < length && array[j] < array[j + 1] {
+//                    j = j + 1
+//                }
+//                if temp > array[j] {
+//                    break
+//                }
+//                array[s] = array[j]
+//                s = j
+//                j = j * 2 + 1
+//            }
+//            array[s] = temp
+//        }
+        
         for i in (0 ... array.count / 2 - 1).reversed() {
-            heapAdjust(array: &array, s: i, m: array.count)
+            heapAdjust(array: &array, location: i, length: array.count)
         }
         for i in (1 ... array.count - 1).reversed() {
-            let temp = array[0]
-            array[0] = array[i]
-            array[i] = temp
-            heapAdjust(array: &array, s: 0, m: i)
+            array.swapAt(0, i)
+//            let temp = array[0]
+//            array[0] = array[i]
+//            array[i] = temp
+            heapAdjust(array: &array, location: 0, length: i)
         }
     }
     
@@ -130,6 +151,12 @@ extension SortSolution {
 
 extension SortSolution {
     
+    func myHeapSort(array: inout [Int]) {
+        
+        
+        
+        
+    }
     
 }
 
