@@ -43,6 +43,7 @@ class ViewController: UIViewController {
         
         ArraySolution.removeDuplicatesSolution()
         ArraySolution.rotateRightSolution()
+        ArraySolution.containsDuplicateSolution()
         
         
         SortSolution.quickSortSolution()
