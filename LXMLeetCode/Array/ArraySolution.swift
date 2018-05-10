@@ -145,3 +145,15 @@ extension ArraySolution {
     }
 }
 
+extension ArraySolution {
+    
+    /// 只出现一次的数字
+    /// 利用的是异或的性质，想个相同的数异或等于0，任何数和0异或等于本身，即“两个输入相同时为0，不同则为1”
+    func singleNumber(_ nums: [Int]) -> Int {
+        var result = 0
+        for temp in nums {
+            result = result ^ temp
+        }
+        return result
+    }
+}
