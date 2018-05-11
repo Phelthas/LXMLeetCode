@@ -157,3 +157,51 @@ extension ArraySolution {
         return result
     }
 }
+
+
+extension ArraySolution {
+    
+    /// 两个数组的交集
+    /// 输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
+    /// 我们可以不考虑输出结果的顺序。
+    func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var resultArray = [Int]()
+        var array1 = nums1
+        var array2 = nums2
+        
+        while array1.count != 0 && array2.count != 0 {
+            let one = array1[0]
+            if let index = array2.index(of: one) {
+                resultArray.append(one)
+                array1.removeFirst()
+                array2.remove(at: index)
+            } else {
+                array1.removeFirst()
+            }
+        }
+        return resultArray
+    }
+    
+    /* 其他人提交的耗时最少的方法，利用字典记录出现次数
+    func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var map = [Int: Int]()
+        var result = Array<Int>()
+        
+        //记录nums1中每个数出现的次数
+        for item in nums1 {
+            let total = map[item]
+            map[item] = (total ?? 0) + 1
+        }
+        
+        //nums2中，如果item在map中有记录，且记录数大于0，就说明item在nums1中也出现过，就把它添加到交集数组中，并让map中的记录数减一
+        for item in nums2 {
+            if let number = map[item], number > 0 {
+                result.append(item)
+                map[item] = number - 1
+            }
+        }
+        
+        return result
+    }
+    */
+}
