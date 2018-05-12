@@ -205,3 +205,38 @@ extension ArraySolution {
     }
     */
 }
+
+extension ArraySolution {
+    func plusOne(_ digits: [Int]) -> [Int] {
+        
+        //再某一位上加一，如果产生进位返回1，否则返回0；index0位个位，1位十位。。。
+        func plusOne(array: inout [Int], atIndex index: Int) -> Int {
+            if index == array.count {
+                array.insert(1, at: 0)
+                return 0
+            } else {
+                let location = array.count - 1 - index
+                var temp = array[location]
+                temp = temp + 1
+                array[location] = temp % 10
+                if temp > 9 {
+                    return 1
+                } else {
+                    return 0
+                }
+            }
+        }
+        
+        var resultArray = digits
+        var index = 0
+        while true {
+            let advance = plusOne(array: &resultArray, atIndex: index)
+            if advance == 0 {
+                break
+            } else {
+                index += 1
+            }
+        }
+        return resultArray
+    }
+}
