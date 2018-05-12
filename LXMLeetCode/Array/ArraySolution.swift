@@ -240,3 +240,24 @@ extension ArraySolution {
         return resultArray
     }
 }
+
+extension ArraySolution {
+    
+    
+    /// 又一个显示我超越了100%的提交者，但看了别人的实现之后，明显感觉别人的应该更快啊。。。
+    /// while的判断用index < nums.count - count 的算法，比我这就优化了一个档次。。。
+    func moveZeroes(_ nums: inout [Int]) {
+        var index = 0
+        var count = 0
+        while index < nums.count && count < nums.count {
+            let current = nums[index]
+            if current == 0 {
+                let temp = nums.remove(at: index)
+                nums.append(temp)
+            } else {
+                index = index + 1
+            }
+            count = count + 1
+        }
+    }
+}
