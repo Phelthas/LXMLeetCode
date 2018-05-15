@@ -277,3 +277,60 @@ extension ArraySolution {
         return [Int]()
     }
 }
+
+extension ArraySolution {
+    
+    /// 是否有效数独
+    func isValidSudoku(_ board: [[Character]]) -> Bool {
+        
+        func isArraySudoku(array: [Character]) -> Bool {
+            var dict = [Character : Int]()
+            for temp in array {
+                if temp != "." {
+                    if let count = dict[temp] {
+                        dict[temp] = count + 1
+                    } else {
+                        dict[temp] = 1
+                    }
+                }
+            }
+            for count in dict.values {
+                if count > 1 {
+                    return false
+                }
+            }
+            return true
+        }
+        
+        for rowArray in board {
+            if isArraySudoku(array: rowArray) == false {
+                return false
+            }
+        }
+        
+        for i in 0 ..< 9 {
+            var columArray = [Character]()
+            for j in 0 ..< 9 {
+                columArray.append(board[j][i])
+            }
+            if isArraySudoku(array: columArray) == false {
+                return false
+            }
+        }
+        
+        for m in 0 ..< 3 {
+            for n in 0 ..< 3 {
+                var subArray = [Character]()
+                for i in  3 * m ..< 3 + 3 * m {
+                    for j in 3 * n ..< 3 + 3 * n {
+                        subArray.append(board[i][j])
+                    }
+                }
+                if isArraySudoku(array: subArray) == false {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+}

@@ -149,14 +149,4 @@ extension SortSolution {
 }
 
 
-extension SortSolution {
-    
-    func myHeapSort(array: inout [Int]) {
-        
-        
-        
-        
-    }
-    
-}
 
