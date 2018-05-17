@@ -148,5 +148,35 @@ extension SortSolution {
     }
 }
 
-
+extension SortSolution {
+    func insertSort(array: inout [Int]) {
+        guard array.count > 0 else { return }
+        var current = 0
+        for i in 1 ..< array.count {
+            current = array[i]
+            if current < array[i - 1] {
+                current = array.remove(at: i)
+                if current < array[0] {
+                    array.insert(current, at: 0)
+                } else {
+                    for j in (0 ..< i - 1).reversed() {
+                        if current > array[j] {
+                            array.insert(current, at: j + 1)
+                            break
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    class func insertSortSolution() {
+        let sortSolution = SortSolution()
+        var testArray = SortSolution.testArray()
+        sortSolution.insertSort(array: &testArray)
+        print("插入排序")
+        print(testArray)
+    }
+    
+}
 

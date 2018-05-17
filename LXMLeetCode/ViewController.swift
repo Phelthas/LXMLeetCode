@@ -48,6 +48,7 @@ class ViewController: UIViewController {
         
         SortSolution.quickSortSolution()
         SortSolution.heapSortSolution()
+        SortSolution.insertSortSolution()
     }
     
 }
