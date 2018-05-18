@@ -334,3 +334,21 @@ extension ArraySolution {
         return true
     }
 }
+
+extension ArraySolution {
+    
+    /// 将图像顺时针旋转 90 度
+    func rotateMatrix(_ matrix: inout [[Int]]) {
+        let n = matrix.count
+        for i in 0 ..< n / 2 {
+            for j in i ..< n - 1 - i {
+                let temp = matrix[i][j]
+                matrix[i][j] = matrix[n - 1 - j][i]
+                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j]
+                matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i]
+                matrix[j][n - 1 - i] = temp
+            }
+        }
+    }
+}
+
