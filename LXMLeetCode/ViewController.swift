@@ -49,6 +49,9 @@ class ViewController: UIViewController {
         SortSolution.quickSortSolution()
         SortSolution.heapSortSolution()
         SortSolution.insertSortSolution()
+        
+        
+        StringSolution().reverse(-123)
     }
     
 }

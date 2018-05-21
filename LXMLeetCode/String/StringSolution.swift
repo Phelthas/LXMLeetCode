@@ -33,4 +33,19 @@ class StringSolution {
         return resultString
     }
     
+    
+    /// 颠倒整数
+    func reverse(_ x: Int) -> Int {
+        var current = x
+        var result = 0
+        while current != 0 {
+            let lastNumber = current % 10
+            result = result * 10 + lastNumber
+            current = current / 10
+            if result > 2147483647 || result < -2147483648 {
+                return 0
+            }
+        }
+        return result
+    }
 }
