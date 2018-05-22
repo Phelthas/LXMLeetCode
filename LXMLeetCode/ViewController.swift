@@ -52,6 +52,7 @@ class ViewController: UIViewController {
         
         
         StringSolution().reverse(-123)
+        ArraySolution().fillClockwiseMatrix(m: 2, n: 6)
     }
     
 }

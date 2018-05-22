@@ -350,5 +350,73 @@ extension ArraySolution {
             }
         }
     }
+    
+    
+    func fillClockwiseMatrix(m: Int, n: Int) -> [[Int]] {
+        var result = [[Int]]()
+        let total = m * n
+        for _ in 0 ..< m {
+            let temp = Array(repeating: 0, count: n)
+            result.append(temp)
+        }
+        var k = 1
+    
+        var i = 0
+        var j = 0
+        while (i <= (m - 1) / 2) && (j <= (n - 1) / 2) {
+            
+            var indexY = n - 1 - j
+            for temp in i ... m - 1 - i {
+                result[temp][indexY] = k
+                k += 1
+            }
+            if k >= total {
+                break
+            }
+            
+            var indexX = m - 1 - i
+            if indexY >= j {
+                for temp in (j ... indexY - 1).reversed() {
+                    result[indexX][temp] = k
+                    k += 1
+                }
+            }
+            if k >= total {
+                break
+            }
+            
+            indexY = j
+            if indexX - 1 >= i {
+                for temp in (i ... indexX - 1).reversed() {
+                    result[temp][indexY] = k
+                    k += 1
+                }
+            }
+            if k >= total {
+                break
+            }
+            
+            indexX = i
+            if n - 1 - j - 1 >= j + 1 {
+                for temp in (j + 1 ... n - 1 - j - 1) {
+                    result[indexX][temp] = k
+                    k += 1
+                }
+            }
+            if k >= total {
+                break
+            }
+            
+            i += 1
+            j += 1
+        }
+        
+        print("顺时针填满矩阵")
+        for temp in 0 ..< m {
+            print(result[temp])
+        }
+        
+        return result
+    }
 }
 
