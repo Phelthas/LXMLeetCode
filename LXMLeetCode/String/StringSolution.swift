@@ -23,6 +23,7 @@ class StringSolution {
     //     return resultString
     // }
     
+    /// 翻转字符串
     func reverseString(_ s: String) -> String {
         guard s.count > 0 else { return s }
         var array = Array(s)
@@ -48,4 +49,24 @@ class StringSolution {
         }
         return result
     }
+    
+    // 字符串中的第一个唯一字符
+    func firstUniqChar(_ s: String) -> Int {
+        var dict = [Character : Int]()
+        for temp in s {
+            if let current = dict[temp] {
+                dict[temp] = current + 1
+            } else {
+                dict[temp] = 1
+            }
+        }
+        for key in s {
+            if dict[key] == 1 {
+                let result = s.index(of: key)
+                return s.distance(from: s.startIndex, to: result!)
+            }
+        }
+        return -1
+    }
+    
 }
