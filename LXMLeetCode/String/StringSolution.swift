@@ -69,4 +69,20 @@ class StringSolution {
         return -1
     }
     
+    //有效的字母异位词
+    func isAnagram(_ s: String, _ t: String) -> Bool {
+//        let one = s.sorted()
+//        let two = t.sorted()
+//        return one == two
+        var dictOne = [Character : Int]()
+        for temp in s {
+            dictOne[temp] = (dictOne[temp] ?? 0) + 1
+        }
+        var dictTwo = [Character : Int]()
+        for temp in t {
+            dictTwo[temp] = (dictTwo[temp] ?? 0) + 1
+        }
+        return dictOne == dictTwo
+    }
+    
 }
