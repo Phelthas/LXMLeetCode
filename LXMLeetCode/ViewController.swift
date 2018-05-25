@@ -52,6 +52,7 @@ class ViewController: UIViewController {
         
         
         StringSolution().reverse(-123)
+        StringSolution().isPalindrome("A man, a plan, a canal: Panama")
         ArraySolution().fillClockwiseMatrix(m: 2, n: 6)
     }
     

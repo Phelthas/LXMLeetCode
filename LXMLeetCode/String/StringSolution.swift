@@ -85,4 +85,24 @@ class StringSolution {
         return dictOne == dictTwo
     }
     
+    // 验证回文字符串 看别人代码用到了s.utf8CString()这个方法，貌似更简单，
+    func isPalindrome(_ s: String) -> Bool {
+        /* ASC11码对应值
+         a-z：97-122
+         
+         A-Z：65-90
+         
+         0-9：48-57
+         */
+        let t = s.lowercased()
+        var resultString = ""
+        for temp in t.unicodeScalars {
+            let value = temp.value
+            if (value >= 97 && value <= 122) || (value >= 48 && value <= 57) {
+                resultString += String(temp)
+            }
+        }
+        let reversedString = String(resultString.reversed())
+        return resultString == reversedString
+    }
 }
