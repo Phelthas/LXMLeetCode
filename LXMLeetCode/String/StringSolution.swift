@@ -105,4 +105,90 @@ class StringSolution {
         let reversedString = String(resultString.reversed())
         return resultString == reversedString
     }
+    
+//    func myAtoi(_ str: String) -> Int {
+//        guard str.count > 0 else {
+//            return 0
+//        }
+//        var resultString = ""
+//        var sign = 1
+//        var hasStart = false
+//        let scalarArray = str.unicodeScalars
+//
+//        for temp in scalarArray {
+//            let value = temp.value
+//
+//            if hasStart == false {
+//                if value == UnicodeScalar(" ")?.value {
+//                    continue
+//                } else if value == UnicodeScalar("+")?.value {
+//                    hasStart = true
+//                } else if value == UnicodeScalar("-")?.value {
+//                    sign = -1
+//                    hasStart = true
+//                } else if value >= 48 && value <= 57 {
+//                    hasStart = true
+//                    resultString = resultString + String(temp)
+//                } else {
+//                    return 0
+//                }
+//            } else {
+//                if value >= 48 && value <= 57 {
+//                    resultString = resultString + String(temp)
+//                } else {
+//                    break
+//                }
+//            }
+//
+//        }
+//
+//        var result = 0
+//        for temp in resultString {
+//            let current = Int(String(temp))!
+//            result = result * 10 + current
+//            if result > Int32.max {
+//                return sign == 1 ? Int(Int32.max) : Int(Int32.min)
+//            }
+//        }
+//        return sign * result
+//    }
+    
+    // 字符串转整数 (atoi) 上面那个是一开始写的，貌似更快一点？这个是优化过的，更好阅读
+    func myAtoi(_ str: String) -> Int {
+        
+        var sign = 1
+        var hasStart = false
+        var result = 0
+        for temp in str {
+            if hasStart == false {
+                if temp == " " {
+                    continue
+                } else if temp == "+" {
+                    hasStart = true
+                } else if temp == "-" {
+                    sign = -1
+                    hasStart = true
+                } else if temp >= "0" && temp <= "9" {
+                    hasStart = true
+                    let current = Int(String(temp))!
+                    result = result * 10 + current
+                } else {
+                    return 0
+                }
+            } else {
+                if temp >= "0" && temp <= "9" {
+                    let current = Int(String(temp))!
+                    result = result * 10 + current
+                    if result > Int32.max {
+                        return sign == 1 ? Int(Int32.max) : Int(Int32.min)
+                    }
+                } else {
+                    break
+                }
+            }
+            
+        }
+        
+        return sign * result
+    }
 }
