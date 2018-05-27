@@ -54,6 +54,7 @@ class ViewController: UIViewController {
         StringSolution().reverse(-123)
         StringSolution().isPalindrome("A man, a plan, a canal: Panama")
         StringSolution().myAtoi("20000000000000000000")
+        StringSolution().strStr("a", "a")
         ArraySolution().fillClockwiseMatrix(m: 2, n: 6)
     }
     

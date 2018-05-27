@@ -191,4 +191,29 @@ class StringSolution {
         
         return sign * result
     }
+    
+    /// 实现 strStr() 函数。思路是对的，但是在LeetCode上提示超出时间限制。。。回头看看怎么优化
+    func strStr(_ haystack: String, _ needle: String) -> Int {
+        let oneCount = haystack.count
+        let twoCount = needle.count
+        guard twoCount > 0 else {
+            return 0
+        }
+        guard oneCount >= twoCount else {
+            return -1
+        }
+        for i in 0 ..< oneCount {
+            if oneCount - i < twoCount {
+                return -1
+            }
+            for (index, temp) in needle.enumerated() {
+                if temp != haystack[haystack.index(haystack.startIndex, offsetBy: i + index)] {
+                    break
+                }
+            }
+            return i
+        }
+        return -1
+    }
+    
 }
