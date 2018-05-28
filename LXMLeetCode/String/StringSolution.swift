@@ -226,4 +226,37 @@ class StringSolution {
         return -1
     }
     
+    /// 数数并说
+    func countAndSay(_ n: Int) -> String {
+        guard n > 0 else { return "" }
+        if n == 1 {
+            return "1"
+        }
+        
+        func helper(str: String) -> String {
+            var resultString = ""
+            let array = [Character](str)
+            var start = array[0]
+            var count = 0
+            for i in 0 ..< array.count {
+                if array[i] == start {
+                    count += 1
+                } else {
+                    resultString = resultString + "\(count)" + "\(start)"
+                    start = array[i]
+                    count = 1
+                }
+            }
+            resultString = resultString + "\(count)" + "\(start)"
+            return resultString
+        }
+        
+        var result = "1"
+        for _ in 1 ..< n {
+            result = helper(str: result)
+        }
+        return result
+        
+    }
+    
 }

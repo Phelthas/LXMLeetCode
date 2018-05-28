@@ -55,6 +55,7 @@ class ViewController: UIViewController {
         StringSolution().isPalindrome("A man, a plan, a canal: Panama")
         StringSolution().myAtoi("20000000000000000000")
         StringSolution().strStr("a", "a")
+        StringSolution().countAndSay(1)
         ArraySolution().fillClockwiseMatrix(m: 2, n: 6)
     }
     
