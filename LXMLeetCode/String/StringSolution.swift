@@ -192,10 +192,15 @@ class StringSolution {
         return sign * result
     }
     
-    /// 实现 strStr() 函数。思路是对的，但是在LeetCode上提示超出时间限制。。。回头看看怎么优化
+    /// 实现 strStr() 函数。思路是对的，原来可以直接将字符串转为Character数组。。。学到了
     func strStr(_ haystack: String, _ needle: String) -> Int {
         let oneCount = haystack.count
         let twoCount = needle.count
+        
+        let oneArray = [Character](haystack)
+        let twoArray = Array<Character>(needle)
+        
+        
         guard twoCount > 0 else {
             return 0
         }
@@ -206,12 +211,17 @@ class StringSolution {
             if oneCount - i < twoCount {
                 return -1
             }
-            for (index, temp) in needle.enumerated() {
-                if temp != haystack[haystack.index(haystack.startIndex, offsetBy: i + index)] {
+            var result = true
+            for (index, temp) in twoArray.enumerated() {
+                if temp != oneArray[i + index] {
+                    result = false
                     break
                 }
             }
-            return i
+            if result {
+                return i
+            }
+            
         }
         return -1
     }
