@@ -259,4 +259,35 @@ class StringSolution {
         
     }
     
+    /// 最长公共前缀，看其他人提交的居然用了自带的prefix函数，这个应该是不行的吧。。。
+    func longestCommonPrefix(_ strs: [String]) -> String {
+        guard strs.count > 0 else { return "" }
+        
+        var characterArray = [[Character]]()
+        var minLength = Int.max
+        for tempString in strs {
+            guard tempString.count > 0 else { return "" }
+            let tempArray = [Character](tempString)
+            characterArray.append(tempArray)
+            if tempString.count < minLength {
+                minLength = tempString.count
+            }
+        }
+        var index = 0
+        var isSame = true
+        while index < minLength && isSame {
+            let first = characterArray[0][index]
+            for i in 0 ..< characterArray.count {
+                if characterArray[i][index] != first {
+                    isSame = false
+                    break
+                }
+            }
+            if isSame {
+                index += 1
+            }
+        }
+        return String(characterArray[0][0 ..< index])
+    }
+    
 }

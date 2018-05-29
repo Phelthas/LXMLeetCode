@@ -56,6 +56,7 @@ class ViewController: UIViewController {
         StringSolution().myAtoi("20000000000000000000")
         StringSolution().strStr("a", "a")
         StringSolution().countAndSay(1)
+        StringSolution().longestCommonPrefix(["a"])
         ArraySolution().fillClockwiseMatrix(m: 2, n: 6)
     }
     
