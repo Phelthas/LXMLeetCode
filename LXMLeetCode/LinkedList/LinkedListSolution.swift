@@ -82,4 +82,52 @@ class LinkedListSolution {
         }
         return head
     }
+
+    /// 自己写的翻转链表
+//    func reverseList(_ head: ListNode?) -> ListNode? {
+//
+//        /// 删除链表的最后一个元素，返回该元素，如果只有一个元素,就只是返回该元素
+//        func deleteLastNode(head: ListNode) -> ListNode {
+//            var current = head
+//            if current.next == nil {
+//                return current
+//            }
+//            while current.next?.next != nil {
+//                current = current.next!
+//            }
+//            let result = current.next
+//            current.next = nil
+//            return result!
+//        }
+//        guard let head = head else { return nil }
+//        guard head.next != nil else { return head }
+//        let result = deleteLastNode(head: head)
+//        var current = result
+//        while head.next != nil {
+//            let temp = deleteLastNode(head: head)
+//            current.next = temp
+//            current = temp
+//        }
+//        current.next = head
+//        return result
+//    }
+    
+    
+    /// 看别人提交后写的
+    func reverseList(_ head: ListNode?) -> ListNode? {
+        guard head != nil, head?.next != nil else { return head }
+        var last: ListNode? = nil
+        var current: ListNode? = head
+        
+        
+        while current?.next != nil {
+            let orignalNext = current?.next
+            current?.next = last
+            last = current
+            current = orignalNext
+        }
+        return last
+        
+    }
+    
 }
