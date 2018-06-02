@@ -130,4 +130,44 @@ class LinkedListSolution {
         
     }
     
+    
+    /// 合并两个有序链表
+    func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        guard let l1 = l1 else { return l2 }
+        guard let l2 = l2 else { return l1 }
+        var currentOne: ListNode? = l1
+        var currentTwo: ListNode? = l2
+        var result: ListNode? = nil
+        if (currentOne?.val)! <= (currentTwo?.val)! {
+            result = currentOne
+            currentOne = currentOne?.next
+        } else {
+            result = currentTwo
+            currentTwo = currentTwo?.next
+        }
+        var current: ListNode? = result
+        while currentOne != nil || currentTwo != nil {
+            if let one = currentOne?.val, let two = currentTwo?.val {
+                if one <= two {
+                    current?.next = currentOne
+                    current = current?.next
+                    currentOne = currentOne?.next
+                } else {
+                    current?.next = currentTwo
+                    current = current?.next
+                    currentTwo = currentTwo?.next
+                }
+            } else if let one = currentOne {
+                current?.next = one
+                current = current?.next
+                currentOne = currentOne?.next
+            } else if let two = currentTwo {
+                current?.next = two
+                current = current?.next
+                currentTwo = currentTwo?.next
+            }
+        }
+        return result
+    }
+    
 }
