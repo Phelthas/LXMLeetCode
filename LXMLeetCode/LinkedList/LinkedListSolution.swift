@@ -131,43 +131,59 @@ class LinkedListSolution {
     }
     
     
-    /// 合并两个有序链表
+//    /// 合并两个有序链表
+//    func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+//        guard let l1 = l1 else { return l2 }
+//        guard let l2 = l2 else { return l1 }
+//        var currentOne: ListNode? = l1
+//        var currentTwo: ListNode? = l2
+//        var result: ListNode? = nil
+//        if (currentOne?.val)! <= (currentTwo?.val)! {
+//            result = currentOne
+//            currentOne = currentOne?.next
+//        } else {
+//            result = currentTwo
+//            currentTwo = currentTwo?.next
+//        }
+//        var current: ListNode? = result
+//        while currentOne != nil || currentTwo != nil {
+//            if let one = currentOne?.val, let two = currentTwo?.val {
+//                if one <= two {
+//                    current?.next = currentOne
+//                    current = current?.next
+//                    currentOne = currentOne?.next
+//                } else {
+//                    current?.next = currentTwo
+//                    current = current?.next
+//                    currentTwo = currentTwo?.next
+//                }
+//            } else if let one = currentOne {
+//                current?.next = one
+//                current = current?.next
+//                currentOne = currentOne?.next
+//            } else if let two = currentTwo {
+//                current?.next = two
+//                current = current?.next
+//                currentTwo = currentTwo?.next
+//            }
+//        }
+//        return result
+//    }
+    
+    /// 合并两个有序链表 递归算法
+    /// 迭代跟递归的思路完全不一样，注意！递归的思路是：
+    /// 首先比较两个链表的头结点，头结点比较小的即为根结点，然后头结点的next就是 除去头结点剩下的链表与另外一个链表的merge，这个思路还是很巧妙的，因为是链表，所以某个结点的next就还是个链表，递归的思想刚好试用。
     func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         guard let l1 = l1 else { return l2 }
         guard let l2 = l2 else { return l1 }
-        var currentOne: ListNode? = l1
-        var currentTwo: ListNode? = l2
         var result: ListNode? = nil
-        if (currentOne?.val)! <= (currentTwo?.val)! {
-            result = currentOne
-            currentOne = currentOne?.next
+        if l1.val <= l2.val {
+            result = l1
+            result?.next = mergeTwoLists(result?.next, l2)
         } else {
-            result = currentTwo
-            currentTwo = currentTwo?.next
-        }
-        var current: ListNode? = result
-        while currentOne != nil || currentTwo != nil {
-            if let one = currentOne?.val, let two = currentTwo?.val {
-                if one <= two {
-                    current?.next = currentOne
-                    current = current?.next
-                    currentOne = currentOne?.next
-                } else {
-                    current?.next = currentTwo
-                    current = current?.next
-                    currentTwo = currentTwo?.next
-                }
-            } else if let one = currentOne {
-                current?.next = one
-                current = current?.next
-                currentOne = currentOne?.next
-            } else if let two = currentTwo {
-                current?.next = two
-                current = current?.next
-                currentTwo = currentTwo?.next
-            }
+            result = l2
+            result?.next = mergeTwoLists(result?.next, l1)
         }
         return result
     }
-    
 }
