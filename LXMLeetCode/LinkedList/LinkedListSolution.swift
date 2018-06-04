@@ -130,4 +130,63 @@ class LinkedListSolution {
         
     }
     
+    
+//    /// 回文链表
+//    func isPalindrome(_ head: ListNode?) -> Bool {
+//
+//        var reversedList: ListNode? = nil
+//        var current: ListNode? = head
+//        while current != nil {
+//            let temp = ListNode(x: current!.val)
+//            temp.next = reversedList
+//            reversedList = temp
+//            current = current?.next
+//        }
+//        var one = head
+//        var two = reversedList
+//        while one != nil {
+//            if one?.val != two?.val {
+//                return false
+//            }
+//            one = one?.next
+//            two = two?.next
+//        }
+//        return true
+//
+//    }
+    
+    
+    /// 看别人提交的代码，用快慢指针找中点，然后翻转后半部分链表比较
+    func isPalindrome(_ head: ListNode?) -> Bool {
+        
+        func reverseList(_ head: ListNode?) -> ListNode? {
+            var current: ListNode? = head
+            var last: ListNode? = nil
+            while current != nil {
+                let temp = current?.next
+                current?.next = last
+                last = current
+                current = temp
+            }
+            return last
+        }
+        
+        var fast: ListNode? = head
+        var slow: ListNode? = head
+        while fast != nil && fast?.next != nil {
+            fast = fast?.next?.next
+            slow = slow?.next
+        }
+        var reversed = reverseList(slow)
+        var start = head
+        while reversed != nil {
+            if (reversed?.val)! != (start?.val)! {
+                return false
+            }
+            reversed = reversed?.next
+            start = start?.next
+        }
+        return true
+    }
+    
 }
