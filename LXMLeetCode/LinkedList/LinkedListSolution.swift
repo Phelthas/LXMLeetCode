@@ -244,4 +244,20 @@ class LinkedListSolution {
         }
         return result
     }
+    
+    
+    /// 链表中是否有环；用快慢两个指针，快指针每次都两步，慢指针每次走一步，如果快指针赶上了慢指针，说明有环，如果某个指针走到了nil，说明没有环
+    func hasCycle(_ head: ListNode?) -> Bool {
+        var fast = head
+        var slow = head
+        while fast != nil && fast?.next != nil && slow != nil {
+            slow = slow?.next
+            fast = fast?.next?.next
+            if fast === slow {
+                return true
+            }
+        }
+        return false
+    }
+    
 }
