@@ -71,7 +71,7 @@ extension TreeNode {
         
         func traverseHelper(node: TreeNode?, min: Int, max: Int) -> Bool {
             guard let node = node else { return true }
-            if node.val < min || node.val > max {
+            if node.val <= min || node.val >= max {
                 return false
             }
             return traverseHelper(node: node.left, min: min, max: node.val) && traverseHelper(node: node.right, min: node.val, max: max)
