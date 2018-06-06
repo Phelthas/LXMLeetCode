@@ -12,56 +12,71 @@ import Foundation
 
 // MARK: - 验证二叉搜索树
 extension TreeNode {
+//    class func isValidBST(root: TreeNode?) -> Bool {
+//        guard let root = root else { return true }
+//
+//        func help(node: TreeNode?) -> Bool {
+//            guard let root = node else { return true }
+//
+//            func traverseLeft(node: TreeNode?, currentVal: Int) -> Bool {
+//                guard let node = node else { return true }
+//                if node.val >= currentVal {
+//                    return false
+//                }
+//                var leftResult = true
+//                var rightResult = true
+//                if let left = node.left {
+//                    leftResult = traverseLeft(node: left, currentVal: currentVal)
+//                }
+//                if let right = node.right {
+//                    rightResult = traverseLeft(node: right, currentVal: currentVal)
+//                }
+//                return leftResult && rightResult
+//            }
+//
+//            func traverseRight(node: TreeNode?, currentVal: Int) -> Bool {
+//                guard let node = node else { return true }
+//                if node.val <= currentVal {
+//                    return false
+//                }
+//                var leftResult = true
+//                var rightResult = true
+//                if let left = node.left {
+//                    leftResult = traverseRight(node: left, currentVal: currentVal)
+//                }
+//                if let right = node.right {
+//                    rightResult = traverseRight(node: right, currentVal: currentVal)
+//                }
+//                return leftResult && rightResult
+//            }
+//
+//            let leftResult = traverseLeft(node: root.left, currentVal: root.val)
+//            let rightResult = traverseRight(node: root.right, currentVal: root.val)
+//
+//            return leftResult && rightResult
+//        }
+//
+//        let conditionOne = help(node: root)
+//
+//        let conditionTwo = isValidBST(root: root.left) && isValidBST(root:root.right)
+//
+//        return conditionOne && conditionTwo
+//
+//    }
+    
+    
+    /// 验证BST的递归算法，这个算法思路还是很值得学习的，递归的核心是：父节点左边所有的值都要比它下，父节点的右边左右的值都要比它大，所以 左节点的右节点（或者右节点的左节点）就同时要满足小于某个数且大于某个数，这里递归巧妙的把最大最小值传递了下去，需要单步运行好好理解下
     class func isValidBST(root: TreeNode?) -> Bool {
         guard let root = root else { return true }
-    
-        func help(node: TreeNode?) -> Bool {
-            guard let root = node else { return true }
-            
-            func traverseLeft(node: TreeNode?, currentVal: Int) -> Bool {
-                guard let node = node else { return true }
-                if node.val >= currentVal {
-                    return false
-                }
-                var leftResult = true
-                var rightResult = true
-                if let left = node.left {
-                    leftResult = traverseLeft(node: left, currentVal: currentVal)
-                }
-                if let right = node.right {
-                    rightResult = traverseLeft(node: right, currentVal: currentVal)
-                }
-                return leftResult && rightResult
+        
+        func traverseHelper(node: TreeNode?, min: Int, max: Int) -> Bool {
+            guard let node = node else { return true }
+            if node.val < min || node.val > max {
+                return false
             }
-            
-            func traverseRight(node: TreeNode?, currentVal: Int) -> Bool {
-                guard let node = node else { return true }
-                if node.val <= currentVal {
-                    return false
-                }
-                var leftResult = true
-                var rightResult = true
-                if let left = node.left {
-                    leftResult = traverseRight(node: left, currentVal: currentVal)
-                }
-                if let right = node.right {
-                    rightResult = traverseRight(node: right, currentVal: currentVal)
-                }
-                return leftResult && rightResult
-            }
-            
-            let leftResult = traverseLeft(node: root.left, currentVal: root.val)
-            let rightResult = traverseRight(node: root.right, currentVal: root.val)
-            
-            return leftResult && rightResult
+            return traverseHelper(node: node.left, min: min, max: node.val) && traverseHelper(node: node.right, min: node.val, max: max)
         }
-        
-        let conditionOne = help(node: root)
-        
-        let conditionTwo = isValidBST(root: root.left) && isValidBST(root:root.right)
-        
-        return conditionOne && conditionTwo
-        
+        return traverseHelper(node: root, min: Int.min, max: Int.max)
     }
     
 }
