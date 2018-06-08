@@ -210,5 +210,26 @@ extension SortSolution {
             }
         }
     }
+    
+    // 第一个错误的版本
+    func firstBadVersion(n: Int) -> Int {
+        
+        func isBadVersion(n: Int) -> Bool {
+            return arc4random() % 2 == 0
+        }
+        
+        var start = 1
+        var end = n
+        var center = 0
+        while start < end {
+            center = start / 2 + end / 2    //!!!注意！！！这里必须不能是（start + end）/ 2，因为两个数之和可能就溢出了。。。。。。。。。。。因为这个超时了半天都不知道怎么错的，还是去网上搜了一下才知道
+            if isBadVersion(n: center) {
+                end = center
+            } else {
+                start = center + 1
+            }
+        }
+        return start
+    }
 }
 
