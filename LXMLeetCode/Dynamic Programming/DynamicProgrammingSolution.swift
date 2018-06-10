@@ -37,27 +37,42 @@ class DynamicProgrammingSolution {
     
     
     /// 买卖股票的最佳时机，自己想出来的算法，比别人提交的算法耗时了一点
+    /// 看了一下别人提交的算法，大致思路是：遍历一遍数组，找到当前的数之前的最小值，那当前的数-最小值就是目前的最大收益，把最大值保存起来跟下一次的遍历比较，那遍历一遍数据就行了
+    /// 而我的想法是找到当前数之后的最大值，其实差不多，但这样就需要遍历两次，时间复杂度多了一倍
+//    func maxProfit(_ prices: [Int]) -> Int {
+//        let n = prices.count
+//        guard n > 1 else { return 0 }
+//        var maxArray = [Int]()
+//        var lastMax = 0
+//        for i in (1 ... n - 1).reversed() {
+//            if prices[i] > lastMax {
+//                lastMax = prices[i]
+//            }
+//            maxArray.append(lastMax)
+//        }
+//        var result = 0
+//        for i in (0 ... n - 2) {
+//            let price = prices[i]
+//            let lastMax = maxArray[n - 1 - 1 - i]
+//            if price < lastMax {
+//                let temp = lastMax - price
+//                if temp > result {
+//                    result = temp
+//                }
+//            }
+//        }
+//        return result
+//    }
+    
     func maxProfit(_ prices: [Int]) -> Int {
-        var n = prices.count
+        let n = prices.count
         guard n > 1 else { return 0 }
-        var maxArray = [Int]()
-        var lastMax = 0
-        for i in (1 ... n - 1).reversed() {
-            if prices[i] > lastMax {
-                lastMax = prices[i]
-            }
-            maxArray.append(lastMax)
-        }
         var result = 0
-        for i in (0 ... n - 2) {
-            let price = prices[i]
-            let lastMax = maxArray[n - 1 - 1 - i]
-            if price < lastMax {
-                let temp = lastMax - price
-                if temp > result {
-                    result = temp
-                }
-            }
+        var minPrice = prices[0]
+        for i in 1 ... n - 1 {
+            let current = prices[i]
+            result = max(current - minPrice, result)
+            minPrice = min(current, minPrice)
         }
         return result
     }
