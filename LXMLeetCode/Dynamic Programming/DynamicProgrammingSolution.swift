@@ -36,4 +36,30 @@ class DynamicProgrammingSolution {
     }
     
     
+    /// 买卖股票的最佳时机，自己想出来的算法，比别人提交的算法耗时了一点
+    func maxProfit(_ prices: [Int]) -> Int {
+        var n = prices.count
+        guard n > 1 else { return 0 }
+        var maxArray = [Int]()
+        var lastMax = 0
+        for i in (1 ... n - 1).reversed() {
+            if prices[i] > lastMax {
+                lastMax = prices[i]
+            }
+            maxArray.append(lastMax)
+        }
+        var result = 0
+        for i in (0 ... n - 2) {
+            let price = prices[i]
+            let lastMax = maxArray[n - 1 - 1 - i]
+            if price < lastMax {
+                let temp = lastMax - price
+                if temp > result {
+                    result = temp
+                }
+            }
+        }
+        return result
+    }
+    
 }
