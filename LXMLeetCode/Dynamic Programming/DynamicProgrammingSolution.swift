@@ -77,4 +77,42 @@ class DynamicProgrammingSolution {
         return result
     }
     
+    
+    /// 最大子序和 按字面意思的解法,穷举法
+//    func maxSubArray(_ nums: [Int]) -> Int {
+//        let n = nums.count
+//        guard n > 0 else { return 0 }
+//        var result = Int.min
+//        var maxSum = 0
+//
+//        for k in 0 ..< n {
+//            maxSum = 0
+//            for i in k ..< n {
+//                let current = nums[i]
+//                maxSum = maxSum + current
+//                if maxSum > result {
+//                    result = maxSum
+//                }
+//            }
+//        }
+//        return result
+//    }
+    
+    
+    /// 看网上思路的O(n)解法，最优起点发，这没有数学基础是想不出来的。。。
+    func maxSubArray(_ nums: [Int]) -> Int {
+        var result = Int.min
+        var thisSum = 0
+        for i in 0 ..< nums.count {
+            thisSum += nums[i]
+            if thisSum > result {
+                result = thisSum
+            }
+            if thisSum < 0 {
+                thisSum = 0
+            }
+        }
+        return result
+    }
+    
 }
