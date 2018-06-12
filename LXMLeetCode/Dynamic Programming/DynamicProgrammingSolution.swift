@@ -115,4 +115,88 @@ class DynamicProgrammingSolution {
         return result
     }
     
+    
+    /// 打家劫舍，这个算法超时了。。。核心思想是：抢第一个还是第二个会导致后面选择不一样，所以要选第一个加其后续最大值，或者第二个加其后续最大值；不可能选第三个，因为选第三个肯定不如选第一个加第三个。
+//    func rob(_ nums: [Int]) -> Int {
+//        let n = nums.count
+//        func rob(_ nums: [Int], start: Int) -> Int {
+//            if n - start <= 0 {
+//                return 0
+//            }
+//            if n - start == 1 {
+//                return nums[start]
+//            }
+//            if n - start == 2 {
+//                return max(nums[start], nums[start + 1])
+//            }
+//            let one = nums[start] + rob(nums, start: start + 2)
+//            let two = nums[start + 1] + rob(nums, start: start + 3)
+//            return max(one, two)
+//        }
+//
+//        return rob(nums, start: 0)
+//    }
+
+    
+    /// 看了看别人博客，其实上面的思路可以优化一下，我是最后才比较，其实每一步都可以比较一次，设f(i)是到第i家时的最大值，当前最大值只有两种情况，要么是算上当前值时取到最大值（f(i - 2) + nums(i)），要么不算当前值时取最大值（f(i - 1)），所以 f(i) = max(f(i - 2) + nums(i), f(i - 1))
+    // 这个写法也是超时的，因为递归有很多重复运算
+//    func rob(_ nums: [Int]) -> Int {
+//        let n = nums.count
+//        if n == 0 { return 0 }
+//        if n == 1 { return nums[0] }
+//
+//        func total(nums: [Int], endIndex: Int) -> Int {
+//            if endIndex <= 0 {
+//              return 0
+//            } else if endIndex == 0 {
+//                return nums[0]
+//            } else if endIndex == 1 {
+//                return max(nums[0], nums[0])
+//            } else {
+//                return max(total(nums: nums, endIndex: endIndex - 1), nums[endIndex] + total(nums: nums, endIndex: endIndex - 2))
+//            }
+//        }
+//        return total(nums: nums, endIndex: n - 1)
+//    }
+    
+    func rob(_ nums: [Int]) -> Int {
+        let n = nums.count
+        if n == 0 { return 0 }
+        if n == 1 { return nums[0] }
+        
+        var result = 0
+        var last = 0
+        for i in 0 ..< n {
+            let temp = result
+            result = max(last + nums[i], result)
+            last = temp
+        }
+        return result
+    }
+    
+    //别人提交的比较好理解的算法，用一个数组保存递归结果
+//    func rob(_ nums: [Int]) -> Int {
+//        if nums.count == 0 {
+//            return 0
+//        }
+//
+//        if nums.count == 1 {
+//            return nums.first!
+//        }
+//
+//        if nums.count == 2 {
+//            return max(nums[0], nums[1])
+//        }
+//
+//        var dp : [Int] = [Int](repeating: 0, count: nums.count)
+//        dp[0] = nums[0]
+//        dp[1] = max(nums[0], nums[1])
+//
+//        for i in 2..<nums.count {
+//            dp[i] = max(nums[i] + dp[i - 2], dp[i - 1])
+//        }
+//
+//        return dp[nums.count - 1]
+//    }
+    
 }
