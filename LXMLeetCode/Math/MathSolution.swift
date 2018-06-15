@@ -26,4 +26,29 @@ class MathSolution {
         return resultArray
     }
     
+    
+    /// 204. 计数质数
+    func countPrimes(_ n: Int) -> Int {
+        if n <= 2 { return 0}
+        var array = [Bool](repeating: true, count: n)
+        
+        for i in 2 ..< n {
+            if i * i >= n { break }
+            if array[i] == false { continue }
+            var j = i * i
+            while j < n {
+                array[j] = false
+                j = j + i
+            }
+        }
+        
+        var result = 0
+        for i in 2 ..< n {
+            if array[i] == true {
+                result += 1
+            }
+        }
+        return result
+    }
+    
 }
