@@ -51,4 +51,20 @@ class MathSolution {
         return result
     }
     
+    
+    /// 题目326，判断是否是3的幂次方，看网上有说可以用对数函数还判断，即直接判断x=log3(n)是不是整数即可，但是没发现swift的对数函数是什么。。。
+    func isPowerOfThree(_ n: Int) -> Bool {
+        if n <= 0 { return false }
+        if n == 1 { return true }
+        var current = n
+        while current != 1 {
+            if current % 3 == 0 {
+                current = current / 3
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+    
 }
