@@ -67,8 +67,45 @@ class MathSolution {
         return true
     }
     
-    /// 罗马数字转整数
+    /// 题目13，罗马数字转整数
     func romanToInt(_ s: String) -> Int {
+        func numberOfCharacter(_ c: String) -> Int {
+            switch c {
+            case "I": return 1
+            case "V": return 5
+            case "X": return 10
+            case "L": return 50
+            case "C": return 100
+            case "D": return 500
+            case "M": return 1000
+            case "IV": return 4
+            case "IX": return 9
+            case "XL": return 40
+            case "XC": return 90
+            case "CD": return 400
+            case "CM": return 900
+            default: return 0
+            }
+        }
+        var result = 0
+        var array = [Character](s)
+        let n = array.count
+        var index = 0
+        while index < n {
+            if n - index >= 2 {
+                let temp = String(array[index]) + String(array[index + 1])
+                let number = numberOfCharacter(temp)
+                if number != 0 {
+                    result += number
+                    index += 2
+                    continue
+                }
+            }
+            let temp = String(array[index])
+            result += numberOfCharacter(temp)
+            index += 1
+        }
+        return result
         
     }
 }
