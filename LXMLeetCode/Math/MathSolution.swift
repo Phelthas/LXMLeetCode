@@ -67,4 +67,8 @@ class MathSolution {
         return true
     }
     
+    /// 罗马数字转整数
+    func romanToInt(_ s: String) -> Int {
+        
+    }
 }
