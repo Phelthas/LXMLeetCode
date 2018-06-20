@@ -41,4 +41,16 @@ class OtherSolution {
         }
         return result
     }
+    
+    
+    /// 190. 颠倒二进制位
+    func reverseBits(_ n: UInt32) -> UInt32 {
+        var result: UInt32 = 0
+        var x = n;
+        for _ in 0 ..< 32 {
+            result = (result << 1) | (x & 1)
+            x = x >> 1
+        }
+        return result
+    }
 }
