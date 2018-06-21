@@ -53,4 +53,22 @@ class OtherSolution {
         }
         return result
     }
+    
+    /// 118. 杨辉三角
+    func generate(_ numRows: Int) -> [[Int]] {
+        var result = [[Int]]()
+        guard numRows > 0 else { return result }
+        for i in 1 ... numRows {
+            let temp = [Int](repeating: 1, count: i)
+            result.append(temp)
+        }
+        if numRows >= 3 {
+            for i in 3 ... numRows {
+                for j in 1 ... i - 2 {
+                    result[i - 1][j] = result[i - 2][j - 1] + result[i - 2][j]
+                }
+            }
+        }
+        return result
+    }
 }
