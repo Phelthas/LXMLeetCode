@@ -71,4 +71,35 @@ class OtherSolution {
         }
         return result
     }
+    
+    
+    
+    /// 20. 有效的括号
+    func isValid(_ s: String) -> Bool {
+        guard s.count > 0 else { return true }
+        if s.count == 1 { return false }
+        let array = [Character](s)
+        var lastArray = [Character]()
+        lastArray.append(array[0])
+        for i in 1 ..< array.count {
+            let current = array[i]
+            if let last = lastArray.last {
+                if last == " " {
+                    // 空格忽略
+                } else if (last == "(" && current == ")") ||
+                    (last == "[" && current == "]") ||
+                    (last == "{" && current == "}") {
+                    lastArray.removeLast()
+                } else {
+                    lastArray.append(current)
+                }
+            } else {
+                lastArray.append(current)
+            }
+        }
+        if lastArray.count == 0 {
+            return true
+        }
+        return false
+    }
 }
