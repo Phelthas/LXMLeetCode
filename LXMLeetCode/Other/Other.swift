@@ -104,7 +104,6 @@ class OtherSolution {
     }
     
     /// 268. 缺失数字, 最快的算法是用异或，其次是用总数求和-数组求和，这两个都是用常数额外空间，我这个算法用了n。。。
-    
     func missingNumber(_ nums: [Int]) -> Int {
         guard nums.count > 0 else { return 0}
         var dict = [Int: Bool]()
@@ -118,4 +117,5 @@ class OtherSolution {
         }
         return 0
     }
+    
 }

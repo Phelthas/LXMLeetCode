@@ -418,5 +418,18 @@ extension ArraySolution {
         
         return result
     }
+    
+    /// 122. 买卖股票的最佳时机 II
+    /// 注意题目要求是你可以尽可能完成更多的交易，所以当天卖出再买进也是可以的，所以就简单了，原来一直理解的是当天卖了就不能再买了，所以感觉一直有问题
+    func maxProfit(_ prices: [Int]) -> Int {
+        guard prices.count > 1 else { return 0 }
+        var result = 0
+        for i in 0 ..< prices.count - 1 {
+            if prices[i] < prices[i + 1] {
+                result += prices[i + 1] - prices[i]
+            }
+        }
+        return result
+    }
 }
 
