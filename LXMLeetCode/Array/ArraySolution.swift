@@ -431,5 +431,64 @@ extension ArraySolution {
         }
         return result
     }
+    
+//    /// 15. 三数之和, 超时的算法
+//    func threeSum(_ nums: [Int]) -> [[Int]] {
+//        var dict = [String : [Int]]()
+//        var array = nums.sorted()
+//
+//        guard array.count >= 3 else { return [[Int]]() }
+//        for i in 0 ... array.count - 3 {
+//            for j in i + 1 ... array.count - 2 {
+//                for k in j + 1 ... array.count - 1 {
+//                    if array[i] + array[j] + array[k] == 0 {
+//                        let key = "\(array[i])_\(array[j])_\(array[k])"
+//                        dict[key] = [array[i], array[j], array[k]]
+//                    }
+//                }
+//            }
+//        }
+//        return [[Int]](dict.values)
+//
+//    }
+    
+    /// 15. 三数之和, 看别人博客的算法，两个指针分别指向头尾两个数，见https://www.cnblogs.com/grandyang/p/4481576.html
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        guard nums.count >= 3 else { return result }
+        let array = nums.sorted()
+        var last = Int.min
+        for i in 0 ... array.count - 3 {
+            let current = array[i]
+            if current == last {
+                continue
+            }
+            if current > 0 {
+                return result
+            }
+            var start = i + 1
+            var end = array.count - 1
+            while start < end {
+                if current + array[start] + array[end] == 0 {
+                    result.append([current, array[start], array[end]])
+                    while (start < end) && array[start] == array[start + 1] {
+                        start += 1
+                    }
+                    while (start < end) && array[end] == array[end - 1] {
+                        end -= 1
+                    }
+                    start += 1
+                    end -= 1
+                    last = current
+                } else if current + array[start] + array[end] > 0 {
+                    end -= 1
+                } else {
+                    start += 1
+                }
+            }
+        }
+        return result
+    }
+    
 }
 
