@@ -490,5 +490,30 @@ extension ArraySolution {
         return result
     }
     
+//    73. 矩阵置零,虽然没有超时，但耗时还是很多。。。看别人的算法，可以先遍历一遍将行列都至为Int.max，在遍历一遍至0
+    func setZeroes(_ matrix: inout [[Int]]) {
+        var array = [(Int, Int)]()
+        
+        for i in 0 ..< matrix.count {
+            let row = matrix[i]
+            for j in 0 ..< row.count {
+                let b = row[j]
+                if b == 0 {
+                    array.append((i, j))
+                }
+            }
+        }
+        
+        for (m, n) in array {
+            for i in 0 ..< matrix.count {
+                for j in 0 ..< matrix[i].count {
+                    matrix[m][j] = 0
+                }
+                matrix[i][n] = 0
+            }
+        }
+    }
+    
+    
 }
 
