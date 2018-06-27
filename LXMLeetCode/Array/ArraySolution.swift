@@ -514,6 +514,20 @@ extension ArraySolution {
         }
     }
     
-    
+//    49. 字母异位词分组
+    func groupAnagrams(_ strs: [String]) -> [[String]] {
+        var dict = [String : [String]]()
+        
+        for temp in strs {
+            let key = String([Character](temp).sorted())
+            if var array = dict[key] {
+                array.append(temp)
+                dict[key] = array
+            } else {
+                dict[key] = [temp]
+            }
+        }
+        return [[String]](dict.values)
+    }
 }
 
