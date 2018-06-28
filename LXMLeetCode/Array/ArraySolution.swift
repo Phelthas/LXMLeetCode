@@ -529,5 +529,43 @@ extension ArraySolution {
         }
         return [[String]](dict.values)
     }
+    
+    
+    /// 3. 无重复字符的最长子串,超时的算法
+//    func lengthOfLongestSubstring(_ s: String) -> Int {
+//        guard s.count > 0 else { return 0 }
+//        let array = [Character](s)
+//        let n = Set<Character>(array).count
+//        guard n > 1 else { return 1 }
+//        var result = 1
+//        for i in 2 ... n {
+//            for j in 0 ... array.count - i {
+//                let sub = Array(array[j ... j + i - 1])
+//                let count = Set<Character>(sub).count
+//                if count == i {
+//                    result = max(result, count)
+//                }
+//            }
+//        }
+//        return result
+//    }
+    
+    /// 3. 无重复字符的最长子串,通过的算法，但只超过了1%的提交。。。
+    func lengthOfLongestSubstring(_ s: String) -> Int {
+        guard s.count > 0 else { return 0 }
+        let array = [Character](s)
+        let n = Set<Character>(array).count
+        guard n > 1 else { return 1 }
+        for i in (2 ... n).reversed() {
+            for j in 0 ... array.count - i {
+                let sub = Array(array[j ... j + i - 1])
+                let count = Set<Character>(sub).count
+                if count == i {
+                    return count
+                }
+            }
+        }
+        return 1
+    }
 }
 

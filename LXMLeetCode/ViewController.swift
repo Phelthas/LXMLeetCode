@@ -44,6 +44,7 @@ class ViewController: UIViewController {
         ArraySolution.removeDuplicatesSolution()
         ArraySolution.rotateRightSolution()
         ArraySolution.containsDuplicateSolution()
+        ArraySolution().lengthOfLongestSubstring("pwwkew")
         
         
         SortSolution.quickSortSolution()
