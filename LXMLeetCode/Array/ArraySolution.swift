@@ -550,22 +550,54 @@ extension ArraySolution {
 //        return result
 //    }
     
-    /// 3. 无重复字符的最长子串,通过的算法，但只超过了1%的提交。。。
+//    /// 3. 无重复字符的最长子串,通过的算法，但只超过了1%的提交。。。
+//    func lengthOfLongestSubstring(_ s: String) -> Int {
+//        guard s.count > 0 else { return 0 }
+//        let array = [Character](s)
+//        let n = Set<Character>(array).count
+//        guard n > 1 else { return 1 }
+//        for i in (2 ... n).reversed() {
+//            for j in 0 ... array.count - i {
+//                let sub = Array(array[j ... j + i - 1])
+//                let count = Set<Character>(sub).count
+//                if count == i {
+//                    return count
+//                }
+//            }
+//        }
+//        return 1
+//    }
+    
+    /// 3. 无重复字符的最长子串, 别人的思路，还可以再优化，用下标计算而不是用数组count计算
     func lengthOfLongestSubstring(_ s: String) -> Int {
         guard s.count > 0 else { return 0 }
-        let array = [Character](s)
-        let n = Set<Character>(array).count
-        guard n > 1 else { return 1 }
-        for i in (2 ... n).reversed() {
-            for j in 0 ... array.count - i {
-                let sub = Array(array[j ... j + i - 1])
-                let count = Set<Character>(sub).count
-                if count == i {
-                    return count
+        var result = 1
+        var array = [Character](s)
+        var window = [array[0]]
+        for i in 1 ..< array.count {
+            let current = array[i]
+            var left = 0
+            while left < window.count {
+                if window[left] == current {
+                    if left == window.count - 1 {
+                        window = [current]
+                    } else {
+                        window = Array(window[left + 1 ..< window.count])
+                        window.append(current)
+                    }
+                    break
+                } else {
+                    left += 1
+                }
+                if left == window.count {
+                    window.append(current)
+                    break
                 }
             }
+            result = max(result, window.count)
         }
-        return 1
+        return result
     }
+    
 }
 
