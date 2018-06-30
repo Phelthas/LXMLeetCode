@@ -599,5 +599,45 @@ extension ArraySolution {
         return result
     }
     
+    /// 5. 最长回文子串，从中间向两边扩散的方法；网上有个Manacher算法，看不懂。。。。
+    func longestPalindrome(_ s: String) -> String {
+        guard s.count > 1 else { return s }
+        let array = [Character](s)
+        var result = [Character]()
+        var temp = [Character]()
+        
+        func findLongestPalindrome(left: Int, right: Int) {
+            var left = left
+            var right = right
+            while left >= 0 && right <= array.count - 1 {
+                if array[left] == array[right] {
+                    if left == 0 || right == array.count - 1 {
+                        temp = Array(array[left ... right])
+                        if temp.count > result.count {
+                            result = temp
+                        }
+                        break
+                    }
+                    left -= 1
+                    right += 1
+                } else {
+                    temp = Array(array[left + 1 ... right - 1])
+                    if temp.count > result.count {
+                        result = temp
+                    }
+                    break
+                }
+            }
+        }
+        
+        for i in 0 ..< array.count - 1 {
+            if array[i] == array[i + 1] {
+                findLongestPalindrome(left: i, right: i + 1)
+            }
+            findLongestPalindrome(left: i, right: i)
+        }
+        return String(result)
+        
+    }
 }
 
