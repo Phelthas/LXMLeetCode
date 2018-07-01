@@ -639,5 +639,21 @@ extension ArraySolution {
         return String(result)
         
     }
+    
+    /// 334. 递增的三元子序列, 这个自己只想到了穷举法，这是看别人思路写的。。。
+    func increasingTriplet(_ nums: [Int]) -> Bool {
+        var first = Int.max
+        var second = Int.max
+        for current in nums {
+            if current <= first {
+                first = current
+            } else if current > first && current < second {
+                second = current
+            } else if current > second {
+                return true
+            }
+        }
+        return false
+    }
 }
 
