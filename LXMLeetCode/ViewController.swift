@@ -59,6 +59,12 @@ class ViewController: UIViewController {
         StringSolution().countAndSay(1)
         StringSolution().longestCommonPrefix(["a"])
         ArraySolution().fillClockwiseMatrix(m: 2, n: 6)
+        
+        
+        let one = ListNode(x: 1)
+        let two = ListNode(x: 9)
+        two.next = ListNode(x: 9)
+        LinkedListSolution().addTwoNumbers(one, two)
     }
     
 }

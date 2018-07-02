@@ -260,4 +260,46 @@ class LinkedListSolution {
         return false
     }
     
+    /// 2. 链表的两数相加
+    func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        guard let l1 = l1 else { return l2 }
+        guard let l2 = l2 else { return l1 }
+        var one: ListNode? = l1
+        var two: ListNode? = l2
+        var result: ListNode? = nil
+        var current: ListNode? = nil
+        var x = 0
+        while one != nil || two != nil {
+            var temp = x
+            if let value = one?.val {
+                temp += value
+                one = one?.next
+            }
+            if let value = two?.val {
+                temp += value
+                two = two?.next
+            }
+            if temp >= 10 {
+                temp = temp % 10
+                x = 1
+            } else {
+                x = 0
+            }
+            let node = ListNode(x: temp)
+            if result == nil {
+                result = node
+                current = node
+            } else {
+                current?.next = node
+                current = node
+            }
+        }
+        if x == 1 {
+            let node = ListNode(x: 1)
+            current?.next = node
+        }
+        return result
+        
+    }
+    
 }
