@@ -302,4 +302,28 @@ class LinkedListSolution {
         
     }
     
+    /// 328. 奇偶链表
+    func oddEvenList(_ head: ListNode?) -> ListNode? {
+        guard let head = head else { return nil }
+        var odd: ListNode? = head
+        var even: ListNode? = head.next
+        let evenFirst = even
+        var next: ListNode? = nil
+        while odd?.next != nil || even?.next != nil {
+            next = odd?.next?.next
+            odd?.next = next
+            if next != nil {
+                odd = next
+            }
+            
+            next = even?.next?.next
+            even?.next = next
+            if next != nil {
+                even = next
+            }
+            
+        }
+        odd?.next = evenFirst
+        return head
+    }
 }
