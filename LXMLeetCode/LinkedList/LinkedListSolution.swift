@@ -326,4 +326,68 @@ class LinkedListSolution {
         odd?.next = evenFirst
         return head
     }
+    
+    /// 160. 相交链表, 我想到的算法是翻转两个链表，然后开始遍历，找到第一个不相同的上一个即是相交的节点，然后再把链表翻转回去。。。算下来最多遍历6遍，理论上还是满足题目要求的，但提交的时候说我改变链表了，有点郁闷
+//    func getIntersectionNode(headA: ListNode?, headB: ListNode?) -> ListNode? {
+//        var result: ListNode? = nil
+//        let reversedA = reverseList(headA)
+//        let reversedB = reverseList(headB)
+//        var currentA = reversedA
+//        var currentB = reversedB
+//        while currentA != nil && currentB != nil {
+//            if currentA === currentB {
+//                result = currentA
+//                currentA = currentA?.next
+//                currentB = currentB?.next
+//            } else {
+//                break
+//            }
+//        }
+//        _ = reverseList(reversedA)
+//        _ = reverseList(reversedB)
+//        return result
+//    }
+    
+    ///160. 相交链表，别人的算法，遍历的时候记下长度差n，然后长的链表先走n步，再一起遍历，找到相同的节点即可，确实比我想到的算法要好很多。。。还可以把两个链表相连，判断有没有环，环的第一个节点就是相交节点
+    func getIntersectionNode(headA: ListNode?, headB: ListNode?) -> ListNode? {
+        var result: ListNode? = nil
+        var a: ListNode? = headA
+        var b: ListNode? = headB
+        var countA = 0
+        var countB = 0
+        while a != nil {
+            countA += 1
+            a = a?.next
+        }
+        while b != nil {
+            countB += 1
+            b = b?.next
+        }
+        if countA > countB {
+            var n = countA - countB
+            a = headA
+            b = headB
+            while n != 0 {
+                a = a?.next
+                n -= 1
+            }
+        } else {
+            var n = countB - countA
+            a = headA
+            b = headB
+            while n != 0 {
+                b = b?.next
+                n -= 1
+            }
+        }
+        while a != nil && b != nil {
+            if a === b {
+                return a
+            } else {
+                a = a?.next
+                b = b?.next
+            }
+        }
+        return nil
+    }
 }
