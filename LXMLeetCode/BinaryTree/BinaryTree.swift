@@ -737,3 +737,38 @@ extension TreeNode {
     }
 }
 
+
+extension TreeNode {
+    
+    /// 103. 二叉树的锯齿形层次遍历
+    func zigzagLevelOrder(_ root: TreeNode?) -> [[Int]] {
+        var result = [[Int]]()
+        guard let root = root else { return result }
+        var array = [TreeNode]()
+        var secondArray = [TreeNode]()
+        var leftToRight = true
+        array.append(root)
+        while array.count != 0 {
+            var line = [Int]()
+            for current in array {
+                line.append(current.val)
+                if let left = current.left {
+                    secondArray.append(left)
+                }
+                if let right = current.right {
+                    secondArray.append(right)
+                }
+            }
+            if leftToRight {
+                result.append(line)
+                leftToRight = false
+            } else {
+                result.append(line.reversed())
+                leftToRight = true
+            }
+            array = secondArray
+            secondArray.removeAll()
+        }
+        return result
+    }
+}
