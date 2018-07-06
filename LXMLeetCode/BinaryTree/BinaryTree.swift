@@ -771,4 +771,22 @@ extension TreeNode {
         }
         return result
     }
+    
+    /// 230. 二叉搜索树中第K小的元素
+    func kthSmallest(_ root: TreeNode?, _ k: Int) -> Int {
+        
+        var array = [Int]()
+        func inorderTraverse(_ root: TreeNode?) {
+            guard let root = root else { return }
+            if let left = root.left {
+                inorderTraverse(left)
+            }
+            array.append(root.val)
+            if let right = root.right {
+                inorderTraverse(right)
+            }
+        }
+        inorderTraverse(root)
+        return array[k - 1]
+    }
 }
