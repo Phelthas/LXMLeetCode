@@ -655,5 +655,41 @@ extension ArraySolution {
         }
         return false
     }
+    
+    /// 200. 岛屿的个数
+    func numIslands(_ grid: [[Character]]) -> Int {
+        var result = 0
+        let m = grid.count
+        if m == 0 {
+            return 0
+        }
+        let n = grid[0].count
+        var temp = grid
+        
+        func recurse(_ i: Int, _ j: Int) {
+            temp[i][j] = "a"
+            if i > 0 && temp[i - 1][j] == "1" {
+                recurse(i - 1, j)
+            }
+            if i < m - 1 && temp[i + 1][j] == "1" {
+                recurse(i + 1, j)
+            }
+            if j > 0 && temp[i][j - 1] == "1" {
+                recurse(i, j - 1)
+            }
+            if j < n - 1 && temp[i][j + 1] == "1" {
+                recurse(i, j + 1)
+            }
+        }
+        for i in 0 ..< m {
+            for j in 0 ..< n {
+                if temp[i][j] == "1" {
+                    result += 1
+                    recurse(i, j)
+                }
+            }
+        }
+        return result
+    }
 }
 

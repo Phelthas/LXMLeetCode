@@ -60,6 +60,9 @@ class ViewController: UIViewController {
         StringSolution().longestCommonPrefix(["a"])
         ArraySolution().fillClockwiseMatrix(m: 2, n: 6)
         
+        let aaa: [[Character]] = [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]
+        ArraySolution().numIslands(aaa)
+        
         
         let one = ListNode(x: 1)
         let two = ListNode(x: 9)
