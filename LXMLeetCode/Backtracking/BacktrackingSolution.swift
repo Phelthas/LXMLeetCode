@@ -46,4 +46,26 @@ class BacktrackingSolution {
         }
         return result
     }
+    
+    
+    /// 22. 括号生成,这是看别人博客写的，这个思路还是需要好好理解一下，深度优先的回溯
+    func generateParenthesis(_ n: Int) -> [String] {
+        var result = [String]()
+        
+        func generateDFS(_ left: Int, _ right: Int, _ s: String) {
+            if left == 0 && right == 0 {
+                result.append(s)
+            }
+            if left > 0 {
+                generateDFS(left - 1, right, s + "(")
+            }
+            if right > 0 && left < right {
+                generateDFS(left, right - 1, s + ")")
+            }
+        }
+        
+        generateDFS(n, n, "")
+        return result
+        
+    }
 }
