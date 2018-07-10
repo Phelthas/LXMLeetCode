@@ -68,6 +68,9 @@ class ViewController: UIViewController {
         let two = ListNode(x: 9)
         two.next = ListNode(x: 9)
         LinkedListSolution().addTwoNumbers(one, two)
+        
+        
+        BacktrackingSolution().permute([1, 2, 3])
     }
     
 }

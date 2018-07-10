@@ -68,4 +68,29 @@ class BacktrackingSolution {
         return result
         
     }
+    
+    /// 46，全排列,自己大致想到的思路，但是完全写不出来，这也是看比人博客写的
+    func permute(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+
+        // i 表示从第几个数开始全排列
+        func dfs(_ array: [Int], _ i: Int) {
+            var array = array
+            if i == array.count {
+                var temp = [Int]()
+                for c in array {
+                    temp.append(c)
+                }
+                result.append(temp)
+            }
+            for j in i ..< array.count {
+                array.swapAt(i, j)
+                dfs(array, i + 1)
+                array.swapAt(i, j)
+            }
+        }
+        
+        dfs(nums, 0)
+        return result
+    }
 }
