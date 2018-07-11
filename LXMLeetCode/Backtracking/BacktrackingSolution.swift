@@ -70,27 +70,50 @@ class BacktrackingSolution {
     }
     
     /// 46，全排列,自己大致想到的思路，但是完全写不出来，这也是看比人博客写的
+//    func permute(_ nums: [Int]) -> [[Int]] {
+//        var result = [[Int]]()
+//
+//        // i 表示从第几个数开始全排列
+//        func dfs(_ array: [Int], _ i: Int) {
+//            var array = array
+//            if i == array.count {
+//                var temp = [Int]()
+//                for c in array {
+//                    temp.append(c)
+//                }
+//                result.append(temp)
+//            }
+//            for j in i ..< array.count {
+//                array.swapAt(i, j)
+//                dfs(array, i + 1)
+//                array.swapAt(i, j)
+//            }
+//        }
+//
+//        dfs(nums, 0)
+//        return result
+//    }
+    
+    /// 46，全排列,递归算法，第一次往链表添加一个元素，有n中可能，然后将剩下的元素再添加一个元素到链表中，有n-1种可能，以此类推，直至链表中的元素大小等于数组大小。
     func permute(_ nums: [Int]) -> [[Int]] {
         var result = [[Int]]()
+        let n = nums.count
 
-        // i 表示从第几个数开始全排列
-        func dfs(_ array: [Int], _ i: Int) {
-            var array = array
-            if i == array.count {
-                var temp = [Int]()
-                for c in array {
-                    temp.append(c)
-                }
-                result.append(temp)
+        func test(_ array: [Int], _ sub: [Int]) {
+            if sub.count == n {
+                result.append(sub)
+                return
             }
-            for j in i ..< array.count {
-                array.swapAt(i, j)
-                dfs(array, i + 1)
-                array.swapAt(i, j)
+            for i in 0 ..< n {
+                if sub.contains(array[i]) == false {
+                    var sub = sub
+                    sub.append(array[i])
+                    test(nums, sub)
+                }
             }
         }
-        
-        dfs(nums, 0)
+        test(nums, [Int]())
         return result
     }
+    
 }
