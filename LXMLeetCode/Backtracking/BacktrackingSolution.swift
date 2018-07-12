@@ -95,25 +95,70 @@ class BacktrackingSolution {
 //    }
     
     /// 46，全排列,递归算法，第一次往链表添加一个元素，有n中可能，然后将剩下的元素再添加一个元素到链表中，有n-1种可能，以此类推，直至链表中的元素大小等于数组大小。
+//    func permute(_ nums: [Int]) -> [[Int]] {
+//        var result = [[Int]]()
+//        let n = nums.count
+//
+//        func test(_ array: [Int], _ sub: [Int]) {
+//            if sub.count == n {
+//                result.append(sub)
+//                return
+//            }
+//            for i in 0 ..< n {
+//                if sub.contains(array[i]) == false {
+//                    var sub = sub
+//                    sub.append(array[i])
+//                    test(nums, sub)
+//                }
+//            }
+//        }
+//        test(nums, [Int]())
+//        return result
+//    }
+    
+    
+    /// 46，全排列，自己的思路实现
     func permute(_ nums: [Int]) -> [[Int]] {
         var result = [[Int]]()
         let n = nums.count
-
-        func test(_ array: [Int], _ sub: [Int]) {
-            if sub.count == n {
-                result.append(sub)
+        
+        func test(_ current: [Int], _ remain: [Int]) {
+            if current.count == n {
+                result.append(current)
                 return
             }
-            for i in 0 ..< n {
-                if sub.contains(array[i]) == false {
-                    var sub = sub
-                    sub.append(array[i])
-                    test(nums, sub)
-                }
+            for i in 0 ..< remain.count {
+                //注意:这里每次循环都要重新生成一份local遍历的拷贝，不然就相当于一边循环一边修改数组了，铁对会越界
+                var localCurrent = current
+                var localRemain = remain
+                let one = localRemain.remove(at: i)
+                localCurrent.append(one)
+                test(localCurrent, localRemain)
             }
         }
-        test(nums, [Int]())
+        test([Int](), nums)
         return result
     }
     
+    /// 78 子集，关键思路是：递归，数组只有一个元素时，子集就是自己和空集，多了一个元素时，就是原来的全部子集+全部子集配新元素生成的子集
+    func subsets(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]()]
+        guard nums.count > 0 else { return result }
+        
+        func test(_ array: [[Int]], _ current: Int) -> [[Int]] {
+            var result = array
+            for temp in array {
+                var a = temp
+                a.append(current)
+                result.append(a)
+            }
+            return result
+        }
+        
+        for num in nums {
+            result = test(result, num)
+        }
+        return result
+    }
+
 }
