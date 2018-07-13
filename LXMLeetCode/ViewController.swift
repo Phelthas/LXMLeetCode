@@ -71,6 +71,10 @@ class ViewController: UIViewController {
         
         
         BacktrackingSolution().permute([1, 2, 3])
+        
+        let board: [[Character]] = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+        let word = "ABCB"
+        BacktrackingSolution().exist(board, word)
     }
     
 }

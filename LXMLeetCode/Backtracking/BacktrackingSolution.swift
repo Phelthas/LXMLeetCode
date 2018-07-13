@@ -161,4 +161,51 @@ class BacktrackingSolution {
         return result
     }
 
+    /// 79. 单词搜索
+    func exist(_ board: [[Character]], _ word: String) -> Bool {
+        
+        guard word.count > 0 else { return true }
+        var m = board.count
+        var n = board[0].count
+        
+        func check(_ board: [[Character]],_ i: Int, _ j: Int, _ array: [Character]) -> Bool {
+            if board[i][j] == array[0] {
+                if array.count == 1 {
+                    return true
+                } else {
+                    var board = board
+                    board[i][j] = "0"
+                    var sub = array
+                    sub.removeFirst()
+                    var result = false
+                    if i > 0 {
+                        result = result || check(board, i - 1, j, sub)
+                    }
+                    if i < m - 1 {
+                        result = result || check(board, i + 1, j, sub)
+                    }
+                    if j > 0 {
+                        result = result || check(board, i, j - 1, sub)
+                    }
+                    if j < n - 1 {
+                        result = result || check(board, i, j + 1, sub)
+                    }
+                    return result
+                }
+            }
+            return false
+        }
+        
+        let array = [Character](word)
+        for i in 0 ..< board.count {
+            let row = board[i]
+            for j in 0 ..< row.count {
+                if check(board, i, j, array) {
+                    return true
+                }
+            }
+        }
+        return false
+        
+    }
 }
