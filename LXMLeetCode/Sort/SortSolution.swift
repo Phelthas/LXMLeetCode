@@ -233,3 +233,50 @@ extension SortSolution {
     }
 }
 
+
+
+// MARK: - 中级算法
+extension SortSolution {
+    
+//    ///75. 分类颜色 这算是 计数排序？？？
+//    func sortColors(_ nums: inout [Int]) {
+//        var count0 = 0
+//        var count1 = 0
+//        var count2 = 0
+//        for num in nums {
+//            if num == 0 {
+//                count0 += 1
+//            } else if num == 1 {
+//                count1 += 1
+//            } else if num == 2 {
+//                count2 += 1
+//            }
+//        }
+//    }
+    
+    ///75. 分类颜色 进阶算法，只用常数空间，一遍扫描; 设立的三个指针 i，j，k是精髓之处，一定要理解这三个指针的含义，i，j，k分别指向当前已处理好的字符串的最后一个0，1，2。
+    func sortColors(_ nums: inout [Int]) {
+        var i = -1
+        var j = -1
+        var k = -1
+        for num in nums {
+            if num == 0 {
+                k += 1
+                nums[k] = 2
+                j += 1
+                nums[j] = 1
+                i += 1
+                nums[i] = 0
+            } else if num == 1 {
+                k += 1
+                nums[k] = 2
+                j += 1
+                nums[j] = 1
+            } else if num == 2 {
+                k += 1
+                nums[k] = 2
+            }
+        }
+    }
+}
+
