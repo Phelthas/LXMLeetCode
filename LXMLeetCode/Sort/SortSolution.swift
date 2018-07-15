@@ -278,5 +278,39 @@ extension SortSolution {
             }
         }
     }
+    
+    /// 347. 前K个高频元素
+    func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+        var dict = [Int: Int]()
+        for num in nums {
+            if let count = dict[num] {
+                dict[num] = count + 1
+            } else {
+                dict[num] = 1
+            }
+        }
+        
+        //这里用系统自带的排序函数貌似就可以，但我这儿是自己写了个插入排序。。。
+        var result = [Int]()
+        for key in dict.keys {
+            if result.count == 0 {
+                result.append(key)
+            } else {
+                let count = dict[key]!
+                if count <= dict[result.last!]! {
+                    result.append(key)
+                } else {
+                    for i in 0 ..< result.count {
+                        if count >= dict[result[i]]! {
+                            result.insert(key, at: i)
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        return Array(result[0 ... k-1])
+    }
 }
+
 

@@ -75,6 +75,8 @@ class ViewController: UIViewController {
         let board: [[Character]] = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
         let word = "ABCB"
         BacktrackingSolution().exist(board, word)
+        
+        SortSolution().topKFrequent([1,1,-96,839,615,374,209,-579,568,162,949,403,-437,274,-785,73,-329,-608,740], 2)
     }
     
 }
