@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         let word = "ABCB"
         BacktrackingSolution().exist(board, word)
         
-        SortSolution().topKFrequent([1,1,-96,839,615,374,209,-579,568,162,949,403,-437,274,-785,73,-329,-608,740], 2)
+        SortSolution().findKthLargest([-1, 2, 0], 2)
     }
     
 }

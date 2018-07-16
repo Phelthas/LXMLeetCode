@@ -311,6 +311,43 @@ extension SortSolution {
         }
         return Array(result[0 ... k-1])
     }
+    
+    func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
+        
+        func partition(array: inout [Int], low: Int, high: Int) -> Int {
+            guard array.count > 0 else { return 0}
+            var left = low
+            var right = high
+            let temp = array[low]
+            while left < right {
+                while left < right && array[right] <= temp {
+                    right -= 1
+                }
+                while left < right && array[left] >= temp {
+                    left += 1
+                }
+                if left < right {
+                    array.swapAt(left, right)
+                }
+                
+            }
+            array.swapAt(left, low)
+            return left
+        }
+        
+        func helper(array: inout [Int], low: Int, high: Int) {
+            if low < high {
+                let povit = partition(array: &array, low: low, high: high)
+                helper(array: &array, low: povit + 1, high: high)
+                helper(array: &array, low: low, high: povit - 1)
+            }
+        }
+        
+        var array = nums
+        helper(array: &array, low: 0, high: array.count - 1)
+        return array[k - 1]
+    }
+    
 }
 
 
