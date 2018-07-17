@@ -312,6 +312,7 @@ extension SortSolution {
         return Array(result[0 ... k-1])
     }
     
+    /// 215 数组中的第K个最大元素，暂时用的快速排序，待优化
     func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
         
         func partition(array: inout [Int], low: Int, high: Int) -> Int {
@@ -348,6 +349,50 @@ extension SortSolution {
         return array[k - 1]
     }
     
+    
+//    /// 162. 寻找峰值, 这个时间复杂度是O(n)的，要二分查找才是O(logN)的
+//    func findPeakElement(_ nums: [Int]) -> Int {
+//        guard nums.count > 0 else { return -1}
+//        var last = Int.min
+//        for i in 0 ..< nums.count {
+//            let current = nums[i]
+//            if current > last && i == nums.count - 1 {
+//                return i
+//            } else {
+//                let next = nums[i + 1]
+//                if current > last && current > next {
+//                    return i
+//                } else {
+//                    last = current
+//                }
+//            }
+//        }
+//        return -1
+//    }
+    
+    /// 162. 寻找峰值, 二分查找才是O(logN)的
+    /*
+     如果中间元素大于其相邻的后续元素，则中间元素左侧（包括中间元素）必然包含一个局部最大值，如果中间元素小于其相邻的后续元素，则中间元素右侧必然包含一个局部最大值。直到最后左边沿和右边沿相遇，我们找到所求峰值。
+     我们选择左右边沿相遇作为结束条件，以及只和后续元素mid+1比较，可以避免考虑当mid为0时，mid-1为负值的特殊情况。题目中只是让我们假设num[-1] = num[n] = 负无穷，实际上，数组是无法得到这两个值的，指针会越界。
+     这里，我们还需要注意的是，当中间元素大于其相邻的后续元素时，说明中间元素左侧（包含中间元素）必然包含一个局部最大值，这时，中间元素也可能是峰值点，所以移动时，end = mid, 而不能跨过中间元素end = mid -1. 而相反情况，中间元素小于其向相邻后续元素，则中间元素右侧比包含一个局部最大值，这时候中间元素一定不是局部最大点，start = mid + 1.
+     */
+    func findPeakElement(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return -1}
+        var left = 0
+        var right = nums.count - 1
+        while left <= right {
+            if left == right {
+                return left
+            }
+            let mid = (left + right) / 2
+            if nums[mid] < nums[mid + 1] {
+                left = left + 1
+            } else {
+                right = mid
+            }
+        }
+        return left
+    }
 }
 
 
