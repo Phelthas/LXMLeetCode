@@ -393,6 +393,49 @@ extension SortSolution {
         }
         return left
     }
+    
+    /// 34. 在排序数组中查找元素的第一个和最后一个位置, 自己想的算法
+    func searchRange(_ nums: [Int], _ target: Int) -> [Int] {
+        guard nums.count > 0 else { return [-1, -1] }
+        
+        func findLowestIndex(left: Int, right: Int) -> Int {
+            if left == right {
+                if nums[left] == target {
+                    return left
+                } else {
+                    return -1
+                }
+            }
+            let mid = (left + right) / 2
+            if nums[mid] >= target {
+                return findLowestIndex(left: left, right: mid)
+            } else {
+                return findLowestIndex(left: mid + 1, right: right)
+            }
+        }
+        
+        func findHighestIndex(left: Int, right: Int) -> Int {
+            if left == right {
+                if nums[right] == target {
+                    return right
+                } else {
+                    return -1
+                }
+            }
+            let mid = Int(ceil(Float(left + right) / 2.0))
+            
+            if nums[mid] <= target {
+                return findHighestIndex(left: mid, right: right)
+            } else {
+                return findHighestIndex(left: left, right: mid - 1)
+            }
+        }
+        
+        let left = findLowestIndex(left: 0, right: nums.count - 1)
+        let right = findHighestIndex(left: 0, right: nums.count - 1)
+        return [left, right]
+        
+    }
 }
 
 

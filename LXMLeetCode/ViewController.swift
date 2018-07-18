@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         let word = "ABCB"
         BacktrackingSolution().exist(board, word)
         
-        SortSolution().findKthLargest([-1, 2, 0], 2)
+        SortSolution().searchRange([5,7,7,8,8,10], 8)
     }
     
 }
