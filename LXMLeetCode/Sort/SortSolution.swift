@@ -8,6 +8,15 @@
 
 import Foundation
 
+public class Interval {
+    public var start: Int
+    public var end: Int
+    public init(_ start: Int, _ end: Int) {
+        self.start = start
+        self.end = end
+    }
+}
+
 
 class SortSolution {
     
@@ -435,6 +444,42 @@ extension SortSolution {
         let right = findHighestIndex(left: 0, right: nums.count - 1)
         return [left, right]
         
+    }
+    
+    ///56. 合并区间 这个题目有点恶心，断点调了N遍。。。
+    func merge(_ intervals: [Interval]) -> [Interval] {
+        guard intervals.count > 1 else { return intervals }
+        var result = [Interval]()
+        var couldMerge = false
+        
+        func helper(_ intervals: [Interval]) -> [Interval] {
+            var result = intervals
+            var i = 0
+            while i < result.count - 1 {
+                let one = result[i]
+                var j = i + 1
+                while j < result.count {
+                    let two = result[j]
+                    if one.end >= two.start && one.start <= two.end {
+                        one.start = min(one.start, two.start)
+                        one.end = max(one.end, two.end)
+                        result.remove(at: j)
+                        couldMerge = true
+                    } else {
+                        j += 1
+                    }
+                }
+                i += 1
+            }
+            return result
+            
+        }
+        result = helper(intervals)
+        while couldMerge == true {
+            couldMerge = false
+            result = helper(result)
+        }
+        return result
     }
 }
 
