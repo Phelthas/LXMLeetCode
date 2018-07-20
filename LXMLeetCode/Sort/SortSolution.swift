@@ -446,7 +446,7 @@ extension SortSolution {
         
     }
     
-    ///56. 合并区间 这个题目有点恶心，断点调了N遍。。。
+    ///56. 合并区间 这个题目有点恶心，断点调了N遍。。。看别人博客，先排序再合并会简单很多，时间复杂度也会降低很多
     func merge(_ intervals: [Interval]) -> [Interval] {
         guard intervals.count > 1 else { return intervals }
         var result = [Interval]()
@@ -481,6 +481,58 @@ extension SortSolution {
         }
         return result
     }
+    
+    //33搜索旋转排序数组 居然超出时间限制，理论上这个也是O(logn)的时间复杂度啊,这里想错了，第一遍找旋转的点，应为不是排序数组，所以第一遍不是logn
+//    func search(_ nums: [Int], _ target: Int) -> Int {
+//        if nums.count == 0 { return -1 }
+//        if nums.count == 1 { return nums[0] == target ? 0 : -1 }
+//        var index = nums.count - 1
+//        var result = -1
+//
+//        func findIndex(left: Int, right: Int) {
+//            if left <= right {
+//                let mid = (left + right) / 2
+//                if mid == 0 && nums[0] > nums[1] {
+//                    index = 0
+//                    return
+//                } else if mid == nums.count - 1 {
+//                    return
+//                } else if nums[mid] > nums[mid + 1] && nums[mid] > nums[mid - 1] {
+//                    index = mid
+//                    return
+//                } else {
+//                    findIndex(left: 0, right: mid - 1)
+//                    findIndex(left: mid + 1, right: right)
+//                }
+//            }
+//        }
+//
+//        func findTarget(left: Int, right: Int) {
+//            if left <= right {
+//                let mid = (left + right) / 2
+//                if nums[mid] == target {
+//                    result = mid
+//                } else if nums[mid] > target {
+//                    findTarget(left: left, right: mid - 1)
+//                } else {
+//                    findTarget(left: mid + 1, right: right)
+//                }
+//            }
+//        }
+//
+//        findIndex(left: 0, right: nums.count - 1)
+//
+//        findTarget(left: 0, right: index)
+//        if result != -1 {
+//            return result
+//        }
+//        findTarget(left: index + 1, right: nums.count - 1)
+//
+//        return result
+//    }
+    
+    ///   注意一点：因为是排序数组旋转得来的，所以第一个数组中的任意一个值都大于第二个数组的最大值
+    
 }
 
 

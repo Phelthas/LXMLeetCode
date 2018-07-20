@@ -77,6 +77,7 @@ class ViewController: UIViewController {
         BacktrackingSolution().exist(board, word)
         
         SortSolution().merge([Interval(1, 3), Interval(2, 6) ,Interval(8, 10) ,Interval(15, 18)])
+        SortSolution().search([5, 1, 3], 5)
     }
     
 }
