@@ -532,7 +532,50 @@ extension SortSolution {
 //    }
     
     ///   注意一点：因为是排序数组旋转得来的，所以第一个数组中的任意一个值都大于第二个数组的最大值
-    
+        func search(_ nums: [Int], _ target: Int) -> Int {
+            if nums.count == 0 { return -1 }
+            if nums.count == 1 { return nums[0] == target ? 0 : -1 }
+            var result = -1
+            
+            
+            func find(left: Int, right: Int) -> Int {
+                if left == right {
+                    if nums[left] == target {
+                        return left
+                    } else {
+                        return -1
+                    }
+                }
+                let mid = (left + right) / 2
+                if nums[mid] == target {
+                    return mid
+                } else if  nums[mid] > target {
+                    return find(left: left, right: mid - 1)
+                } else {
+                    return find(left: mid + 1, right: right)
+                }
+            }
+            
+            func helper(left: Int, right: Int) {
+                let mid = (left + right) / 2
+                let current = nums[mid]
+                if current == target {
+                    result = mid
+                    return
+                } else if  target < current && target >= nums[left] {
+                    result = find(left: left, right: mid - 1)
+                } else if target < current && target < nums[left] {
+                    helper(left: mid + 1, right: right)
+                } else if target > current && target <= nums[right] {
+                    result =  find(left: mid + 1, right: right)
+                } else {
+                    helper(left: left, right: mid - 1)
+                }
+            }
+            
+            return result
+            
+        }
 }
 
 
