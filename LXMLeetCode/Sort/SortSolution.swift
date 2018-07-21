@@ -531,50 +531,37 @@ extension SortSolution {
 //        return result
 //    }
     
+    ///   33搜索旋转排序数组 看别人博客写的
     ///   注意一点：因为是排序数组旋转得来的，所以第一个数组中的任意一个值都大于第二个数组的最大值
+    ///   所以最关键的思路是：当nums[mid] > nums[left]时，left到mid是排序好的；否则mid到right是排序好的
         func search(_ nums: [Int], _ target: Int) -> Int {
             if nums.count == 0 { return -1 }
             if nums.count == 1 { return nums[0] == target ? 0 : -1 }
             var result = -1
-            
-            
-            func find(left: Int, right: Int) -> Int {
-                if left == right {
-                    if nums[left] == target {
-                        return left
-                    } else {
-                        return -1
-                    }
-                }
-                let mid = (left + right) / 2
-                if nums[mid] == target {
-                    return mid
-                } else if  nums[mid] > target {
-                    return find(left: left, right: mid - 1)
-                } else {
-                    return find(left: mid + 1, right: right)
-                }
-            }
-            
             func helper(left: Int, right: Int) {
+                if left > right { return }
                 let mid = (left + right) / 2
                 let current = nums[mid]
                 if current == target {
                     result = mid
                     return
-                } else if  target < current && target >= nums[left] {
-                    result = find(left: left, right: mid - 1)
-                } else if target < current && target < nums[left] {
-                    helper(left: mid + 1, right: right)
-                } else if target > current && target <= nums[right] {
-                    result =  find(left: mid + 1, right: right)
+                }
+                if current >= nums[left] {
+                    if target < current && target >= nums[left] {
+                        helper(left: left, right: mid - 1)
+                    } else {
+                        helper(left: mid + 1, right: right)
+                    }
                 } else {
-                    helper(left: left, right: mid - 1)
+                    if target > current && target <= nums[right] {
+                        helper(left: mid + 1, right: right)
+                    } else {
+                        helper(left: left, right: mid - 1)
+                    }
                 }
             }
-            
+            helper(left: 0, right: nums.count - 1)
             return result
-            
         }
 }
 
