@@ -199,4 +199,51 @@ class DynamicProgrammingSolution {
 //        return dp[nums.count - 1]
 //    }
     
+    
+}
+
+
+extension DynamicProgrammingSolution {
+    
+//    /// 45，跳跃游戏， 自己想的算法，超时了。。。这是遍历所有可能。。。
+//    func canJump(_ nums: [Int]) -> Bool {
+//        guard nums.count > 0 else { return true }
+//        let n = nums.count
+//
+//        func helper(start: Int) -> Bool {
+//            if start == n - 1 {
+//                return true
+//            }
+//            if start > n - 1{
+//                return false
+//            } else {
+//                let target = nums[start]
+//                if target <= 0 {
+//                    return false
+//                }
+//                var result = false
+//                for i in 1 ... target {
+//                    result = result || helper(start: start + i)
+//                }
+//                return result
+//            }
+//        }
+//        return helper(start: 0)
+//
+//    }
+    
+    /// 45，跳跃游戏， 看别人博客写的，贪心算法
+    func canJump(_ nums: [Int]) -> Bool {
+        guard nums.count > 0 else { return true }
+        var reach = 0
+        for i in 0 ..< nums.count {
+            if reach >= i && reach < nums.count - 1 {
+                reach = max(reach, i + nums[i])
+            } else {
+                break
+            }
+        }
+        return reach >= nums.count - 1
+    }
+    
 }

@@ -564,7 +564,41 @@ extension SortSolution {
             return result
     }
     
-    /// 240. 搜索二维矩阵 II 测了半天，关键是要找到判断大小的充分必要条件
+//    /// 240. 搜索二维矩阵 II 测了半天，关键是要找到判断大小的充分必要条件
+//    func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+//        let m = matrix.count
+//        if m <= 0 {
+//            return false
+//        }
+//        let n = matrix[0].count
+//        if n <= 0 {
+//            return false
+//        }
+//
+//        func find(top: Int, left: Int, bottom: Int, right: Int) -> Bool {
+//            if left > right || top > bottom {
+//                return false
+//            }
+//            let midH = (left + right) / 2
+//            let midV = (top + bottom) / 2
+//
+//            if target == matrix[midV][midH] {
+//                return true
+//            }
+//            if target < matrix[midV][midH] {
+//                let leftMatrix = find(top:top, left: left, bottom: bottom, right: midH - 1)
+//                let topMatrix = find(top:top, left: left, bottom: midV - 1, right: right)
+//                return leftMatrix || topMatrix
+//            } else {
+//                let rightMatrix = find(top:top, left: midH + 1, bottom: bottom, right: right)
+//                let bottomMatrix = find(top:midV + 1, left: left, bottom: bottom, right: right)
+//                return rightMatrix || bottomMatrix
+//            }
+//        }
+//        return find(top:0, left: 0, bottom: m - 1, right: n - 1)
+//    }
+    
+    /// 240. 搜索二维矩阵 II 看网上的算法，只需要O(m+n)的时间复杂度
     func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
         let m = matrix.count
         if m <= 0 {
@@ -574,28 +608,18 @@ extension SortSolution {
         if n <= 0 {
             return false
         }
-        
-        func find(top: Int, left: Int, bottom: Int, right: Int) -> Bool {
-            if left > right || top > bottom {
-                return false
-            }
-            let midH = (left + right) / 2
-            let midV = (top + bottom) / 2
-            
-            if target == matrix[midV][midH] {
+        var i = 0
+        var j = n - 1
+        while i < m && j >= 0 {
+            if matrix[i][j] == target {
                 return true
-            }
-            if target < matrix[midV][midH] {
-                let leftMatrix = find(top:top, left: left, bottom: bottom, right: midH - 1)
-                let topMatrix = find(top:top, left: left, bottom: midV - 1, right: right)
-                return leftMatrix || topMatrix
+            } else if matrix[i][j] > target {
+                j -= 1
             } else {
-                let rightMatrix = find(top:top, left: midH + 1, bottom: bottom, right: right)
-                let bottomMatrix = find(top:midV + 1, left: left, bottom: bottom, right: right)
-                return rightMatrix || bottomMatrix
+                i += 1
             }
         }
-        return find(top:0, left: 0, bottom: m - 1, right: n - 1)
+        return false
     }
     
     
