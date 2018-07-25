@@ -246,4 +246,48 @@ extension DynamicProgrammingSolution {
         return reach >= nums.count - 1
     }
     
+    /// 62. 不同路径   自己想的算法，又是超时。。。
+//    func uniquePaths(_ m: Int, _ n: Int) -> Int {
+//        guard m > 0 else { return 0 }
+//        guard n > 0 else { return 0 }
+//        var result = [(0, 0)]
+//        var tempArray = [(Int, Int)]()
+//        while true {
+//            let one = result.first!
+//            if one.0 == m - 1 && one.1 == n - 1 {
+//                break
+//            }
+//            tempArray.removeAll()
+//            for last in result {
+//                if last.0 < m - 1 {
+//                    tempArray.append((last.0 + 1, last.1))
+//                }
+//                if last.1 < n - 1 {
+//                    tempArray.append((last.0, last.1 + 1))
+//                }
+//            }
+//            result = tempArray
+//        }
+//        return result.count
+//    }
+    
+    /// 62. 不同路径  终于有个自己想出来的跟答案一样的算法
+    func uniquePaths(_ m: Int, _ n: Int) -> Int {
+        var matrix = [[Int]]()
+        for i in 0 ..< m {
+            for j in 0 ..< n {
+                if i == 0 && j == 0 {
+                    matrix[i][j] = 1
+                } else if i == 0 && j > 0 {
+                    matrix[i][j] = matrix[i][j - 1]
+                } else if j == 0 && i > 0 {
+                    matrix[i][j] = matrix[i - 1][j]
+                } else {
+                    matrix[i][j] = matrix[i - 1][j] + matrix[i][j - 1]
+                }
+            }
+        }
+        return matrix[m - 1][n - 1]
+        
+    }
 }
