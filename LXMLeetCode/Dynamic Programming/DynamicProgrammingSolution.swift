@@ -290,4 +290,19 @@ extension DynamicProgrammingSolution {
         return matrix[m - 1][n - 1]
         
     }
+    
+    /// 322. 零钱兑换 这个有点难，核心思路是找到dp[i]的递推关系
+    /// 这里 设dp[i]为兑换目标i最少的硬币数, 则 dp[i]应该是把所有coin都替换一次后最小的那个
+    func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+        var dp = [Int](repeating: Int(Int32.max), count: amount + 1)
+        dp[0] = 0
+        for i in 0 ..< amount {
+            for j in 0 ..< coins.count {
+                if i - coins[j] >= 0 {
+                    dp[i] = min(dp[i], dp[i - coins[j]] + 1)
+                }
+            }
+        }
+        return dp[amount] == Int(Int32.max) ? -1 : dp[amount]
+    }
 }

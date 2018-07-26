@@ -79,6 +79,10 @@ class ViewController: UIViewController {
         SortSolution().merge([Interval(1, 3), Interval(2, 6) ,Interval(8, 10) ,Interval(15, 18)])
         let matrix = [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]
         SortSolution().searchMatrix(matrix, 5)
+        
+        
+        
+        DynamicProgrammingSolution().coinChange([186,419,83,408], 6249)
     }
     
 }
