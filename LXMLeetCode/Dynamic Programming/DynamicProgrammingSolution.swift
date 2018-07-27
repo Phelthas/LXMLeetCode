@@ -305,4 +305,20 @@ extension DynamicProgrammingSolution {
         }
         return dp[amount] == Int(Int32.max) ? -1 : dp[amount]
     }
+    
+    /// 300. 最长上升子序列, 这个题完全没看懂。。。抄了一下别人的答案
+    func lengthOfLIS(_ nums: [Int]) -> Int {
+        guard nums.count > 1 else { return nums.count }
+        let n = nums.count
+        var longest = [Int](repeating: 1, count: n)
+        for j in 1 ..< n {
+            for i in 0 ..< j {
+                if nums[j] > nums[i] && longest[j] < longest[i] + 1 {//注意longest[j]<longest[i]+1这个条件，不能省略。
+                    longest[j] = longest[i] + 1 //计算以arr[j]结尾的序列的最长递增子序列长度
+                }
+            }
+        }
+        
+        return longest.max() ?? 1
+    }
 }
