@@ -83,6 +83,9 @@ class ViewController: UIViewController {
         
         
         DynamicProgrammingSolution().coinChange([186,419,83,408], 6249)
+        
+        let codec = Codec()
+        codec.serialize(root: codec.deserialize(data: "1,2,3,null,null,4,5"))
     }
     
 }
