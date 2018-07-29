@@ -108,4 +108,9 @@ class MathSolution {
         return result
         
     }
+    
+    /// 202 快乐数，先占个坑
+    func isHappy(_ n: Int) -> Bool {
+        
+    }
 }
