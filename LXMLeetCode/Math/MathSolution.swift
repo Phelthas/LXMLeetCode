@@ -109,8 +109,25 @@ class MathSolution {
         
     }
     
-    /// 202 快乐数，先占个坑
+    /// 202 快乐数
     func isHappy(_ n: Int) -> Bool {
+        var array = [Int]()
+        var current = n
         
+        while current != 1 {
+            if array.contains(current) {
+                return false
+            }
+            array.append(current)
+            var temp = current
+            var count = 0
+            while temp != 0 {
+                let a = temp % 10
+                count += a * a
+                temp = temp / 10
+            }
+            current = count
+        }
+        return true
     }
 }
