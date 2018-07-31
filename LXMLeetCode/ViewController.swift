@@ -86,6 +86,8 @@ class ViewController: UIViewController {
         
         let codec = Codec()
         codec.serialize(root: codec.deserialize(data: "1,2,3,null,null,4,5"))
+        
+        MathSolution().titleToNumber("A")
     }
     
 }

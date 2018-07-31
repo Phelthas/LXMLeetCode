@@ -130,4 +130,30 @@ class MathSolution {
         }
         return true
     }
+    
+    
+    /// 172. 阶乘后的零 关键是找出0的规律，参考：https://blog.csdn.net/qikaihuting/article/details/65937878
+    /// 
+    func trailingZeroes(_ n: Int) -> Int {
+        var count = n
+        var result = 0
+        while count / 5 != 0 {
+            count = count / 5
+            result += count
+        }
+        return result
+    }
+    
+    /// 171. Excel表列序号
+    func titleToNumber(_ s: String) -> Int {
+        var result = 0
+        let array = s.utf8CString
+        let a = "A".utf8CString.first!
+        for i in 0 ..< array.count - 1 {
+            let c = array[i]
+            result *= 26
+            result += Int(c) - Int(a) + 1
+        }
+        return result
+    }
 }
