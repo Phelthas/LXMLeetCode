@@ -156,4 +156,28 @@ class MathSolution {
         }
         return result
     }
+    
+    /// 50. Pow(x, n)
+    func myPow(_ x: Double, _ n: Int) -> Double {
+        var x = x
+        var count = n
+        if n < 0 {
+            x = 1 / x
+            count = -1 * count
+        }
+        if n == 0 {
+            return 1
+        }
+        if n == 1 {
+            return x
+        }
+        if n == 2 {
+            return x * x
+        }
+        if n % 2 == 0 {
+            return myPow(myPow(x, count / 2), 2)
+        } else {
+            return x * myPow(myPow(x, count / 2), 2)
+        }
+    }
 }
