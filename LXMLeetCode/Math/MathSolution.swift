@@ -180,4 +180,24 @@ class MathSolution {
             return x * myPow(myPow(x, count / 2), 2)
         }
     }
+    
+    /// 69. x 的平方根
+    func mySqrt(_ x: Int) -> Int {
+        if x <= 1 { return x }
+        var low = 0
+        var high = x
+        while low <= high {
+            let mid = (low + high) / 2
+            let temp = x / mid
+            if temp == mid {
+                return mid
+            } else if temp > mid {
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        return high
+    }
+    
 }
