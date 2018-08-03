@@ -200,4 +200,27 @@ class MathSolution {
         return high
     }
     
+    ///29. 两数相除 边界条件注意，很恶心
+    func divide(_ dividend: Int, _ divisor: Int) -> Int {
+        if (divisor == 0 || (dividend == Int(Int32.min) && divisor == -1)) { return Int(Int32.max) }
+        let sign = (dividend > 0 ? 1 : -1) ^ (divisor > 0 ? 1 : -1) == 0 ? 1 : -1
+        var dividend = abs(dividend)
+        var divisor = abs(divisor)
+        
+        if abs(divisor) == 1 { return sign == 1 ? dividend : -dividend }
+        var result = 0
+        while dividend >= divisor {
+            var temp = divisor
+            var count = 1
+            while temp << 1 <= dividend {
+                temp = temp << 1
+                count = count << 1
+            }
+            dividend -= temp
+            result += count
+        }
+        result = sign == 1 ? result : -result
+        return result
+    }
+    
 }
