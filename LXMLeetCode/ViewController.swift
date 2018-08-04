@@ -88,6 +88,7 @@ class ViewController: UIViewController {
         codec.serialize(root: codec.deserialize(data: "1,2,3,null,null,4,5"))
         
         MathSolution().mySqrt(4)
+        MathSolution().fractionToDecimal(1, 11)
     }
     
 }

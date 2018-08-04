@@ -223,4 +223,37 @@ class MathSolution {
         return result
     }
     
+    /// 58 分数到小数
+    func fractionToDecimal(_ numerator: Int, _ denominator: Int) -> String {
+        var result = ""
+        var a = numerator
+        let b = denominator
+        result += "\(a/b)"
+        a = a % b
+        if a != 0 {
+            result += "."
+        } else {
+            return result
+        }
+        var decimal = ""
+        var array = [a]
+        while true {
+            a = a * 10
+            decimal += "\(a/b)"
+            a = a % b
+            if a == 0 {
+                result += decimal
+                return result
+            }
+            if let index = array.index(of: a) {
+                var temp = [Character](decimal)
+                temp.insert("(", at: index)
+                temp.append(")")
+                result += String(temp)
+                return result
+            } else {
+                array.append(a)
+            }
+        }
+    }
 }
