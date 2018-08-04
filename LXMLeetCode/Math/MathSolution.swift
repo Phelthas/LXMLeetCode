@@ -223,11 +223,13 @@ class MathSolution {
         return result
     }
     
-    /// 58 分数到小数
+    /// 58 分数到小数, 加入0的判断
     func fractionToDecimal(_ numerator: Int, _ denominator: Int) -> String {
-        var result = ""
-        var a = numerator
-        let b = denominator
+        if numerator == 0 { return "0" }
+        let sign = (numerator > 0 ? 1 : -1) ^ (denominator > 0 ? 1 : -1) == 0 ? "" : "-"
+        var result = sign
+        var a = abs(numerator)
+        let b = abs(denominator)
         result += "\(a/b)"
         a = a % b
         if a != 0 {
