@@ -118,4 +118,11 @@ class OtherSolution {
         return 0
     }
     
+    /// 371. 两整数之和, 这个完全不知道，当成新的知识点学习吧
+    func getSum(_ a: Int, _ b: Int) -> Int {
+        if b == 0 { return a }
+        let xorSum = a ^ b
+        let carry = (a & b) << 1
+        return getSum(xorSum, carry)
+    }
 }
