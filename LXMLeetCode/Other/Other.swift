@@ -125,4 +125,40 @@ class OtherSolution {
         let carry = (a & b) << 1
         return getSum(xorSum, carry)
     }
+    
+    /// 150. 逆波兰表达式求值
+    func evalRPN(_ tokens: [String]) -> Int {
+        var stack = [String]()
+        for temp in tokens {
+            if temp == "+" {
+                if let one = Int(stack.removeLast()),
+                    let two = Int(stack.removeLast()) {
+                    stack.append("\(two + one)")
+                }
+                
+            } else if temp == "-" {
+                if let one = Int(stack.removeLast()),
+                    let two = Int(stack.removeLast()) {
+                    stack.append("\(two - one)")
+                }
+            } else if temp == "*" {
+                if let one = Int(stack.removeLast()),
+                    let two = Int(stack.removeLast()) {
+                    stack.append("\(two * one)")
+                }
+            } else if temp == "/" {
+                if let one = Int(stack.removeLast()),
+                    let two = Int(stack.removeLast()) {
+                    stack.append("\(two / one)")
+                }
+            } else {
+                stack.append(temp)
+            }
+        }
+        if let result = stack.last {
+            return Int(result) ?? 0
+        }
+        return 0
+    }
+    
 }
