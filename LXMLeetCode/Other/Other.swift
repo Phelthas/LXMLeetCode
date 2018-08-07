@@ -161,4 +161,28 @@ class OtherSolution {
         return 0
     }
     
+    /// 169 求众数，自己想的笨办法，有空再研究更高效的算法
+    func majorityElement(_ nums: [Int]) -> Int {
+        var dict = [Int : Int]()
+        for num in nums {
+            if let count = dict[num] {
+                dict[num] = count + 1
+            } else {
+                dict[num] = 1
+            }
+        }
+        let n = nums.count
+        var m = 0
+        if n % 2 == 0 {
+            m = n / 2
+        } else {
+            m = n / 2 + 1
+        }
+        for num in dict.keys {
+            if dict[num]! >= m {
+                return num
+            }
+        }
+        return 0
+    }
 }
