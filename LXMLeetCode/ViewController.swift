@@ -89,6 +89,9 @@ class ViewController: UIViewController {
         
         MathSolution().mySqrt(4)
         MathSolution().fractionToDecimal(1, 11)
+        
+        var array = [3, 2, 2, 3]
+        LibrarySolution().removeElement(&array, 3)
     }
     
 }

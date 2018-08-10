@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Library {
+class LibrarySolution {
     
     /// 9 回文数
     func isPalindrome(_ x: Int) -> Bool {
@@ -75,5 +75,20 @@ class Library {
         return String(array)
     }
     
-    //昨天做了两道。。。今天加班太晚了，跳一个
+    //27. 移除元素
+    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+        guard nums.count > 0 else { return 0 }
+        var i = 0
+        var last = nums.count - 1
+        while i <= last {
+            if nums[i] == val {
+                nums[i] = nums[last]
+                nums[last] = 0
+                last -= 1
+            } else {
+                i += 1
+            }
+        }
+        return i
+    }
 }
