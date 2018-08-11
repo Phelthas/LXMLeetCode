@@ -692,8 +692,26 @@ extension ArraySolution {
         return result
     }
     
+}
+
+
+extension ArraySolution {
     
-    
-    
+    /// 724. 寻找数组的中心索引
+    func pivotIndex(_ nums: [Int]) -> Int {
+        var leftSum = 0
+        let total = nums.reduce(0) { (result, item) -> Int in
+            return result + item
+        }
+        for i in 0 ..< nums.count {
+            if i >= 1 {
+                leftSum += nums[i - 1]
+            }
+            if total - leftSum - nums[i] == leftSum {
+                return i
+            }
+        }
+        return -1
+    }
 }
 
