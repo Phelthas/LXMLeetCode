@@ -92,6 +92,8 @@ class ViewController: UIViewController {
         
         var array = [3, 2, 2, 3]
         LibrarySolution().removeElement(&array, 3)
+        
+        ArraySolution().dominantIndex([0,0,0,1])
     }
     
 }

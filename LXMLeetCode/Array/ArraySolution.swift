@@ -713,5 +713,30 @@ extension ArraySolution {
         }
         return -1
     }
+    
+    ///747. 至少是其他数字两倍的最大数
+    func dominantIndex(_ nums: [Int]) -> Int {
+        var max = 0
+        var index = -1
+        var second = 0
+        for i in 0 ..< nums.count {
+            let current = nums[i]
+            if current > max {
+                max = current
+                index = i
+            }
+        }
+        for i in 0 ..< nums.count {
+            let current = nums[i]
+            if current > second && current < max {
+                second = current
+            }
+        }
+        if max >= 2 * second {
+            return index
+        } else {
+            return -1
+        }
+    }
 }
 
