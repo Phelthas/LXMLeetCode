@@ -738,5 +738,54 @@ extension ArraySolution {
             return -1
         }
     }
+    
+    /// 498. Diagonal Traverse
+    func findDiagonalOrder(_ matrix: [[Int]]) -> [Int] {
+        var result = [Int]()
+        var m = matrix.count
+        if m == 0 { return result }
+        var n = matrix[0].count
+        var i = 0
+        var j = 0
+        var isUp = true
+        while i < m  || j < n {
+            if isUp {
+                if i >= m || j >= n{
+                    i = i - 1
+                    j = j + 1
+                }
+                let current = matrix[i][j]
+                result.append(current)
+                if i == m - 1 && j == n - 1 {
+                    break
+                }
+                
+                i = i - 1
+                j = j + 1
+                if i < 0 || j >= n {
+                    i = i + 1
+                    isUp = false
+                }
+            } else {
+                if j >= n || i >= m{
+                    i = i + 1
+                    j = j - 1
+                }
+                let current = matrix[i][j]
+                result.append(current)
+                if i == m - 1 && j == n - 1 {
+                    break
+                }
+                i = i + 1
+                j = j - 1
+                if j < 0 || i >= m {
+                    j = j + 1
+                    isUp = true
+                }
+            }
+        }
+        return result
+        
+    }
 }
 
