@@ -787,5 +787,58 @@ extension ArraySolution {
         return result
         
     }
+    
+    /// 54. Spiral Matrix
+    func spiralOrder(_ matrix: [[Int]]) -> [Int] {
+        var result = [Int]()
+        let m = matrix.count
+        if m == 0 {
+            return result
+        }
+        let n = matrix[0].count
+        if n == 0 {
+            return result
+        }
+        var i = 0
+        var j = 0
+        var circle = 0
+        while result.count < m * n {
+            i = circle
+            for j in circle ..< n - circle {
+                result.append(matrix[i][j])
+            }
+            if result.count == m * n {
+                return result
+            }
+            
+            j = n - 1 - circle
+            for i in circle + 1 ..< m - circle {
+                result.append(matrix[i][j])
+            }
+            if result.count == m * n {
+                return result
+            }
+            
+            i = m - 1 - circle
+            for j in (circle ..< n - circle - 1).reversed() {
+                result.append(matrix[i][j])
+            }
+            if result.count == m * n {
+                return result
+            }
+            
+            j = circle
+            for i in (circle + 1 ..< m - circle - 1).reversed() {
+                result.append(matrix[i][j])
+            }
+            if result.count == m * n {
+                return result
+            }
+            circle += 1
+        }
+        return result
+    }
+    
+    
 }
 
