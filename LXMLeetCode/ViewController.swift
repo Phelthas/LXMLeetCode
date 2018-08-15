@@ -98,6 +98,7 @@ class ViewController: UIViewController {
         ArraySolution().findDiagonalOrder(matrixOne)
         ArraySolution().spiralOrder(matrixOne)
         
+        StringSolution().addBinary("11", "1")
         
     }
     

@@ -291,3 +291,30 @@ class StringSolution {
     }
     
 }
+
+extension StringSolution {
+    
+    /// 67. Add Binary
+    func addBinary(_ a: String, _ b: String) -> String {
+
+        let one = [Character](a)
+        let two = [Character](b)
+        let countA = one.count
+        let countB = two.count
+        let n = max(one.count, two.count)
+        var result = ""
+        var k = 0
+        for i in 0 ..< n {
+            let x = Int(String(i < one.count ? one[countA - 1 - i] : "0"))!
+            let y = Int(String(i < two.count ? two[countB - 1 - i] : "0"))!
+            var temp = x + y + k
+            k = temp / 2
+            temp = temp % 2
+            result = "\(temp)" + result
+        }
+        if k == 1 {
+            result = "1" + result
+        }
+        return result
+    }
+}
