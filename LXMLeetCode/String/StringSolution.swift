@@ -317,4 +317,16 @@ extension StringSolution {
         }
         return result
     }
+    
+    /// 561. 数组拆分 I
+    func arrayPairSum(_ nums: [Int]) -> Int {
+        let array = nums.sorted()
+        var i = 0
+        var result = 0
+        while i < array.count {
+            result += array[i]
+            i += 2
+        }
+        return result
+    }
 }
