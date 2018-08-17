@@ -346,4 +346,18 @@ extension StringSolution {
         }
         return [-1, -1]
     }
+    
+    /// 27. 移除元素 双指针技巧
+    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+        var j = 0
+        for i in 0 ..< nums.count {
+            if nums[i] == val {
+                
+            } else {
+                nums[j] = nums[i]
+                j += 1
+            }
+        }
+        return j
+    }
 }
