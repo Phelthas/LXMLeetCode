@@ -360,4 +360,19 @@ extension StringSolution {
         }
         return j
     }
+    
+    /// 485. 最大连续1的个数
+    func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
+        var result = 0
+        var count = 0
+        for i in 0 ..< nums.count {
+            if nums[i] == 1 {
+                count += 1
+            } else {
+                count = 0
+            }
+            result = max(result, count)
+        }
+        return result
+    }
 }
