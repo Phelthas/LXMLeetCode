@@ -100,6 +100,7 @@ class ViewController: UIViewController {
         
         StringSolution().addBinary("11", "1")
         
+        StringSolution().minSubArrayLen(7, [2,3,1,2,4,3])
     }
     
 }

@@ -375,4 +375,37 @@ extension StringSolution {
         }
         return result
     }
+    
+    /// 209. 长度最小的子数组 思路应该是对的，但是写的比较麻烦
+    func minSubArrayLen(_ s: Int, _ nums: [Int]) -> Int {
+        
+        var result = Int.max
+        var array = [Int]()
+        var sum = 0
+        for i in 0 ..< nums.count {
+            let current = nums[i]
+            if current >= s {
+                return 1
+            } else {
+                array.append(current)
+                sum += current
+                while sum >= s {
+                    result = min(array.count, result)
+                    if let one = array.first {
+                        if sum - one >= s {
+                            sum = sum - one
+                            array.removeFirst()
+                        } else {
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        if result == Int.max {
+            return 0
+        } else {
+            return result
+        }
+    }
 }
