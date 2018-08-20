@@ -739,12 +739,12 @@ extension ArraySolution {
         }
     }
     
-    /// 498. Diagonal Traverse
+    /// 498. Diagonal Traverse 对角线遍历
     func findDiagonalOrder(_ matrix: [[Int]]) -> [Int] {
         var result = [Int]()
-        var m = matrix.count
+        let m = matrix.count
         if m == 0 { return result }
-        var n = matrix[0].count
+        let n = matrix[0].count
         var i = 0
         var j = 0
         var isUp = true
@@ -788,7 +788,7 @@ extension ArraySolution {
         
     }
     
-    /// 54. Spiral Matrix
+    /// 54. Spiral Matrix 螺旋矩阵
     func spiralOrder(_ matrix: [[Int]]) -> [Int] {
         var result = [Int]()
         let m = matrix.count
@@ -839,6 +839,20 @@ extension ArraySolution {
         return result
     }
     
-    
+    /// 119. 杨辉三角 II
+    func getRow(_ rowIndex: Int) -> [Int] {
+        var last = [Int](repeating: 1, count: rowIndex + 1)
+        var current = [Int](repeating: 1, count: rowIndex + 1)
+        if rowIndex <= 1 { return last }
+        var row = 2
+        while row <= rowIndex + 1 {
+            for i in 1 ..< row - 1 {
+                current[i] = last[i - 1] + last[i]
+            }
+            last = current
+            row += 1
+        }
+        return last
+    }
 }
 
