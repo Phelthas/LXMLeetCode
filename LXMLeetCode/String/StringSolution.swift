@@ -408,4 +408,34 @@ extension StringSolution {
             return result
         }
     }
+    
+    
+    /// 557. 反转字符串中的单词 III
+    func reverseWords(_ s: String) -> String {
+        
+        func reverseWord(_ array: inout [Character], start: Int, count: Int) {
+            if count == 0 { return }
+            for i in start ..< (start + start + count) / 2 {
+                let end = start + start + count - 1 - i
+                let temp = array[i]
+                array[i] = array[end]
+                array[end] = temp
+            }
+        }
+        
+        var array = [Character](s)
+        var start = 0
+        var count = 0
+        for i in 0 ..< array.count {
+            if array[i] != " " {
+                count += 1
+            } else {
+                reverseWord(&array, start: start, count: count)
+                start = i + 1
+                count = 0
+            }
+        }
+        reverseWord(&array, start: start, count: count)
+        return String(array)
+    }
 }
