@@ -390,4 +390,23 @@ class LinkedListSolution {
         }
         return nil
     }
+    
+    
+    /// 142. 环形链表 II
+    func detectCycle(head: ListNode?) -> ListNode? {
+        guard let head = head else { return nil }
+        var array = [ListNode]()
+        var current: ListNode? = head
+        while current?.next != nil {
+            for node in array {
+                if node === current?.next! {
+                    return node
+                }
+            }
+            array.append((current?.next)!)
+            current = current?.next
+        }
+        return nil
+    }
+    
 }
