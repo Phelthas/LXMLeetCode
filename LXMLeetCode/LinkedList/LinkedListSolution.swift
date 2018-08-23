@@ -409,4 +409,24 @@ class LinkedListSolution {
         return nil
     }
     
+    /// 203. 删除链表中的节点 自己运行没啥问题啊，提交居然说编译出错
+    func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
+        var current: ListNode? = head
+        var last: ListNode? = nil
+        if current == nil { return nil }
+        if current!.val == val {
+            return current?.next
+        }
+        while current != nil {
+            if current!.val != val {
+                last = current
+                current = current?.next
+            } else {
+                last?.next = current?.next
+                break
+            }
+        }
+        return head
+    }
+    
 }

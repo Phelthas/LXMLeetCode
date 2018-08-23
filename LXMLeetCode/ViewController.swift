@@ -101,6 +101,13 @@ class ViewController: UIViewController {
         StringSolution().addBinary("11", "1")
         
         StringSolution().minSubArrayLen(7, [2,3,1,2,4,3])
+        
+        let listNodeOne = ListNode(x: 1)
+        let listNodeTwo = ListNode(x: 2)
+        let listNodeThree = ListNode(x: 3)
+        listNodeOne.next = listNodeTwo
+        listNodeTwo.next = listNodeThree
+        LinkedListSolution().removeElements(listNodeOne, 3)
     }
     
 }
