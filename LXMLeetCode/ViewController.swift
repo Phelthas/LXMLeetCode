@@ -108,6 +108,9 @@ class ViewController: UIViewController {
         listNodeOne.next = listNodeTwo
         listNodeTwo.next = listNodeThree
         LinkedListSolution().removeElements(listNodeOne, 3)
+        
+        DoublyLinkedListSolution().flatten(head: DoublyLinkedListSolution.testData())
+        
     }
     
 }
