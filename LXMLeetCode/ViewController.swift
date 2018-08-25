@@ -111,6 +111,7 @@ class ViewController: UIViewController {
         
         DoublyLinkedListSolution().flatten(head: DoublyLinkedListSolution.testData())
         
+        LinkedListSolution().rotateRight(ListNode.testData(), 2)
     }
     
 }

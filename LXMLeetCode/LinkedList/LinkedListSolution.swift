@@ -16,6 +16,19 @@ public class ListNode {
     init(x: Int) {
         self.val = x
     }
+    
+    class func testData() -> ListNode {
+        let one = ListNode(x: 1)
+        let two = ListNode(x: 2)
+        let three = ListNode(x: 3)
+        let four = ListNode(x: 4)
+        let five = ListNode(x: 5)
+        one.next = two
+        two.next = three
+        three.next = four
+        four.next = five
+        return one
+    }
 }
 
 
@@ -427,6 +440,35 @@ class LinkedListSolution {
             }
         }
         return head
+    }
+    
+    /// 旋转链表
+    func rotateRight(_ head: ListNode?, _ k: Int) -> ListNode? {
+        if head == nil { return nil }
+        var count = 0
+        var current = head
+        while current != nil {
+            count += 1
+            current = current?.next
+        }
+        let realK = k % count
+        current = head
+        
+        var temp = realK
+        var second = head
+        while temp > 0 {
+            temp = temp - 1
+            second = second?.next
+        }
+        
+        while second?.next != nil {
+            second = second?.next
+            current = current?.next
+        }
+        let result = current?.next
+        current?.next = nil
+        second?.next = head
+        return result
     }
     
 }
