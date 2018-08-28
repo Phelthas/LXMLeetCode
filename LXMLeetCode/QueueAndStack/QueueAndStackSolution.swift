@@ -10,7 +10,7 @@ import Foundation
 
 class QueueAndStackSolution {
     
-    /// 752. 打开转盘锁 首先想到的暴力穷举法，超时了。。。
+    /// 752. 打开转盘锁 如果直接用字符串character强转就会超时
     func openLock(_ deadends: [String], _ target: String) -> Int {
         var result = 0
         var queue = ["0000"]
@@ -87,6 +87,23 @@ class QueueAndStackSolution {
             
         }
         return -1
+    }
+    
+    
+    
+    /// 279 完全平方数, 贪心算法在这里是不合适的(比如12)，这里是看网上的动态规划算法
+    /// 如果一个数能写成i + j * j 的形式，那 dp[i] + 1 就是完全平方数的一种情况之一，至于是不是个数最少的，还要看dp[i + j * j]是不是之前已经算出来了，可以更简单的得到，所以这两个去min即可
+    func numSquares(_ n: Int) -> Int {
+        var dp = [Int](repeating: Int.max, count: n + 1)
+        dp[0] = 0
+        for i in 0 ... n {
+            var j = 1
+            while i + j * j <= n {
+                dp[i + j * j] = min(dp[i + j * j], dp[i] + 1)
+                j += 1
+            }
+        }
+        return dp[n]
     }
     
 }

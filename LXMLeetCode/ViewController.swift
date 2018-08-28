@@ -114,7 +114,7 @@ class ViewController: UIViewController {
         LinkedListSolution().rotateRight(ListNode.testData(), 2)
         
         QueueAndStackSolution().openLock(["0201","0101","0102","1212","2002"], "0202")
-        
+        QueueAndStackSolution().numSquares(12)
     }
     
 }
