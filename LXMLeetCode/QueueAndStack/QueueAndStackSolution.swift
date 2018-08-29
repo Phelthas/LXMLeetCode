@@ -106,4 +106,26 @@ class QueueAndStackSolution {
         return dp[n]
     }
     
+    /// 739 每日温度 首先想到的算法，超时了
+    func dailyTemperatures(_ temperatures: [Int]) -> [Int] {
+        var result = [Int]()
+        guard temperatures.count > 0 else { return result }
+        if temperatures.count == 1 { return [0] }
+        var stack = temperatures
+        while stack.count > 0 {
+            let current = stack.removeFirst()
+            var isExist = false
+            for i in 0 ..< stack.count {
+                if stack[i] > current {
+                    result.append(i + 1)
+                    isExist = true
+                    break
+                }
+            }
+            if isExist == false {
+                result.append(0)
+            }
+        }
+        return result
+    }
 }
