@@ -115,6 +115,7 @@ class ViewController: UIViewController {
         
         QueueAndStackSolution().openLock(["0201","0101","0102","1212","2002"], "0202")
         QueueAndStackSolution().numSquares(12)
+        QueueAndStackSolution().dailyTemperatures([73,74,75,71,69,72,76,73])
     }
     
 }

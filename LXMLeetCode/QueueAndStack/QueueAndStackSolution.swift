@@ -106,24 +106,55 @@ class QueueAndStackSolution {
         return dp[n]
     }
     
-    /// 739 每日温度 首先想到的算法，超时了
+//    /// 739 每日温度 首先想到的算法，超时了
+//    func dailyTemperatures(_ temperatures: [Int]) -> [Int] {
+//        var result = [Int]()
+//        guard temperatures.count > 0 else { return result }
+//        if temperatures.count == 1 { return [0] }
+//        for i in 0 ..< temperatures.count {
+//            let current = temperatures[i]
+//            var isExist = false
+//            for j in i + 1 ..< temperatures.count {
+//                if temperatures[j] > current {
+//                    result.append(j - i)
+//                    isExist = true
+//                    break
+//                }
+//            }
+//            if isExist == false {
+//                result.append(0)
+//            }
+//        }
+//
+//        return result
+//    }
+    
+     /// 739 每日温度 网上看的递减栈的算法，是个思路，得好好理解下
     func dailyTemperatures(_ temperatures: [Int]) -> [Int] {
-        var result = [Int]()
+        var result = [Int](repeating: 0, count: temperatures.count)
         guard temperatures.count > 0 else { return result }
         if temperatures.count == 1 { return [0] }
-        var stack = temperatures
-        while stack.count > 0 {
-            let current = stack.removeFirst()
-            var isExist = false
-            for i in 0 ..< stack.count {
-                if stack[i] > current {
-                    result.append(i + 1)
-                    isExist = true
-                    break
+        var stack = [(index: Int, value: Int)]()
+        for i in 0 ..< temperatures.count {
+            let current = temperatures[i]
+            if stack.count == 0 {
+                stack.append((i, current))
+            } else {
+                var last = stack.last!
+                if current > last.value {
+                    while stack.count > 0 {
+                        last = stack.last!
+                        if current > last.value {
+                            last = stack.removeLast()
+                            result[last.index] = i - last.index
+                        } else {
+                            break
+                        }
+                    }
+                    stack.append((i, current))
+                } else {
+                    stack.append((i, current))
                 }
-            }
-            if isExist == false {
-                result.append(0)
             }
         }
         return result
