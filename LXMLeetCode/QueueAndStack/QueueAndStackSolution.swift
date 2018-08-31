@@ -159,4 +159,23 @@ class QueueAndStackSolution {
         }
         return result
     }
+    
+    ///494 目标和  直接dfs居然还超时。。。
+    func findTargetSumWays(_ nums: [Int], _ S: Int) -> Int {
+        var result = 0
+        
+        func dfs(_ nums: [Int], sum: Int, index: Int) {
+            if index == nums.count {
+                if sum == S {
+                    result += 1
+                }
+            } else {
+                let a = nums[index]
+                dfs(nums, sum: sum + a, index: index + 1)
+                dfs(nums, sum: sum - a, index: index + 1)
+            }
+        }
+        dfs(nums, sum: 0, index: 0)
+        return result
+    }
 }
