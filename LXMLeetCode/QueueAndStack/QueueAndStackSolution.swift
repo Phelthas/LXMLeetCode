@@ -178,4 +178,9 @@ class QueueAndStackSolution {
         dfs(nums, sum: 0, index: 0)
         return result
     }
+    
+    /// 先占个坑
+    func decodeString(_ s: String) -> String {
+        
+    }
 }
