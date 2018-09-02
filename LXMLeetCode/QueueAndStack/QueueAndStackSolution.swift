@@ -205,4 +205,48 @@ class QueueAndStackSolution {
         }
         return String(stack)
     }
+    
+    /// 733. Flood Fill
+    func floodFill(_ image: [[Int]], _ sr: Int, _ sc: Int, _ newColor: Int) -> [[Int]] {
+        var matrix = image
+        let m = image.count
+        if m == 0 {
+            return matrix
+        }
+        let n = image[0].count
+        if n == 0 {
+            return matrix
+        }
+        
+        func helper(i: Int, j: Int, _ newColor: Int, _ oldColor: Int) {
+            let current = matrix[i][j]
+            if current == newColor {
+                return
+            }
+            if current != oldColor {
+                return
+            }
+            matrix[i][j] = newColor
+            if i > 0 {
+                helper(i: i - 1, j: j, newColor, oldColor)
+            }
+            if i < m - 1 {
+                helper(i: i + 1, j: j, newColor, oldColor)
+            }
+            if j > 0 {
+                helper(i: i, j: j - 1, newColor, oldColor)
+            }
+            if j < n - 1 {
+                helper(i: i, j: j + 1, newColor, oldColor)
+            }
+        }
+        let target = matrix[sr][sc]
+        if target == newColor {
+            return image
+        } else {
+            helper(i: sr, j: sc, newColor, target)
+        }
+        
+        return matrix
+    }
 }
