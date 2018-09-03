@@ -249,4 +249,47 @@ class QueueAndStackSolution {
         
         return matrix
     }
+    
+    /// 542. 01 矩阵 直接dfs居然又超时
+    func updateMatrix(_ matrix: [[Int]]) -> [[Int]] {
+        let m = matrix.count
+        if m == 0 { return matrix }
+        let n = matrix[0].count
+        if n == 0 { return matrix }
+        
+        var result = matrix
+        var visited = matrix
+        
+        func helper(i: Int, j: Int, length: Int, visited: [[Int]]) -> Int {
+            let current = matrix[i][j]
+            var visited = visited
+            if current == 0 {
+                return length
+            }
+            if visited[i][j] == 2 {
+                return Int.max
+            }
+            visited[i][j] = 2
+            var temp = Int.max
+            if i > 0 {
+                temp = min(temp, helper(i: i - 1, j: j, length: length + 1, visited: visited))
+            }
+            if i < m - 1 {
+                temp = min(temp, helper(i: i + 1, j: j, length: length + 1, visited: visited))
+            }
+            if j > 0 {
+                temp = min(temp, helper(i: i, j: j - 1, length: length + 1, visited: visited))
+            }
+            if j < n - 1 {
+                temp = min(temp, helper(i: i, j: j + 1, length: length + 1, visited: visited))
+            }
+            return temp
+        }
+        for i in 0 ..< m {
+            for j in 0 ..< n {
+                result[i][j] = helper(i: i, j: j, length: 0, visited: visited)
+            }
+        }
+        return result
+    }
 }
