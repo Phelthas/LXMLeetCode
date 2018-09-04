@@ -118,6 +118,7 @@ class ViewController: UIViewController {
         QueueAndStackSolution().dailyTemperatures([73,74,75,71,69,72,76,73])
         QueueAndStackSolution().findTargetSumWays([1,1,1,1,1,], 3)
         QueueAndStackSolution().updateMatrix([[0,0,0],[0,1,0],[1,1,1]])
+        QueueAndStackSolution().canVisitAllRooms([[],[1,1],[2,2]])
     }
     
 }

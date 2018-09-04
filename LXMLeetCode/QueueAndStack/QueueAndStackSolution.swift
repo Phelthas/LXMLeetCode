@@ -292,4 +292,31 @@ class QueueAndStackSolution {
         }
         return result
     }
+    
+    /// 841. Keys and Rooms
+    func canVisitAllRooms(_ rooms: [[Int]]) -> Bool {
+        let m = rooms.count
+        if m == 0 { return true }
+        var dict = [Int : Bool]()
+        dict[0] = true
+        var visited = Set<Int>()
+        func helper(_ keys: [Int]) {
+            for key in keys {
+                if visited.contains(key) {
+                    continue
+                } else {
+                    dict[key] = true
+                    visited.insert(key)
+                    helper(rooms[key])
+                }
+            }
+        }
+        helper(rooms[0])
+        for i in 0 ..< m {
+            if dict[i] == nil {
+                return false
+            }
+        }
+        return true
+    }
 }
