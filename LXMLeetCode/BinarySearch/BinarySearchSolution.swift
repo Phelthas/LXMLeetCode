@@ -58,4 +58,57 @@ class BinarySearchSolution {
         
         return nums[left]
     }
+
+    /// 658. 找到 K 个最接近的元素,自己想的，别别人提交的只计算下标的方法要复杂了点，理论上不用操作数组的
+    func findClosestElements(_ arr: [Int], _ k: Int, _ x: Int) -> [Int] {
+        
+        
+        var left = 0
+        var right = arr.count - 1
+        var index = 0
+        while left < right {
+            if left == right - 1 {
+                if abs(arr[left] - x) <= abs(arr[right] - x) {
+                    index = left
+                } else {
+                    index = right
+                }
+                break
+            }
+            let mid = (left + right) / 2
+            if arr[mid] == x {
+                index = mid
+                break
+            } else if arr[mid] > x {
+                right = mid
+            } else {
+                left = mid
+            }
+        }
+        var result = [Int]()
+        result.append(arr[index])
+        left = index - 1
+        right = index + 1
+        while result.count != k {
+            if left < 0 {
+                result.append(arr[right])
+                right += 1
+                continue
+            }
+            if right > arr.count - 1 {
+                result.insert(arr[left], at: 0)
+                left -= 1
+                continue
+            }
+            if abs(arr[left] - x) <= abs(arr[right] - x) {
+                result.insert(arr[left], at: 0)
+                left -= 1
+            } else {
+                result.append(arr[right])
+                right += 1
+            }
+        }
+        
+        return result
+    }
 }
