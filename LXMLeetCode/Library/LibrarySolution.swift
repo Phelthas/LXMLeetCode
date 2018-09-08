@@ -92,5 +92,21 @@ class LibrarySolution {
         return i
     }
     
-    ///占个坑先
+    /// 367. 有效的完全平方数
+    func isPerfectSquare(_ num: Int) -> Bool {
+        if num == 1 { return true }
+        var left = 0
+        var right = num
+        while left <= right {
+            let mid = (left + right) / 2
+            if num / mid == mid && num % mid == 0 {
+                return true
+            } else if num / mid < mid {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        return false
+    }
 }
