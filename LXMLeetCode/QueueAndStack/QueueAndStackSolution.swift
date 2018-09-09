@@ -321,22 +321,6 @@ class QueueAndStackSolution {
     }
     
     
-    /// 744. 寻找比目标字母大的最小字母 其实没太理解思路，这是网上看到别人写的代码，提交提示编译出错。。。
-    func nextGreatestLetter(_ letters: [Character], _ target: Character) -> Character {
-        var left = 0
-        var right = letters.count - 1
-        if target > letters[right] {
-            return letters[0]
-        }
-        while left < right {
-            let mid = (left + right) / 2
-            if target >= letters[mid] {
-                left = mid + 1
-            } else {
-                right = mid
-            }
-        }
-        return letters[left]
-    }
+    
     
 }
