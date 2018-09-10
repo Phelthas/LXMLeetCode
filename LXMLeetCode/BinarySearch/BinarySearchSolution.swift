@@ -147,4 +147,28 @@ class BinarySearchSolution {
         }
         return nums[left]
     }
+    
+    /// 349. 两个数组的交集, 感觉没用到二分法呀。。。
+    func intersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        let array1 = nums1.sorted()
+        let array2 = nums2.sorted()
+        var result = Set<Int>()
+        var i = 0
+        var j = 0
+        while i < array1.count && j < array2.count {
+            let one = array1[i]
+            let two = array2[j]
+            if one == two {
+                result.insert(one)
+                i += 1
+                j += 1
+            } else if one < two {
+                i += 1
+            } else {
+                j += 1
+            }
+        }
+        return Array(result)
+    }
+    
 }
