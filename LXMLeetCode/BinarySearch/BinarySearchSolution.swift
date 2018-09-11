@@ -171,4 +171,25 @@ class BinarySearchSolution {
         return Array(result)
     }
     
+    /// 287. 寻找重复数 注意，这个题目的关键是下标才是排序数组，nums里面的数是用来统计的
+    func findDuplicate(_ nums: [Int]) -> Int {
+        var l = 1
+        var r = nums.count - 1
+        while l < r {
+            let mid = (l + r) / 2
+            var count = 0
+            for i in 0 ..< nums.count {
+                if nums[i] <= mid {
+                    count += 1
+                }
+            }
+            if count <= mid {
+                l = mid + 1
+            } else {
+                r = mid
+            }
+        }
+        return l
+    }
+    
 }

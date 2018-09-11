@@ -119,6 +119,8 @@ class ViewController: UIViewController {
         QueueAndStackSolution().findTargetSumWays([1,1,1,1,1,], 3)
         QueueAndStackSolution().updateMatrix([[0,0,0],[0,1,0],[1,1,1]])
         QueueAndStackSolution().canVisitAllRooms([[],[1,1],[2,2]])
+        
+        BinarySearchSolution().findDuplicate([1,3,4,2,2])
     }
     
 }
