@@ -109,4 +109,21 @@ class LibrarySolution {
         }
         return false
     }
+    
+    /// 11. 盛最多水的容器
+    func maxArea(_ height: [Int]) -> Int {
+        var result = 0
+        var left = 0
+        var right = height.count - 1
+        while left < right {
+            let m = (right - left) * min(height[left], height[right])
+            result = max(result, m)
+            if height[left] <= height[right] {
+                left += 1
+            } else {
+                right -= 1
+            }
+        }
+        return result
+    }
 }
