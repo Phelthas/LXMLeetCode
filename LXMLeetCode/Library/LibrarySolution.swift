@@ -127,5 +127,33 @@ class LibrarySolution {
         return result
     }
     
-    /// 16. 最接近的三数之和
+    /// 16. 最接近的三数之和 直接遍历肯定超时，我本来想到了思路，但是绝对值跟大于小于的关系没绕过来
+    func threeSumClosest(_ nums: [Int], _ target: Int) -> Int {
+        var array = nums.sorted()
+        var diff = Int.max
+        var result = 0
+        for i in 0 ..< array.count - 2 {
+            let a = array[i]
+            
+            var j = i + 1
+            var k = array.count - 1
+            while j < k {
+                let b = array[j]
+                let c = array[k]
+                let tempSum = a + b + c
+                if abs(tempSum - target) < diff {
+                    diff = abs(tempSum - target)
+                    result = tempSum
+                }
+                if tempSum > target {
+                    k -= 1
+                } else if tempSum < target {
+                    j += 1
+                } else {
+                    return result
+                }
+            }
+        }
+        return result
+    }
 }
