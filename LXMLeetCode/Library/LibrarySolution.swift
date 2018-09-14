@@ -156,4 +156,36 @@ class LibrarySolution {
         }
         return result
     }
+    
+    
+    func fourSum(_ nums: [Int], _ target: Int) -> [[Int]] {
+        
+        var array = nums.sorted()
+        var result = [[Int]]()
+        guard nums.count >= 4 else { return result }
+        
+        for i in 0 ..< nums.count - 3 {
+            for j in i + 1 ..< nums.count - 2 {
+                var left = j + 1
+                var right = nums.count - 1
+                while left < right {
+                    let sum = array[i] + array[j] + array[left] + array[right]
+                    if sum == target {
+                        let temp = [array[i], array[j], array[left], array[right]]
+                        if !result.contains(temp) {
+                            result.append(temp)
+                        }
+                        left += 1
+                        right -= 1
+                    } else if sum > target {
+                        right -= 1
+                    } else {
+                        left += 1
+                    }
+                }
+            }
+        }
+        
+        return result
+    }
 }
