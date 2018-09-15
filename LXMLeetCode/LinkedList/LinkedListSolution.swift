@@ -471,4 +471,48 @@ class LinkedListSolution {
         return result
     }
     
+    
+    /// 24. 两两交换链表中的节点, 自己想的方法，比较耗时，用虚拟的头结点可以大大简化代码
+//    func swapPairs(_ head: ListNode?) -> ListNode? {
+//        var one = head
+//        var two = one?.next
+//        if two == nil {
+//            return head
+//        }
+//        let result = two
+//        var next = two?.next
+//        var last: ListNode? = nil
+//        while one != nil && two != nil {
+//            last?.next = two
+//            two?.next = one
+//            one?.next = next
+//            last = one
+//
+//            one = next
+//            two = one?.next
+//            next = two?.next
+//        }
+//        return result
+//    }
+    
+    func swapPairs(_ head: ListNode?) -> ListNode? {
+        let result = ListNode(x: -1)
+        result.next = head
+        var one = head
+        var two = one?.next
+        var next = two?.next
+        var last: ListNode? = result
+        
+        while one != nil && two != nil {
+            last?.next = two
+            two?.next = one
+            one?.next = next
+            last = one
+            
+            one = next
+            two = one?.next
+            next = two?.next
+        }
+        return result.next
+    }
 }
