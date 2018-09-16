@@ -188,4 +188,21 @@ class LibrarySolution {
         
         return result
     }
+    
+    
+    /// 35. 搜索插入位置
+    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+        guard nums.count > 0 else { return 0 }
+        if target < nums[0] { return 0 }
+        
+        for i in 0 ..< nums.count {
+            let current = nums[i]
+            if current == target {
+                return i
+            } else if current > target {
+                return i
+            }
+        }
+        return nums.count
+    }
 }
