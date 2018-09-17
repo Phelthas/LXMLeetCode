@@ -205,4 +205,29 @@ class LibrarySolution {
         }
         return nums.count
     }
+    
+    /// 39. 组合总和 ，这题还是有点晕，基本是蒙出来的
+    func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
+        
+        var result = [[Int]]()
+        var array = candidates.sorted()
+        
+        func helper(array:[Int], start: Int, temp: [Int], sum: Int) {
+            if sum == target {
+                result.append(temp)
+                return
+            } else if sum > target {
+                return
+            } else {
+                for i in start ..< array.count {
+                    var temp = temp
+                    temp.append(array[i])
+                    helper(array: array, start: i, temp: temp, sum: sum + array[i])
+                }
+            }
+            
+        }
+        helper(array: array, start: 0, temp: [Int](), sum: 0)
+        return result
+    }
 }
