@@ -232,29 +232,53 @@ class LibrarySolution {
     }
     
     /// 40. 组合总和 II 完全抄的，没看懂
+//    func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
+//        var sortNums = candidates.sorted()
+//        var tmp = [Int]()  // current set for testing
+//        var rlt = [[Int]]() // the result set
+//
+//        // subtrack a num from candidates to find the combination:
+//        func backtrack(_ nums: inout [Int], _ tmp: inout [Int], _ start:Int, _ tg:Int, _ rlt:inout[[Int]]) {
+//            if tg==0 { // find one and put into result;
+//                rlt.append(tmp)
+//                return
+//            }
+//            if start >= nums.count || nums[start] > tg { return } // go on condictions
+//            for i in start...nums.count-1 {
+//                if tg < nums[i] { return }
+//                if i != start && nums[i]==nums[i-1] { continue } // skip the same num been used
+//                tmp.append(nums[i])
+//                backtrack(&nums, &tmp, i+1, tg-nums[i], &rlt)
+//                tmp.removeLast()
+//            }
+//        }
+//
+//        backtrack(&sortNums, &tmp, 0, target, &rlt)
+//        return rlt
+//    }
+    
     func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
-        var sortNums = candidates.sorted()
-        var tmp = [Int]()  // current set for testing
-        var rlt = [[Int]]() // the result set
+        var array = candidates.sorted()
+        var result = [[Int]]()
         
-        // subtrack a num from candidates to find the combination:
-        func backtrack(_ nums: inout [Int], _ tmp: inout [Int], _ start:Int, _ tg:Int, _ rlt:inout[[Int]]) {
-            if tg==0 { // find one and put into result;
-                rlt.append(tmp)
+        func helper(start: Int, temp: [Int], sum: Int) {
+            if sum == target {
+                result.append(temp)
                 return
             }
-            if start >= nums.count || nums[start] > tg { return } // go on condictions
-            for i in start...nums.count-1 {
-                if tg < nums[i] { return }
-                if i != start && nums[i]==nums[i-1] { continue } // skip the same num been used
-                tmp.append(nums[i])
-                backtrack(&nums, &tmp, i+1, tg-nums[i], &rlt)
-                tmp.removeLast()
+            if start >= array.count || sum > target {
+                return
+            }
+            for i in start ..< array.count {
+                if sum + array[i] > target { return }
+                if i != start && array[i] == array[i - 1] { continue }//这一句是关键,一次递归取一个数放到temp里面，而一次for循环里的操作是平级的，也就是都是当第start个数来用，如果这时候有跟前一个数相等的，就直接跳过就行了。比如array是[1,1,1,2,3],那只需要分别取1，2，3为第一个数递归就行了，不能讲1取三次！
+                var temp = temp
+                temp.append(array[i])
+                helper(start: i + 1, temp: temp, sum: sum + array[i])
             }
         }
-        
-        backtrack(&sortNums, &tmp, 0, target, &rlt)
-        return rlt
+        helper(start: 0, temp: [Int](), sum: 0)
+        return result
     }
     
 }

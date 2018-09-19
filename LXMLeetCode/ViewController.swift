@@ -121,6 +121,8 @@ class ViewController: UIViewController {
         QueueAndStackSolution().canVisitAllRooms([[],[1,1],[2,2]])
         
         BinarySearchSolution().findDuplicate([1,3,4,2,2])
+        
+        LibrarySolution().combinationSum2([10,1,2,7,6,1,5], 8)
     }
     
 }
