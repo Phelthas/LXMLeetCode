@@ -281,5 +281,27 @@ class LibrarySolution {
         return result
     }
     
-    // 占个坑先
+    /// 47 全排列 II  跟40有点像
+    func permuteUnique(_ nums: [Int]) -> [[Int]] {
+        var array = nums.sorted()
+        var n = nums.count
+        var result = [[Int]]()
+        func helper(remain: [Int], temp: [Int]) {
+            if temp.count == n {
+                result.append(temp)
+            } else {
+                for i in 0 ..< remain.count {
+                    if 0 == i || remain[i] != remain[i - 1] {
+                        var newRemain = remain
+                        let current = newRemain.remove(at: i)
+                        var newTemp = temp
+                        newTemp.append(current)
+                        helper(remain: newRemain, temp: newTemp)
+                    }
+                }
+            }
+        }
+        helper(remain: array, temp: [Int]())
+        return result
+    }
 }

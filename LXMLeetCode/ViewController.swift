@@ -123,6 +123,7 @@ class ViewController: UIViewController {
         BinarySearchSolution().findDuplicate([1,3,4,2,2])
         
         LibrarySolution().combinationSum2([10,1,2,7,6,1,5], 8)
+        LibrarySolution().permuteUnique([1,1,2])
     }
     
 }
