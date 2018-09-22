@@ -304,4 +304,30 @@ class LibrarySolution {
         helper(remain: array, temp: [Int]())
         return result
     }
+    
+    /// 58. 最后一个单词的长度 这么简单的题居然边界条件调了半天。。。
+    func lengthOfLastWord(_ s: String) -> Int {
+        guard s.count > 0 else { return 0 }
+        let array = [Character](s)
+        var i = array.count - 1
+        while i >= 0 {
+            if array[i] == " " {
+                i -= 1
+                if i < 0 {
+                    return 0
+                }
+            } else {
+                var j = i - 1
+                while j >= 0 {
+                    if array[j] == " " {
+                        return i - j
+                    } else {
+                        j -= 1
+                    }
+                }
+                return i - j
+            }
+        }
+        return array.count
+    }
 }
