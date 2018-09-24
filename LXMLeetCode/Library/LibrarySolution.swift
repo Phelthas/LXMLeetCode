@@ -385,4 +385,65 @@ class LibrarySolution {
         return result
         
     }
+    
+    /// 60. 第k个排列 用全排列的方式做，超时了。。。
+//    func getPermutation(_ n: Int, _ k: Int) -> String {
+//        var array = [Int]()
+//        for i in 1 ... n {
+//            array.append(i)
+//        }
+//        var matrix = [[Int]]()
+//        func helper(remain: [Int], temp: [Int]) {
+//            if matrix.count >= k { return }
+//            if temp.count == n {
+//                matrix.append(temp)
+//            }
+//            for i in 0 ..< remain.count {
+//                var newRemain = remain
+//                var newTemp  = temp
+//                let one = newRemain.remove(at: i)
+//                newTemp.append(one)
+//                helper(remain: newRemain, temp: newTemp)
+//            }
+//        }
+//
+//        helper(remain: array, temp: [Int]())
+//        let temp = matrix.last!
+//        var result = ""
+//        for i in 0 ..< temp.count {
+//            result += "\(temp[i])"
+//        }
+//        return result
+//    }
+    
+    // 牛逼了，自己想出来的算法：首先，n！个全排列中，有分别以1-n为第一个数的 （n-1）！个全排列；
+    // 所以要判断k大于几倍的 （n-1）！，如果是0倍，那说明就是以数组第一个数为开头的；如果大于i倍（n-1）！又小于i+1倍（n-1）！，则说明是以第i个数为开头的全排列；这时候把这个数放到结果中，对剩下的数组进行同样的判断
+    
+    func getPermutation(_ n: Int, _ k: Int) -> String {
+        if n == 1 { return "1" }
+        var array = [Int]()
+        var dp = [Int](repeating: 1, count: n + 1)
+        for i in 1 ... n {
+            array.append(i)
+            dp[i] = dp[i - 1] * i
+        }
+        
+        var result = [Int]()
+        var k = k
+        while result.count < n {
+            var i = 0 //i表示用数组的第几个数为开头
+            while k > (i + 1) * dp[array.count - 1] {
+                i += 1
+            }
+            k = k - i * dp[array.count - 1]
+            let temp = array.remove(at: i)
+            result.append(temp)
+        }
+        var s = ""
+        for i in 0 ..< result.count {
+            s += "\(result[i])"
+        }
+        return s
+    }
+
 }
