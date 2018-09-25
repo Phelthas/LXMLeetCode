@@ -445,5 +445,52 @@ class LibrarySolution {
         }
         return s
     }
+    
+    /// 63.不同路径 II, 别人提交的直接给障碍物那儿赋值0的方法应该是更好的，因为结果是0+x还是x嘛
+    func uniquePathsWithObstacles(_ obstacleGrid: [[Int]]) -> Int {
+        let m = obstacleGrid.count
+        if m == 0 { return 0 }
+        let n = obstacleGrid[0].count
+        if n == 0 { return 0 }
+        var matrix = [[Int]]()
+        for _ in 0 ..< m {
+            let temp = [Int](repeating: 0, count: n)
+            matrix.append(temp)
+        }
+        if obstacleGrid[0][0] == 1 { return 0 }
+        
+        for i in 0 ..< m {
+            for j in 0 ..< n {
+                if i == 0 && j == 0 {
+                    matrix[0][0] = 1
+                } else if i == 0 && j > 0 {
+                    if obstacleGrid[i][j] == 1 {
+                        matrix[i][j] = -1
+                    } else {
+                        matrix[i][j] = matrix[i][j - 1]
+                    }
+                } else if i > 0 && j == 0 {
+                    if obstacleGrid[i][j] == 1 {
+                        matrix[i][j] = -1
+                    } else {
+                        matrix[i][j] = matrix[i - 1][j]
+                    }
+                } else {
+                    if obstacleGrid[i][j] == 1 {
+                        matrix[i][j] = -1
+                    } else if matrix[i][j - 1] == -1 && matrix[i - 1][j] == -1 {
+                        matrix[i][j] = 0
+                    } else if matrix[i][j - 1] == -1 {
+                        matrix[i][j] = matrix[i - 1][j]
+                    } else if matrix[i - 1][j] == -1 {
+                        matrix[i][j] = matrix[i][j - 1]
+                    } else {
+                        matrix[i][j] = matrix[i][j - 1] + matrix[i - 1][j]
+                    }
+                }
+            }
+        }
+        return matrix[m-1][n-1] == -1 ? 0 : matrix[m-1][n-1]
+    }
 
 }
