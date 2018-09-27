@@ -516,4 +516,43 @@ class LibrarySolution {
     }
     
     /// 71. 简化路径
+    func simplifyPath(_ path: String) -> String {
+        guard path.count > 0 else { return path }
+        let array = [Character](path)
+        var result = [[Character]]()
+        var temp: [Character] = ["/"]
+        
+        var i = 1
+        while i < array.count {
+            let c = array[i]
+            if c != "/" {
+                temp.append(c)
+            } else {
+                result.append(temp)
+                temp = ["/"]
+            }
+            i += 1
+        }
+        result.append(temp)
+        
+        var j = 0
+        var x = [String]()
+        while j < result.count {
+            let sub = String(result[j])
+            if sub == "/." || sub == "/" {
+                
+            } else if sub == "/.." {
+                _ = x.popLast()
+            } else {
+                x.append(sub)
+            }
+            j += 1
+        }
+        if x.count == 0 { return "/" }
+        var a = ""
+        for sub in x {
+            a += sub
+        }
+        return a
+    }
 }
