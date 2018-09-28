@@ -555,4 +555,47 @@ class LibrarySolution {
         }
         return a
     }
+    
+    /// 74. 搜索二维矩阵 还有问题
+    func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+        let m = matrix.count
+        if m == 0 { return false }
+        let n = matrix[0].count
+        if n == 0 { return false }
+        var colum = [Int]()
+        for array in matrix {
+            colum.append(array[0])
+        }
+        
+        var left = 0
+        var right = colum.count - 1
+        var row = 0
+        while left < right {
+            let mid = (left + right) / 2
+            if colum[mid] == target {
+                return true
+            } else if colum[mid] > target {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        row = left
+        
+        let array = matrix[left]
+        left = 0
+        right = array.count - 1
+        while left < right {
+            let mid = (left + right) / 2
+            if array[mid] == target {
+                return true
+            } else if array[mid] > target {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        return false
+        
+    }
 }
