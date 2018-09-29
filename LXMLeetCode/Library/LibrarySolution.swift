@@ -556,7 +556,7 @@ class LibrarySolution {
         return a
     }
     
-    /// 74. 搜索二维矩阵 还有问题
+    /// 74. 搜索二维矩阵 见过的最复杂的边界条件问题
     func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
         let m = matrix.count
         if m == 0 { return false }
@@ -570,8 +570,9 @@ class LibrarySolution {
         var left = 0
         var right = colum.count - 1
         var row = 0
-        while left < right {
-            let mid = (left + right) / 2
+        while left <= right {
+            // Prevent (left + right) overflow
+            let mid = left + (right - left) / 2
             if colum[mid] == target {
                 return true
             } else if colum[mid] > target {
@@ -580,13 +581,19 @@ class LibrarySolution {
                 left = mid + 1
             }
         }
-        row = left
+        row = min(left, right)
+        if row < 0 { return false }
         
-        let array = matrix[left]
+        
+        let array = matrix[row]
+        if array.count == 1 {
+            return array[0] == target
+        }
         left = 0
         right = array.count - 1
-        while left < right {
-            let mid = (left + right) / 2
+        while left <= right {
+            // Prevent (left + right) overflow
+            let mid = left + (right - left) / 2
             if array[mid] == target {
                 return true
             } else if array[mid] > target {
