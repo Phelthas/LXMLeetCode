@@ -605,4 +605,31 @@ class LibrarySolution {
         return false
         
     }
+    
+    /// 77.组合 超时了。。。
+    func combine(_ n: Int, _ k: Int) -> [[Int]] {
+        var array = [Int]()
+        for i in 1 ... n {
+            array.append(i)
+        }
+        var result = [[Int]]()
+        
+        func helper(remain: [Int], temp: [Int]) {
+            if temp.count == k {
+                result.append(temp)
+            } else {
+                for i in 0 ..< remain.count {
+                    var newRemain = remain
+                    let a = newRemain.remove(at: i)
+                    if temp.count == 0 || a > temp.last! {
+                        var newTemp = temp
+                        newTemp.append(a)
+                        helper(remain: newRemain, temp: newTemp)
+                    }
+                }
+            }
+        }
+        helper(remain: array, temp: [Int]())
+        return result
+    }
 }
