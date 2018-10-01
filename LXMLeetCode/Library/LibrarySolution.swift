@@ -607,6 +607,33 @@ class LibrarySolution {
     }
     
     /// 77.组合 超时了。。。
+//    func combine(_ n: Int, _ k: Int) -> [[Int]] {
+//        var array = [Int]()
+//        for i in 1 ... n {
+//            array.append(i)
+//        }
+//        var result = [[Int]]()
+//
+//        func helper(remain: [Int], temp: [Int]) {
+//            if temp.count == k {
+//                result.append(temp)
+//            } else {
+//                for i in 0 ..< remain.count {
+//                    var newRemain = remain
+//                    let a = newRemain.remove(at: i)
+//                    if temp.count == 0 || a > temp.last! {
+//                        var newTemp = temp
+//                        newTemp.append(a)
+//                        helper(remain: newRemain, temp: newTemp)
+//                    }
+//                }
+//            }
+//        }
+//        helper(remain: array, temp: [Int]())
+//        return result
+//    }
+    
+    /// 77.组合 通过的答案
     func combine(_ n: Int, _ k: Int) -> [[Int]] {
         var array = [Int]()
         for i in 1 ... n {
@@ -614,22 +641,22 @@ class LibrarySolution {
         }
         var result = [[Int]]()
         
-        func helper(remain: [Int], temp: [Int]) {
+        func helper(temp: [Int], start: Int) {
+            if start > n {
+                return
+            }
             if temp.count == k {
                 result.append(temp)
             } else {
-                for i in 0 ..< remain.count {
-                    var newRemain = remain
-                    let a = newRemain.remove(at: i)
-                    if temp.count == 0 || a > temp.last! {
-                        var newTemp = temp
-                        newTemp.append(a)
-                        helper(remain: newRemain, temp: newTemp)
-                    }
+                for i in start ..< array.count {
+                    let current = array[i]
+                    var newTemp = temp
+                    newTemp.append(current)
+                    helper(temp: newTemp, start: i + 1)
                 }
             }
         }
-        helper(remain: array, temp: [Int]())
+        helper(temp: [Int](), start: 0)
         return result
     }
 }
