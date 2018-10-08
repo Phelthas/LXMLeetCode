@@ -659,4 +659,25 @@ class LibrarySolution {
         helper(temp: [Int](), start: 0)
         return result
     }
+    
+    /// 80.删除排序数组中的重复项 II
+    func removeDuplicates(_ nums: inout [Int]) -> Int {
+        guard nums.count > 2 else { return nums.count }
+        var index = 2
+        var last1 = nums[0]
+        var last2 = nums[1]
+        
+        for i in 2 ..< nums.count {
+            let current = nums[i]
+            if last1 == last2 && last2 == current {
+                
+            } else {
+                nums[index] = current
+                index += 1
+                last1 = last2
+                last2 = current
+            }
+        }
+        return index
+    }
 }
