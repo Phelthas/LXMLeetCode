@@ -699,4 +699,41 @@ class LibrarySolution {
         return head
     }
     
+    /// 82.删除排序链表中的重复元素 II
+    func deleteDuplicates2(_ head: ListNode?) -> ListNode? {
+        if head?.next == nil {
+            return head
+        }
+        
+        let blank = ListNode(x: Int.min)
+        blank.next = head
+        
+        var last = blank
+        var start = head
+        var current = start?.next
+        
+        while current != nil {
+            if start!.val == current!.val {
+                var temp = current?.next
+                while temp != nil {
+                    if temp!.val == start!.val {
+                        temp = temp?.next
+                    } else {
+                        break
+                    }
+                }
+                last.next = temp
+                start = temp
+                current = temp?.next
+                
+            } else {
+                last = start!
+                start = current
+                current = current?.next
+            }
+        }
+        return blank.next
+        
+    }
+    
 }
