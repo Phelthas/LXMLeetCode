@@ -736,4 +736,34 @@ class LibrarySolution {
         
     }
     
+    /// 86. 分隔链表
+    func partition(_ head: ListNode?, _ x: Int) -> ListNode? {
+        var result: ListNode? = nil
+        var big: ListNode? = nil
+        var currentSmall: ListNode? = nil
+        var currentBig: ListNode? = nil
+        var current = head
+        while current != nil {
+            if current!.val < x {
+                if result == nil {
+                    result = current
+                    currentSmall = current
+                } else {
+                    currentSmall?.next = current
+                    currentSmall = current
+                }
+            } else {
+                if big == nil {
+                    big = current
+                    currentBig = current
+                } else {
+                    currentBig?.next = current
+                    currentBig = current
+                }
+            }
+            current = current?.next
+        }
+        currentSmall?.next = big
+        return result
+    }
 }
