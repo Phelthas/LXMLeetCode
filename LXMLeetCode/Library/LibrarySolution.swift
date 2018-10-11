@@ -763,7 +763,8 @@ class LibrarySolution {
             }
             current = current?.next
         }
+        currentBig?.next = nil
         currentSmall?.next = big
-        return result
+        return result == nil ? big : result
     }
 }
