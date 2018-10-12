@@ -130,6 +130,7 @@ class ViewController: UIViewController {
             , 3)
         
         LibrarySolution().partition(ListNode.linkedList(fromArray: [1,4,3,2,5,2]), 3)
+        LibrarySolution().grayCode(2)
     }
     
 }

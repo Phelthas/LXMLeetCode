@@ -767,4 +767,39 @@ class LibrarySolution {
         currentSmall?.next = big
         return result == nil ? big : result
     }
+    
+    /// 89. 格雷编码 用最笨的方法做的，我感觉还是有点意义的
+    func grayCode(_ n: Int) -> [Int] {
+        var matrix = [[Int]]()
+        var temp = [Int](repeating: 0, count: n)
+        matrix.append(temp)
+        
+        func helper(array: [Int]) -> [Int] {
+            
+            for i in (0 ..< array.count).reversed() {
+                let current = array[i]
+                var result = array
+                result[i] = current == 0 ? 1 : 0
+                if !matrix.contains(result) {
+                    matrix.append(result)
+                    return result
+                }
+            }
+            return [Int]()
+        }
+        
+        while temp.count != 0 {
+            temp = helper(array: temp)
+        }
+        var result = [Int]()
+        for array in matrix {
+            var temp = 0
+            for i in 0 ..< array.count {
+                temp += array[i] * 1 << i
+            }
+            result.append(temp)
+        }
+        return result
+        
+    }
 }
