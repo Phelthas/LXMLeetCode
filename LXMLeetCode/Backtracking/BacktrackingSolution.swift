@@ -208,4 +208,28 @@ class BacktrackingSolution {
         return false
         
     }
+    
+    /// 90.子集 II 笨办法
+    func subsetsWithDup(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]()]
+        guard nums.count > 0 else { return result }
+        
+        func test(_ array: [[Int]], _ current: Int) -> [[Int]] {
+            var result = array
+            for temp in array {
+                var a = temp
+                a.append(current)
+                if !result.contains(a) {
+                    result.append(a)
+                }
+            }
+            return result
+        }
+        
+        for num in nums.sorted() {
+            result = test(result, num)
+        }
+        return result
+    }
+    
 }
