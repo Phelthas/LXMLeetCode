@@ -29,6 +29,18 @@ public class ListNode {
         four.next = five
         return one
     }
+    
+    class func linkedList(fromArray array: [Int]) -> ListNode? {
+        guard array.count > 0 else { return nil }
+        let result = ListNode(x: array[0])
+        if array.count == 1 { return result }
+        var current: ListNode? = result
+        for i in 1 ..< array.count {
+            current?.next = ListNode(x: array[i])
+            current = current?.next
+        }
+        return result
+    }
 }
 
 
