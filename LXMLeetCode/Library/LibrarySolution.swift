@@ -834,4 +834,20 @@ class LibrarySolution {
             return head
         }
     }
+    
+    
+    /// 100. 相同的树
+    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
+        if p == nil && q == nil {
+            return true
+        } else if p == nil || q == nil {
+            return false
+        } else {
+            if p!.val == q!.val {
+                return isSameTree(p?.left, q?.left) && isSameTree(p?.right, q?.right)
+            } else {
+                return false
+            }
+        }
+    }
 }
