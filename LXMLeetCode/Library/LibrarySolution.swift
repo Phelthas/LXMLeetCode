@@ -837,17 +837,66 @@ class LibrarySolution {
     
     
     /// 100. 相同的树
+//    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
+//        if p == nil && q == nil {
+//            return true
+//        } else if p == nil || q == nil {
+//            return false
+//        } else {
+//            if p!.val == q!.val {
+//                return isSameTree(p?.left, q?.left) && isSameTree(p?.right, q?.right)
+//            } else {
+//                return false
+//            }
+//        }
+//    }
+    
+    /// 100. 相同的树 迭代写法
     func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
         if p == nil && q == nil {
             return true
         } else if p == nil || q == nil {
             return false
-        } else {
-            if p!.val == q!.val {
-                return isSameTree(p?.left, q?.left) && isSameTree(p?.right, q?.right)
-            } else {
+        }
+        var stackP = [TreeNode]()
+        var stackQ = [TreeNode]()
+        stackP.append(p!)
+        stackQ.append(q!)
+        var currentP: TreeNode? = nil
+        var currentQ: TreeNode? = nil
+        
+        while stackP.count != 0 || stackQ.count != 0 {
+            if stackP.count != stackQ.count {
                 return false
             }
+            currentP = stackP.removeLast()
+            currentQ = stackQ.removeLast()
+            if currentP!.val != currentQ!.val {
+                return false
+            }
+            while currentP != nil || currentQ != nil {
+                if currentP != nil && currentQ != nil {
+                    if currentP!.val != currentQ!.val {
+                        return false
+                    }
+                    let rightP = currentP?.right
+                    let rightQ = currentQ?.right
+                    if rightP == nil && rightQ == nil {
+                        
+                    } else if rightP == nil || rightQ == nil {
+                        return false
+                    } else {
+                        stackP.append(rightP!)
+                        stackQ.append(rightQ!)
+                    }
+                    currentP = currentP?.left
+                    currentQ = currentQ?.left
+                } else {
+                    return false
+                }
+                
+            }
         }
+        return true
     }
 }
