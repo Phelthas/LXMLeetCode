@@ -835,6 +835,24 @@ class LibrarySolution {
         }
     }
     
+    /// 96. 不同的二叉搜索树,关键是：总个数=分别以各个数为根节点的二叉搜索树的综合
+    /// 而以某个数为根节点的二叉树的个数 = 其左边子树的个数*右边子树的个数
+    func numTrees(_ n: Int) -> Int {
+        if n == 0 { return 1 }
+        if n == 1 { return 1 }
+        var result = [Int](repeating: 0, count: n + 1)
+        result[0] = 1
+        result[1] = 1
+        for i in 2 ... n  {
+            
+            for j in 1 ... i {
+                result[i] += result[j - 1] * result[i - j]
+            }
+            
+        }
+        return result[n]
+    }
+    
     
     /// 100. 相同的树
 //    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
