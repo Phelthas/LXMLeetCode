@@ -836,6 +836,42 @@ class LibrarySolution {
     }
     
     /// 95. 不同的二叉搜索树 II
+    func generateTrees(_ n: Int) -> [TreeNode?] {
+        if n == 0 { return [nil] }
+        if n == 1 { return [TreeNode(1)] }
+        var matrix = [[TreeNode?]]()
+        matrix.append([nil])
+        matrix.append([TreeNode(1)])
+        
+        func helper(array: [Int]) -> [TreeNode?] {
+            if array.count == 0 {
+                return [nil]
+            } else if array.count == 1 {
+                return [TreeNode(array[0])]
+            } else {
+                var result = [TreeNode?]()
+                for i in 0 ..< array.count {
+                    
+                    var temp = i == 0 ? 0 : i - 1
+                    let leftArray = helper(array: Array(0 ... temp))
+                    temp = i == array.count - 1 ? array.count - 1 : i + 1
+                    let rightArray = helper(array: Array(temp ... array.count - 1))
+                    for left in leftArray {
+                        for right in rightArray {
+                            let root = TreeNode(array[i])
+                            root.left = left
+                            root.right = right
+                            result.append(root)
+                        }
+                    }
+                    
+                }
+                return result
+            }
+        }
+        
+        return helper(array: Array(1 ... n))
+    }
     
     /// 96. 不同的二叉搜索树,关键是：总个数=分别以各个数为根节点的二叉搜索树的综合
     /// 而以某个数为根节点的二叉树的个数 = 其左边子树的个数*右边子树的个数
