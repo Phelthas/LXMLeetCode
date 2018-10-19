@@ -835,13 +835,10 @@ class LibrarySolution {
         }
     }
     
-    /// 95. 不同的二叉搜索树 II
+    /// 95. 不同的二叉搜索树 II  递归的思路，关键跟96题差不多，所有可能的情况=左右子树情况的乘积再求和
     func generateTrees(_ n: Int) -> [TreeNode?] {
-        if n == 0 { return [nil] }
+        if n == 0 { return [TreeNode?]() }
         if n == 1 { return [TreeNode(1)] }
-        var matrix = [[TreeNode?]]()
-        matrix.append([nil])
-        matrix.append([TreeNode(1)])
         
         func helper(array: [Int]) -> [TreeNode?] {
             if array.count == 0 {
@@ -851,11 +848,10 @@ class LibrarySolution {
             } else {
                 var result = [TreeNode?]()
                 for i in 0 ..< array.count {
-                    
-                    var temp = i == 0 ? 0 : i - 1
-                    let leftArray = helper(array: Array(0 ... temp))
-                    temp = i == array.count - 1 ? array.count - 1 : i + 1
-                    let rightArray = helper(array: Array(temp ... array.count - 1))
+                    var temp = i == 0 ? [Int]() : Array(array[0...i - 1])
+                    let leftArray = helper(array: temp)
+                    temp = i == array.count - 1 ? [Int]() : Array(array[i + 1...array.count - 1])
+                    let rightArray = helper(array: temp)
                     for left in leftArray {
                         for right in rightArray {
                             let root = TreeNode(array[i])
@@ -864,7 +860,6 @@ class LibrarySolution {
                             result.append(root)
                         }
                     }
-                    
                 }
                 return result
             }

@@ -132,6 +132,7 @@ class ViewController: UIViewController {
         LibrarySolution().partition(ListNode.linkedList(fromArray: [1,4,3,2,5,2]), 3)
         LibrarySolution().grayCode(2)
         LibrarySolution().reverseBetween(ListNode.linkedList(fromArray: [1,2,3,4,5]), 2, 4)
+        LibrarySolution().generateTrees(3)
     }
     
 }
