@@ -133,6 +133,16 @@ class ViewController: UIViewController {
         LibrarySolution().grayCode(2)
         LibrarySolution().reverseBetween(ListNode.linkedList(fromArray: [1,2,3,4,5]), 2, 4)
         LibrarySolution().generateTrees(3)
+        
+        var block = {
+            let one = TreeNode(1)
+            let two = TreeNode(2)
+            one.right = two
+            LibrarySolution().minDepth(one)
+        }
+        block()
+        
+        
     }
     
 }

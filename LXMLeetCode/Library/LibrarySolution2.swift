@@ -34,4 +34,27 @@ extension LibrarySolution {
         }
         return result.reversed()
     }
+    
+    /// 111. 二叉树的最小深度
+    func minDepth(_ root: TreeNode?) -> Int {
+        guard let root = root else { return 0 }
+        
+        func depthOf(node: TreeNode?, currentDepth: Int) -> Int {
+            guard let node = node else { return currentDepth }
+            let result = currentDepth + 1
+            if node.left == nil && node.right == nil {
+                return result
+            } else if node.left == nil {
+                return depthOf(node: node.right, currentDepth: result)
+            } else if node.right == nil {
+                return depthOf(node: node.left, currentDepth: result)
+            } else {
+                return min(depthOf(node: node.left, currentDepth: result), depthOf(node: node.right, currentDepth: result))
+            }
+            
+        }
+        
+        return depthOf(node: root, currentDepth: 0)
+        
+    }
 }
