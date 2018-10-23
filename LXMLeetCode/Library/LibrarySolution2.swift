@@ -35,6 +35,27 @@ extension LibrarySolution {
         return result.reversed()
     }
     
+    /// 110. 平衡二叉树的递归写法
+    func isBalanced(_ root: TreeNode?) -> Bool {
+        
+        func heightOf(_ root: TreeNode?) -> Int {
+            guard let root = root else { return 0 }
+            return max(1 + heightOf(root.left), 1 + heightOf(root.right))
+        }
+        
+        guard let root = root else { return true }
+        if root.left == nil && root.right == nil {
+            return true
+        } else {
+            let leftHeight = heightOf(root.left)
+            let rightHeight = heightOf(root.right)
+            if abs(leftHeight - rightHeight) > 1 {
+                return false
+            }
+            return isBalanced(root.left) && isBalanced(root.right)
+        }
+    }
+    
     /// 111. 二叉树的最小深度
     func minDepth(_ root: TreeNode?) -> Int {
         guard let root = root else { return 0 }
@@ -57,4 +78,7 @@ extension LibrarySolution {
         return depthOf(node: root, currentDepth: 0)
         
     }
+    
+    
+    
 }
