@@ -79,6 +79,30 @@ extension LibrarySolution {
         
     }
     
-    
+    /// 113.路径总和 II 
+    func pathSum(_ root: TreeNode?, _ sum: Int) -> [[Int]] {
+        var result = [[Int]]()
+        guard let root = root else { return result }
+        
+        func traverse(node: TreeNode, total: Int, array:[Int]) {
+            let temp = total + node.val
+            var array = array
+            array.append(node.val)
+            
+            if node.left == nil && node.right == nil && temp == sum {
+                result.append(array)
+            } else {
+                if let left = node.left {
+                    traverse(node: left, total: temp, array: array)
+                }
+                if let right = node.right {
+                    traverse(node: right, total: temp, array: array)
+                }
+            }
+        }
+        
+        traverse(node: root, total: 0, array: [Int]())
+        return result
+    }
     
 }
