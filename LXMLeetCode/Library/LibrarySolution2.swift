@@ -105,4 +105,33 @@ extension LibrarySolution {
         return result
     }
     
+    /// 114. 二叉树展开为链表
+    func flatten(_ root: TreeNode?) {
+        
+        func helper(_ node: TreeNode?) -> TreeNode? {
+            guard let node = node else { return nil }
+            if node.left == nil && node.right == nil {
+                return node
+            } else if node.left == nil {
+                node.right = helper(node.right)
+            } else if node.right == nil {
+                node.right = helper(node.left)
+                node.left = nil
+            } else {
+                let tempRight = helper(node.right)
+                let tempLeft = helper(node.left)
+                var last = tempLeft
+                while last?.right != nil {
+                    last = last?.right
+                }
+                node.left = nil
+                node.right = tempLeft
+                last?.right = tempRight
+            }
+            return node
+        }
+        
+        helper(root)
+    }
+    
 }
