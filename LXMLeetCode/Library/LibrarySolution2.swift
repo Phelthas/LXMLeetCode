@@ -134,4 +134,23 @@ extension LibrarySolution {
         helper(root)
     }
     
+    /// 120.三角形最小路径和, 超时的算法
+    func minimumTotal(_ triangle: [[Int]]) -> Int {
+        let m = triangle.count
+        if m == 0 { return 0 }
+        var result = Int.max
+        
+        func helper(row: Int, index: Int, sum: Int) {
+            let temp = sum + triangle[row][index]
+            if row == m - 1 {
+                result = min(result, temp)
+            } else {
+                helper(row: row + 1, index: index, sum: temp)
+                helper(row: row + 1, index: index + 1, sum: temp)
+            }
+        }
+        
+        helper(row: 0, index: 0, sum: 0)
+        return result
+    }
 }
