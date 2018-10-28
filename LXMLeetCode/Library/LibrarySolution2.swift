@@ -134,6 +134,7 @@ extension LibrarySolution {
         helper(root)
     }
     
+<<<<<<< HEAD
     /// 129. 求根到叶子节点数字之和
     func sumNumbers(_ root: TreeNode?) -> Int {
         var array = [String]()
@@ -160,4 +161,59 @@ extension LibrarySolution {
         
     }
     
+=======
+    /// 120.三角形最小路径和, 超时的算法
+//    func minimumTotal(_ triangle: [[Int]]) -> Int {
+//        let m = triangle.count
+//        if m == 0 { return 0 }
+//        var result = Int.max
+//
+//        func helper(row: Int, index: Int, sum: Int) {
+//            let temp = sum + triangle[row][index]
+//            if row == m - 1 {
+//                result = min(result, temp)
+//            } else {
+//                helper(row: row + 1, index: index, sum: temp)
+//                helper(row: row + 1, index: index + 1, sum: temp)
+//            }
+//        }
+//        helper(row: 0, index: 0, sum: 0)
+//        return result
+//    }
+    
+    /// 120.三角形最小路径和, 动态规划的算法，O(n) 的方法
+    func minimumTotal(_ triangle: [[Int]]) -> Int {
+        let m = triangle.count
+        if m == 0 { return 0 }
+        if m == 1 { return triangle[0][0] }
+        var result = triangle //设result[i][j]是到ij的最小路径和
+        
+        for i in 1 ..< m {
+            for j in 0 ... i {
+                if j == 0 {
+                    result[i][j] = triangle[i][j] + result[i - 1][j]
+                }
+                else if j == i {
+                    result[i][j] = triangle[i][j] + result[i - 1][j - 1]
+                }
+                else {
+                    result[i][j] = triangle[i][j] + min(result[i - 1][j], result[i - 1][j - 1])
+                }
+            }
+        }
+        return result[m - 1].min() ?? 0
+    }
+    
+    /// 120.三角形最小路径和，O(n) 的方法抄别人的代码，没完全弄懂
+//    func minimumTotal(_ triangle: [[Int]]) -> Int {
+//        var dps = Array(repeating: 0, count: triangle.count + 1)
+//        for row in (0..<triangle.count).reversed() {
+//            for column in 0..<triangle[row].count {
+//                dps[column] = min(dps[column], dps[column + 1]) + triangle[row][column]
+//            }
+//        }
+//
+//        return dps[0]
+//    }
+>>>>>>> origin/master
 }
