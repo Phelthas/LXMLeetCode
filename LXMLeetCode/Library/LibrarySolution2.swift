@@ -134,4 +134,30 @@ extension LibrarySolution {
         helper(root)
     }
     
+    /// 129. 求根到叶子节点数字之和
+    func sumNumbers(_ root: TreeNode?) -> Int {
+        var array = [String]()
+        guard let root = root else { return 0 }
+        
+        func helper(_ node: TreeNode, _ temp: String) {
+            let temp = temp + "\(node.val)"
+            if node.left == nil && node.right == nil {
+                array.append(temp)
+            } else {
+                if let left = node.left {
+                    helper(left, temp)
+                }
+                if let right = node.right {
+                    helper(right, temp)
+                }
+            }
+        }
+        
+        helper(root, "")
+        return array.reduce(0, {
+            return $0 + Int($1)!
+        })
+        
+    }
+    
 }
