@@ -134,34 +134,6 @@ extension LibrarySolution {
         helper(root)
     }
     
-<<<<<<< HEAD
-    /// 129. 求根到叶子节点数字之和
-    func sumNumbers(_ root: TreeNode?) -> Int {
-        var array = [String]()
-        guard let root = root else { return 0 }
-        
-        func helper(_ node: TreeNode, _ temp: String) {
-            let temp = temp + "\(node.val)"
-            if node.left == nil && node.right == nil {
-                array.append(temp)
-            } else {
-                if let left = node.left {
-                    helper(left, temp)
-                }
-                if let right = node.right {
-                    helper(right, temp)
-                }
-            }
-        }
-        
-        helper(root, "")
-        return array.reduce(0, {
-            return $0 + Int($1)!
-        })
-        
-    }
-    
-=======
     /// 120.三角形最小路径和, 超时的算法
 //    func minimumTotal(_ triangle: [[Int]]) -> Int {
 //        let m = triangle.count
@@ -215,5 +187,30 @@ extension LibrarySolution {
 //
 //        return dps[0]
 //    }
->>>>>>> origin/master
+
+    /// 129. 求根到叶子节点数字之和
+    func sumNumbers(_ root: TreeNode?) -> Int {
+        var array = [String]()
+        guard let root = root else { return 0 }
+        
+        func helper(_ node: TreeNode, _ temp: String) {
+            let temp = temp + "\(node.val)"
+            if node.left == nil && node.right == nil {
+                array.append(temp)
+            } else {
+                if let left = node.left {
+                    helper(left, temp)
+                }
+                if let right = node.right {
+                    helper(right, temp)
+                }
+            }
+        }
+        
+        helper(root, "")
+        return array.reduce(0, {
+            return $0 + Int($1)!
+        })
+        
+    }
 }
