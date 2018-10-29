@@ -213,4 +213,35 @@ extension LibrarySolution {
         })
         
     }
+    
+    /// 130.被围绕的区域 提交显示 运行错误，playground调试没问题
+    func solve(_ board: inout [[Character]]) {
+        let m = board.count
+        if m <= 2 { return }
+        let n = board[0].count
+        if n <= 2 { return }
+        
+        func helper(i: Int, j: Int) -> Bool {
+            let a = board[i][j]
+            if a == "X" { return true }
+            if a == "O" {
+                if (i == 0 || i == m - 1 || j == 0 || j == n - 1) {
+                    return false
+                }
+                // let top = helper(i: i - 1, j: j)
+                // let bottom = helper(i: i + 1, j: j)
+                // let left = helper(i: i, j: j - 1)
+                // let right = helper(i: i, j: j + 1)
+                return helper(i: i - 1, j: j) && helper(i: i + 1, j: j) && helper(i: i, j: j - 1) && helper(i: i, j: j + 1)
+            }
+            return false
+        }
+        for i in 1 ..< m - 1 {
+            for j in 1 ..< n - 1 {
+                if helper(i: i, j: j) == false {
+                    board[i][j] = "X"
+                }
+            }
+        }
+    }
 }
