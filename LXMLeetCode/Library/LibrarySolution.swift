@@ -281,6 +281,38 @@ class LibrarySolution {
         return result
     }
     
+    /// 42.接雨水,这个算法的核心思路是：一块柱子能接水的量取决于它左右两边最高的柱子中较短的一个
+    /// 这个算法是分别计算每个柱子能接到的雨水的量，再求和！！！
+    func trap(_ height: [Int]) -> Int {
+        let n = height.count
+        if n <= 2 { return 0 }
+        var leftArray = [Int](repeating:0, count: n) //leftArray是保存height[i]左边最大值的数组
+        var rightArray = [Int](repeating:0, count: n)//rightArray是保存height[i]右边边最大值的数组
+        var maxLeft = 0
+        for i in 0 ..< n {
+            maxLeft = max(maxLeft, height[i])
+            leftArray[i] = maxLeft
+        }
+        
+        var maxRight = 0
+        for i in (0 ..< n).reversed() {
+            maxRight = max(maxRight, height[i])
+            rightArray[i] = maxRight
+        }
+        
+        var result = 0
+        for i in 1 ..< n - 1 {
+            if leftArray[i - 1] <= 0 || rightArray[i + 1] <= 0 {
+                continue
+            }
+            let temp = min(leftArray[i - 1], rightArray[i + 1]) - height[i]
+            if temp > 0 {
+                result += temp
+            }
+        }
+        return result
+    }
+    
     /// 47 全排列 II  跟40有点像
     func permuteUnique(_ nums: [Int]) -> [[Int]] {
         var array = nums.sorted()
