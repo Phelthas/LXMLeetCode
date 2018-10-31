@@ -244,4 +244,24 @@ extension LibrarySolution {
             }
         }
     }
+    
+    /// 137.只出现一次的数字 II
+    // 网上其他两种算法，没完全弄懂
+    // 利用位运算才有办法实现不用额外空间，就是遍历32次每次记录某位的出现的次数，如果不能被三整除，说明那个出现一次的就在该位有值，那么ans 或该位一下就可以了。
+    // 对于除出现一次之外的所有的整数，其二进制表示中每一位1出现的次数是3的整数倍，将所有这些1清零，剩下的就是最终的数。用ones记录到当前计算的变量为止，二进制1出现“1次”（mod 3 之后的 1）的数位。用twos记录到当前计算的变量为止，二进制1出现“2次”（mod 3 之后的 2）的数位。当ones和twos中的某一位同时为1时表示二进制1出现3次，此时需要清零。即用二进制模拟三进制计算。最终ones记录的是最终结果。
+    func singleNumber(_ nums: [Int]) -> Int {
+        var dict = [Int : Int]()
+        for num in nums {
+            if let count = dict[num] {
+                if count == 2 {
+                    dict.removeValue(forKey: num)
+                } else {
+                    dict[num] = count + 1
+                }
+            } else {
+                dict[num] = 1
+            }
+        }
+        return dict.keys.first ?? 0
+    }
 }
