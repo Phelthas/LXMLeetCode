@@ -264,4 +264,40 @@ extension LibrarySolution {
         }
         return dict.keys.first ?? 0
     }
+    
+    /// 139. 单词拆分, 超时的算法
+//    func wordBreak(_ s: String, _ wordDict: [String]) -> Bool {
+//        for i in 0 ..< wordDict.count {
+//            let word = wordDict[i]
+//            if s == word || s.replacingOccurrences(of: "?", with: "") == "" {
+//                return true
+//            } else if s.contains(word) {
+//                let remain = s.replacingOccurrences(of: word, with: "?")
+//                let temp = wordBreak(remain, wordDict)
+//                if temp {//注意这里是true才返回，false的话就继续
+//                    return true
+//                }
+//            } else {
+//                continue
+//            }
+//        }
+//        return false
+//    }
+    
+    /// 139. 单词拆分,动态规划的算法
+    func wordBreak(_ s: String, _ wordDict: [String]) -> Bool {
+        var array = [Character](s)
+        var dp = [Bool](repeating: false, count: s.count + 1)
+        dp[0] = true
+        for i in 0 ..< s.count {
+            for j in 0 ... i {
+                let sub = String(array[i...j])
+                if dp[j] && wordDict.contains(sub) {
+                    dp[i + 1] = true
+                    break
+                }
+            }
+        }
+        return dp[s.count]
+    }
 }

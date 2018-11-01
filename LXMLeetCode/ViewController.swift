@@ -142,6 +142,8 @@ class ViewController: UIViewController {
         }
         block()
         
+        LibrarySolution().wordBreak("cars", ["car","ca","rs"])
+        
         
     }
     
