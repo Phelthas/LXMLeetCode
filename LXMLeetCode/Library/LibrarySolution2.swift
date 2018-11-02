@@ -300,4 +300,35 @@ extension LibrarySolution {
         }
         return dp[s.count]
     }
+    
+    /// 143. 重排链表
+    func reorderList(_ head: ListNode?) {
+        var p1 = head
+        var p2 = head?.next
+        while p2?.next != nil {
+            p1 = p1?.next
+            p2 = p2?.next?.next
+        }
+        var two = p1?.next
+        p1?.next = nil
+        var one = head
+        
+        var last: ListNode? = nil
+        while two != nil {
+            let temp = two?.next
+            two?.next = last
+            last = two
+            two = temp
+        }
+        two = last
+        
+        while one != nil && two != nil {
+            let temp1 = one?.next
+            let temp2 = two?.next
+            one?.next = two
+            two?.next = temp1
+            one = temp1
+            two = temp2
+        }
+    }
 }
