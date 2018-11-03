@@ -331,4 +331,36 @@ extension LibrarySolution {
             two = temp2
         }
     }
+    
+    /// 147. 对链表进行插入排序
+    func insertionSortList(_ head: ListNode?) -> ListNode? {
+        if head == nil { return nil }
+        var sorted = head
+        var current = head?.next
+        sorted?.next = nil
+        while current != nil {
+            var temp = current?.next
+            current?.next = nil
+            if current!.val < sorted!.val {
+                current?.next = sorted
+                sorted = current
+            } else {
+                var last = sorted
+                var target = sorted?.next
+                while target != nil {
+                    if current!.val <= target!.val {
+                        last?.next = current
+                        current?.next = target
+                        break
+                    } else {
+                        last = target
+                        target = target?.next
+                    }
+                }
+                last?.next = current
+            }
+            current = temp
+        }
+        return sorted
+    }
 }
