@@ -365,4 +365,35 @@ extension LibrarySolution {
     }
     
     /// 148. 排序链表
+    func sortList(_ head: ListNode?) -> ListNode? {
+        
+        func mergeHelper(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+            guard let l1 = l1 else { return l2 }
+            guard let l2 = l2 else { return l1 }
+            var result: ListNode? = nil
+            if l1.val < l2.val {
+                result = l1
+                result?.next = mergeHelper(l1.next, l2)
+            } else {
+                result = l2
+                result?.next = mergeHelper(l2.next, l1)
+            }
+            return result
+        }
+        
+        if head == nil || head?.next == nil { return head }//这一句不能少，否则LeetCode会报错
+        
+        var slow = head
+        var fast = head?.next
+        while fast?.next != nil {
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        let two = slow?.next
+        slow?.next = nil
+        let l1 = sortList(head)
+        let l2 = sortList(two)
+        let result = mergeHelper(l1, l2)
+        return result
+    }
 }
