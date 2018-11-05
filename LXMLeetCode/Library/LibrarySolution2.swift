@@ -396,4 +396,32 @@ extension LibrarySolution {
         let result = mergeHelper(l1, l2)
         return result
     }
+    
+    /// 165. 比较版本号
+    func compareVersion(_ version1: String, _ version2: String) -> Int {
+        let array1 = version1.components(separatedBy: ".")
+        let array2 = version2.components(separatedBy: ".")
+        
+        let count1 = array1.count
+        let count2 = array2.count
+        let maxCount = count1 >= count2 ? count1 : count2
+        
+        for i in 0 ..< maxCount {
+            var one: Int = 0
+            var two: Int = 0
+            if i < count1 {
+                one = Int(array1[i]) ?? 0
+            }
+            if i < count2 {
+                two = Int(array2[i]) ?? 0
+            }
+            if one > two {
+                return 1
+            } else if one < two {
+                return -1
+            }
+        }
+        return 0
+        
+    }
 }
