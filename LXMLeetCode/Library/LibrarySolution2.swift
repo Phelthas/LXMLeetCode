@@ -424,4 +424,25 @@ extension LibrarySolution {
         return 0
         
     }
+    
+    
+    /// 168. Excel表列名称
+    func convertToTitle(_ n: Int) -> String {
+        let A: Character = "A"
+        let num = Int(A.unicodeScalars.first!.value)
+        
+        func helper(_ n: Int, _ temp: String) -> String {
+            let n = n - 1
+            if n >= 0 && n <= 25 {
+                return String(Character(UnicodeScalar(num + n)!)) + temp
+            } else {
+                let a = n % 26
+                let b = n / 26
+                let c = helper(a + 1, temp)
+                return helper(b, c)
+            }
+        }
+        return helper(n, "")
+    }
+    
 }
