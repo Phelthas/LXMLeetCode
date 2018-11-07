@@ -445,4 +445,53 @@ extension LibrarySolution {
         return helper(n, "")
     }
     
+    /// 179. 最大数,自己想的算法比别人慢100倍。。。
+    func largestNumber(_ nums: [Int]) -> String {
+        
+        var maxString: String = ""
+        // a >= b 返回true，a < b返回false
+        func helper(_ array: [Int], _ num: Int) -> [Int] {
+            if array.count == 0 {
+                maxString = "\(num)"
+                return [num]
+            } else {
+                var result = [Int]()
+                for i in 0 ... array.count {
+                    var temp = array
+                    temp.insert(num, at: i)
+                    var current = ""
+                    for j in 0 ..< temp.count {
+                        if current == "0" {
+                            current = "\(temp[j])"
+                        } else {
+                            current += "\(temp[j])"
+                        }
+                        
+                    }
+                    if current > maxString {
+                        maxString = current
+                        result = temp
+                    }
+                }
+                return result
+            }
+        }
+        
+        var result = [Int]()
+        let temp = Array(nums.sorted().reversed())
+        for i in 0 ..< nums.count {
+            result = helper(result, temp[i])
+        }
+        return maxString
+    }
+    
+    // func largestNumber(_ nums: [Int]) -> String {
+    //     let strs = nums.map{"\($0)"}.sorted { (str1, str2) -> Bool in
+    //         return str1 + str2 > str2 + str1
+    //     }
+    //     let s = strs.joined()
+    //     if(s.first != "0"){ return s }
+    //     return "0"
+    // }
+    
 }
