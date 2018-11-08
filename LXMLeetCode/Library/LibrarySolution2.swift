@@ -494,4 +494,31 @@ extension LibrarySolution {
     //     return "0"
     // }
     
+    /// 199. 二叉树的右视图
+    func rightSideView(_ root: TreeNode?) -> [Int] {
+        guard let root = root else { return [Int]() }
+        var matrix = [[Int]]()
+        var array1 = [TreeNode]()
+        var array2 = [TreeNode]()
+        array1.append(root)
+        while array1.count > 0 {
+            var temp = [Int]()
+            for node in array1 {
+                temp.append(node.val)
+                if let left = node.left {
+                    array2.append(left)
+                }
+                if let right = node.right {
+                    array2.append(right)
+                }
+            }
+            matrix.append(temp)
+            array1 = array2
+            array2.removeAll()
+        }
+        return matrix.map { array in
+            return array.last!
+        }
+    }
+    
 }
