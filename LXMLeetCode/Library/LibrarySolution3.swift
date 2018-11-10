@@ -34,4 +34,35 @@ extension LibrarySolution {
         }
         return true
     }
+    
+    /// 213. 打家劫舍 II
+    func rob(_ nums: [Int]) -> Int {
+        let n = nums.count
+        if n == 0 { return 0 }
+        if n == 1 { return nums[0] }
+        if n == 2 { return max(nums[0], nums[1]) }
+        
+        var dp1 = [Int](repeating: 0, count: nums.count + 1) // 不考虑首尾相连，且偷第一个的情况
+        var dp2 = [Int](repeating: 0, count: nums.count + 1) // 不考虑首尾相连，且不偷第一个的情况
+        
+        var result = [Int](repeating: 0, count: nums.count + 1)
+        
+        dp1[0] = nums[0]
+        dp1[1] = nums[0]
+        for i in 2 ..< nums.count {
+            dp1[i] = max(dp1[i-1], dp1[i-2] + nums[i])
+        }
+        
+        dp2[1] = nums[1]
+        for i in 2 ..< nums.count {
+            dp2[i] = max(dp2[i-1], dp2[i-2] + nums[i])
+        }
+        
+        result[0] = nums[0]
+        for i in 1 ..< nums.count {
+            result[i] = max(dp1[i-1], dp2[i])
+        }
+        return result[nums.count - 1]
+        
+    }
 }
