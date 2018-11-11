@@ -67,4 +67,32 @@ extension LibrarySolution {
     }
     
     /// 216. 组合总和 III
+    func combinationSum3(_ k: Int, _ n: Int) -> [[Int]] {
+        var array = [Int]()
+        for i in 1 ... 9 {
+            array.append(i)
+        }
+        
+        var result = [[Int]]()
+        
+        func helper(remain: [Int], current: [Int], sum: Int) {
+            var newRemain = remain
+            while newRemain.count > 0 {
+                let temp = newRemain.removeFirst()
+                var newCurrent = current
+                newCurrent.append(temp)
+                let newSum = sum + temp
+                if newSum == n && newCurrent.count == k {
+                    result.append(newCurrent)
+                } else if newSum > n {
+                    continue
+                } else {
+                    helper(remain: newRemain, current: newCurrent, sum: newSum)
+                }
+            }
+        }
+        
+        helper(remain: array, current: [Int](), sum: 0)
+        return result
+    }
 }
