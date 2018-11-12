@@ -95,4 +95,59 @@ extension LibrarySolution {
         helper(remain: array, current: [Int](), sum: 0)
         return result
     }
+    
+    /// 219. 存在重复元素 II
+    /// 超时的算法
+    // func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
+    //     if k == 0 { return false }
+    //     for i in 0 ..< nums.count {
+    //         for j in i + 1 ... i + k {
+    //             if j < nums.count {
+    //                 if nums[i] == nums[j] {
+    //                     return true
+    //                 }
+    //             } else {
+    //                 break
+    //             }
+    //         }
+    //     }
+    //     return false
+    // }
+    
+    /// 自己想的算法
+    func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
+        if k == 0 { return false }
+        var dict = [Int : [Int]]()
+        for i in 0 ..< nums.count {
+            let num = nums[i]
+            if var array = dict[num] {
+                array.append(i)
+                dict[num] = array
+            } else {
+                dict[num] = [i]
+            }
+        }
+        for array in dict.values {
+            for i in 0 ..< array.count - 1 {
+                if array[i + 1] - array[i] <= k {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    // 别人提交的最快的算法
+    // func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
+    //     var set: Set<Int> = []
+    //     for i in 0..<nums.count {
+    //         if i > k {
+    //             set.remove(nums[i-k-1])//移掉无效数据
+    //         }
+    //         if !set.insert(nums[i]).inserted {
+    //             return true
+    //         }
+    //     }
+    //     return false
+    // }
 }
