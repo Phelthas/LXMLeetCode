@@ -150,4 +150,24 @@ extension LibrarySolution {
     //     }
     //     return false
     // }
+    
+    /// 220. 存在重复元素 III 时间复杂度O(kn)都超时，得再研究下了
+    func containsNearbyAlmostDuplicate(_ nums: [Int], _ k: Int, _ t: Int) -> Bool {
+        if k == 0 { return false }
+        var set = Set<Int>()
+        for i in 0 ..< nums.count {
+            let current = nums[i]
+            if i > k {
+                set.remove(nums[i - k - 1])
+            }
+            for temp in set {
+                if abs(temp - current) <= t {
+                    return true
+                }
+            }
+            set.insert(current)
+        }
+        
+        return false
+    }
 }
