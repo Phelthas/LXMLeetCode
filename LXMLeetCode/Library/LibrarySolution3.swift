@@ -170,4 +170,54 @@ extension LibrarySolution {
         
         return false
     }
+    
+    /// 221. 最大正方形
+    func maximalSquare(_ matrix: [[Character]]) -> Int {
+        let m = matrix.count
+        if m == 0 { return 0 }
+        let n = matrix[0].count
+        if n == 0 { return 0 }
+        var result = 0
+        
+        func isAll1(i: Int, j: Int, count: Int) -> Bool {
+            for a in i ..< i + count {
+                for b in j ..< j + count {
+                    if matrix[a][b] == "0" {
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+        
+        func helper(i: Int, j: Int) -> Int {
+            if matrix[i][j] == "0" {
+                return result
+            }
+            if result == 0 {
+                result = 1
+            }
+            var temp = result
+            let maxL = min(m - i, n - j)
+            if result >= maxL {
+                return result
+            }
+            for k in result + 1 ... maxL {
+                if result >= maxL {
+                    return result
+                }
+                if isAll1(i: i, j: j, count: k) {
+                    temp += 1
+                }
+            }
+            return temp
+        }
+        
+        for i in 0 ..< m {
+            for j in 0 ..< n {
+                result = helper(i: i, j: j)
+            }
+        }
+        return result * result
+    }
 }
