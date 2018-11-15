@@ -171,53 +171,81 @@ extension LibrarySolution {
         return false
     }
     
-    /// 221. 最大正方形
+    /// 221. 最大正方形,最笨的办法，居然能过。。。
+//    func maximalSquare(_ matrix: [[Character]]) -> Int {
+//        let m = matrix.count
+//        if m == 0 { return 0 }
+//        let n = matrix[0].count
+//        if n == 0 { return 0 }
+//        var result = 0
+//
+//        func isAll1(i: Int, j: Int, count: Int) -> Bool {
+//            for a in i ..< i + count {
+//                for b in j ..< j + count {
+//                    if matrix[a][b] == "0" {
+//                        return false
+//                    }
+//                }
+//            }
+//            return true
+//        }
+//
+//        func helper(i: Int, j: Int) -> Int {
+//            if matrix[i][j] == "0" {
+//                return result
+//            }
+//            if result == 0 {
+//                result = 1
+//            }
+//            var temp = result
+//            let maxL = min(m - i, n - j)
+//            if result >= maxL {
+//                return result
+//            }
+//            for k in result + 1 ... maxL {
+//                if result >= maxL {
+//                    return result
+//                }
+//                if isAll1(i: i, j: j, count: k) {
+//                    temp += 1
+//                }
+//            }
+//            return temp
+//        }
+//
+//        for i in 0 ..< m {
+//            for j in 0 ..< n {
+//                result = helper(i: i, j: j)
+//            }
+//        }
+//        return result * result
+//    }
+    
+    /// 221. 最大正方形 别人提交的算法
     func maximalSquare(_ matrix: [[Character]]) -> Int {
         let m = matrix.count
         if m == 0 { return 0 }
         let n = matrix[0].count
         if n == 0 { return 0 }
         var result = 0
-        
-        func isAll1(i: Int, j: Int, count: Int) -> Bool {
-            for a in i ..< i + count {
-                for b in j ..< j + count {
-                    if matrix[a][b] == "0" {
-                        return false
-                    }
-                }
-            }
-            return true
-        }
-        
-        func helper(i: Int, j: Int) -> Int {
-            if matrix[i][j] == "0" {
-                return result
-            }
-            if result == 0 {
-                result = 1
-            }
-            var temp = result
-            let maxL = min(m - i, n - j)
-            if result >= maxL {
-                return result
-            }
-            for k in result + 1 ... maxL {
-                if result >= maxL {
-                    return result
-                }
-                if isAll1(i: i, j: j, count: k) {
-                    temp += 1
-                }
-            }
-            return temp
+        var A = [[Int]]()//设置A[i][j]是以ij为右下角的最大正方形的边长，则A[i][j]=min(A[i-1][j-1],A[i-1][j],A[i][j-1])+1,参考https://blog.csdn.net/u012501459/article/details/46553139
+        for _ in 0 ..< m {
+            let array = [Int](repeating: 0, count: n)
+            A.append(array)
         }
         
         for i in 0 ..< m {
             for j in 0 ..< n {
-                result = helper(i: i, j: j)
+                if matrix[i][j] == "1" {
+                    A[i][j] = 1
+                    if i > 0 && j > 0 {
+                        A[i][j] += min(min(A[i - 1][j], A[i][j - 1]), A[i - 1][j - 1])
+                    }
+                    result = max(result, A[i][j])
+                }
             }
         }
+        
         return result * result
     }
 }
