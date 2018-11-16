@@ -248,4 +248,13 @@ extension LibrarySolution {
         
         return result * result
     }
+    
+    /// 222. 完全二叉树的节点个数, 直接递归了，没用到完全二叉树的性质
+    func countNodes(_ root: TreeNode?) -> Int {
+        if root == nil {
+            return 0
+        } else {
+            return countNodes(root?.left) + countNodes(root?.right) + 1
+        }
+    }
 }
