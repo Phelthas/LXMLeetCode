@@ -257,4 +257,24 @@ extension LibrarySolution {
             return countNodes(root?.left) + countNodes(root?.right) + 1
         }
     }
+    
+    /// 223. 矩形面积
+    func computeArea(_ A: Int, _ B: Int, _ C: Int, _ D: Int, _ E: Int, _ F: Int, _ G: Int, _ H: Int) -> Int {
+        let area1 = abs(A - C) * abs(B - D)
+        let area2 = abs(E - G) * abs(F - H)
+        let area3 = abs(min(C, G) - max(A, E)) * abs(min(D, H) - max(B, F))
+        // if ((E <= A && A <= G) || (E <= C && C <= G) || (A <= E && E <= C) || (A <= G && G <= C))
+        // && ((F <= B && B <= H) || (F <= D && D <= H) || (B <= F && F <= D) || (B <= H && H <= D)) {
+        //     return area1 + area2 - area3
+        // } else {
+        //     return area1 + area2
+        // }
+        
+        //以上判断等价于
+        if (min(C, G) - max(A, E) > 0) && (min(D, H) - max(B, F) > 0) {
+            return area1 + area2 - area3
+        } else {
+            return area1 + area2
+        }
+    }
 }
