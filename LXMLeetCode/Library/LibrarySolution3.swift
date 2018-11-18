@@ -288,4 +288,33 @@ extension LibrarySolution {
         invertTree(root.right)
         return root
     }
+    
+    /// 228. 汇总区间
+    func summaryRanges(_ nums: [Int]) -> [String] {
+        var result = [String]()
+        guard nums.count > 0 else { return result }
+        if nums.count == 1 { return ["\(nums[0])"] }
+        var start = nums[0]
+        var end = nums[0]
+        for i in 1 ..< nums.count {
+            let current = nums[i]
+            if current != end + 1 {
+                if start == end {
+                    result.append("\(start)")
+                } else {
+                    result.append("\(start)->\(end)")
+                }
+                start = current
+                end = current
+            } else {
+                end = current
+            }
+        }
+        if start == end {
+            result.append("\(start)")
+        } else {
+            result.append("\(start)->\(end)")
+        }
+        return result
+    }
 }
