@@ -317,4 +317,19 @@ extension LibrarySolution {
         }
         return result
     }
+    
+    /// 231. 2的幂
+    func isPowerOfTwo(_ n: Int) -> Bool {
+        if n <= 0 { return false }
+        if n == 1 { return true }
+        var current = n
+        while current > 2 {
+            if current % 2 != 0 {
+                return false
+            } else {
+                current = current / 2
+            }
+        }
+        return true
+    }
 }
