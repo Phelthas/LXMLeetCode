@@ -332,4 +332,23 @@ extension LibrarySolution {
         }
         return true
     }
+    
+    /// 238. 除自身以外数组的乘积,这个题目有点意思，看了别人答案觉得挺简单，但自己又想不出来
+    func productExceptSelf(_ nums: [Int]) -> [Int] {
+        let n = nums.count
+        var result = [Int](repeating: 1, count: n)
+        guard n > 0 else { return result }
+        var left = [Int](repeating: 1, count: n) //设left[i]为nums[i]左边的所有元素的乘积
+        var right = [Int](repeating: 1, count: n) //设right[i]为nums[i]右边的所有元素的乘积
+        for i in 1 ..< n {
+            left[i] = left[i - 1] * nums[i - 1]
+        }
+        for i in (0 ..< n - 1).reversed() {
+            right[i] = right[i + 1] * nums[i + 1]
+        }
+        for i in 0 ..< n {
+            result[i] = left[i] * right[i]
+        }
+        return result
+    }
 }
