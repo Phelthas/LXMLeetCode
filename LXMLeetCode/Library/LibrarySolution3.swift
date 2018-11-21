@@ -351,4 +351,31 @@ extension LibrarySolution {
         }
         return result
     }
+    
+    /// 257. 二叉树的所有路径
+    func binaryTreePaths(_ root: TreeNode?) -> [String] {
+        var result = [String]()
+        guard let root = root else { return result }
+        
+        func helper(_ node: TreeNode, _ current: String) {
+            var temp = ""
+            if current == "" {
+                temp = "\(node.val)"
+            } else {
+                temp = current + "->\(node.val)"
+            }
+            if node.left == nil && node.right == nil {
+                result.append(temp)
+            }
+            if let left = node.left {
+                helper(left, temp)
+            }
+            if let right = node.right {
+                helper(right, temp)
+            }
+        }
+        
+        helper(root, "")
+        return result
+    }
 }
