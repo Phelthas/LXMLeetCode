@@ -378,4 +378,21 @@ extension LibrarySolution {
         helper(root, "")
         return result
     }
+    
+    
+    /// 258. 各位相加
+    func addDigits(_ num: Int) -> Int {
+        var current = num
+        var sum = 0
+        repeat {
+            sum = 0
+            while current > 0 {
+                let temp = current % 10
+                current = current / 10
+                sum += temp
+            }
+            current = sum
+        } while sum >= 10
+        return sum
+    }
 }
