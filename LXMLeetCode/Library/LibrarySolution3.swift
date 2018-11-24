@@ -408,4 +408,24 @@ extension LibrarySolution {
         }
         return Array(set)
     }
+    
+    /// 263. 丑数
+    func isUgly(_ num: Int) -> Bool {
+        if num == 0 { return false }
+        if num == 1 { return true }
+        var current = num
+        if num % 2 == 0 {
+            current = num / 2
+            return isUgly(current)
+        }
+        if num % 3 == 0 {
+            current = num / 3
+            return isUgly(current)
+        }
+        if num % 5 == 0 {
+            current = num / 5
+            return isUgly(current)
+        }
+        return false
+    }
 }
