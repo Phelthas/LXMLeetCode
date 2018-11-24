@@ -395,4 +395,17 @@ extension LibrarySolution {
         } while sum >= 10
         return sum
     }
+    
+    /// 260. 只出现一次的数字 III
+    func singleNumber(_ nums: [Int]) -> [Int] {
+        var set = Set<Int>()
+        for num in nums {
+            if set.contains(num) {
+                set.remove(num)
+            } else {
+                set.insert(num)
+            }
+        }
+        return Array(set)
+    }
 }
