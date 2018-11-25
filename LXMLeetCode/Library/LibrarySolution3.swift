@@ -428,4 +428,33 @@ extension LibrarySolution {
         }
         return false
     }
+    
+    /// 264. 丑数 II   没完全弄懂
+    func nthUglyNumber(_ n: Int) -> Int {
+        if n == 1 { return 1}
+        var val1 = 2
+        var val2 = 3
+        var val3 = 5
+        var i1 = 0
+        var i2 = 0
+        var i3 = 0
+        var result = [1]
+        for i in 1 ..< n {
+            let current = min(min(val1, val2), val3)
+            result.append(current)
+            if current == val1 {
+                i1 += 1
+                val1 = result[i1] * 2
+            }
+            if current == val2 {
+                i2 += 1
+                val2 = result[i2] * 3
+            }
+            if current == val3 {
+                i3 += 1
+                val3 = result[i3] * 5
+            }
+        }
+        return result[n - 1]
+    }
 }
