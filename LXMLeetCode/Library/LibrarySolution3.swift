@@ -457,4 +457,61 @@ extension LibrarySolution {
         }
         return result[n - 1]
     }
+    
+    
+    /// 289. 生命游戏
+    func gameOfLife(_ board: inout [[Int]]) {
+        var m = board.count
+        var n = board[0].count
+        var matrix = board
+        
+        func helper(_ i: Int, _ j: Int) -> Int {
+            var count = 0
+            if i > 0 {
+                count += board[i - 1][j]
+                if j > 0 {
+                    count += board[i - 1][j - 1]
+                }
+                if j < n - 1 {
+                    count += board[i - 1][j + 1]
+                }
+            }
+            if i < m - 1 {
+                count += board[i + 1][j]
+                if j > 0 {
+                    count += board[i + 1][j - 1]
+                }
+                if j < n - 1 {
+                    count += board[i + 1][j + 1]
+                }
+            }
+            if j > 0 {
+                count += board[i][j - 1]
+            }
+            if j < n - 1 {
+                count += board[i][j + 1]
+            }
+            
+            if board[i][j] == 1 {
+                if count == 2 || count == 3 {
+                    return 1
+                } else {
+                    return 0
+                }
+            } else {
+                if count == 3 {
+                    return 1
+                } else {
+                    return 0
+                }
+            }
+        }
+        
+        for i in 0 ..< m {
+            for j in 0 ..< n {
+                matrix[i][j] = helper(i, j)
+            }
+        }
+        board = matrix
+    }
 }
