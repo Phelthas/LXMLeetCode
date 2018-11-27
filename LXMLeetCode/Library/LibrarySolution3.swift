@@ -514,4 +514,32 @@ extension LibrarySolution {
         }
         board = matrix
     }
+    
+    /// 290. 单词模式
+    func wordPattern(_ pattern: String, _ str: String) -> Bool {
+        let array = [Character](pattern)
+        let wordArray = str.components(separatedBy: " ")
+        if array.count != wordArray.count { return false }
+        var dict1 = [Character : String]()
+        var dict2 = [String : Character]()
+        for i in 0 ..< array.count {
+            let c = array[i]
+            let s = wordArray[i]
+            if let temp = dict1[c] {
+                if temp != s {
+                    return false
+                }
+            } else {
+                dict1[c] = s
+            }
+            if let temp = dict2[s] {
+                if temp != c {
+                    return false
+                }
+            } else {
+                dict2[s] = c
+            }
+        }
+        return true
+    }
 }
