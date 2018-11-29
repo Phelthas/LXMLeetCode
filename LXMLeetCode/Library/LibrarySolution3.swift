@@ -562,4 +562,39 @@ extension LibrarySolution {
             return true
         }
     }
+    
+    /// 299. 猜数字游戏  用了最笨的双循环
+    func getHint(_ secret: String, _ guess: String) -> String {
+        var array1 = [Character](secret)
+        var array2 = [Character](guess)
+        var bulls = 0
+        var cows = 0
+        var used = Set<Int>()
+        var bullSet = Set<Int>()
+        
+        for i in 0 ..< array1.count {
+            if array1[i] == array2[i] {
+                bulls += 1
+                bullSet.insert(i)
+                used.insert(i)
+            }
+        }
+        
+        for i in 0 ..< array2.count {
+            if bullSet.contains(i) {
+                continue
+            }
+            for j in 0 ..< array1.count {
+                if used.contains(j) {
+                    continue
+                }
+                if array2[i] == array1[j] {
+                    cows += 1
+                    used.insert(j)
+                    break
+                }
+            }
+        }
+        return "\(bulls)A\(cows)B"
+    }
 }
