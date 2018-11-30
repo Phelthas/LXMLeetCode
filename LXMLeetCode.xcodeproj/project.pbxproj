@@ -26,6 +26,7 @@
 		43F7195B20D0C02000A872C4 /* DesignSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7195A20D0C02000A872C4 /* DesignSolution.swift */; };
 		43FDBAF020AFCF440010579A /* StringSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FDBAEF20AFCF440010579A /* StringSolution.swift */; };
 		F635250E2195DB78004A9EE8 /* LibrarySolution3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F635250D2195DB78004A9EE8 /* LibrarySolution3.swift */; };
+		F640444C21B18D780066FF4D /* LibrarySolution4.swift in Sources */ = {isa = PBXBuildFile; fileRef = F640444B21B18D780066FF4D /* LibrarySolution4.swift */; };
 		F6467E3A211B3A7100F6F841 /* LibrarySolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6467E39211B3A7100F6F841 /* LibrarySolution.swift */; };
 		F6519538217B81B300D46042 /* LibrarySolution2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6519537217B81B300D46042 /* LibrarySolution2.swift */; };
 		F6918B1620F3B6DE0035B0C9 /* BacktrackingSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6918B1520F3B6DE0035B0C9 /* BacktrackingSolution.swift */; };
@@ -56,6 +57,7 @@
 		43F7195A20D0C02000A872C4 /* DesignSolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSolution.swift; sourceTree = "<group>"; };
 		43FDBAEF20AFCF440010579A /* StringSolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSolution.swift; sourceTree = "<group>"; };
 		F635250D2195DB78004A9EE8 /* LibrarySolution3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySolution3.swift; sourceTree = "<group>"; };
+		F640444B21B18D780066FF4D /* LibrarySolution4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySolution4.swift; sourceTree = "<group>"; };
 		F6467E39211B3A7100F6F841 /* LibrarySolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySolution.swift; sourceTree = "<group>"; };
 		F6519537217B81B300D46042 /* LibrarySolution2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySolution2.swift; sourceTree = "<group>"; };
 		F6918B1520F3B6DE0035B0C9 /* BacktrackingSolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacktrackingSolution.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				F6467E39211B3A7100F6F841 /* LibrarySolution.swift */,
 				F6519537217B81B300D46042 /* LibrarySolution2.swift */,
 				F635250D2195DB78004A9EE8 /* LibrarySolution3.swift */,
+				F640444B21B18D780066FF4D /* LibrarySolution4.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				43FDBAF020AFCF440010579A /* StringSolution.swift in Sources */,
 				438E3FA320CB864B009DEDF1 /* DynamicProgrammingSolution.swift in Sources */,
 				43DC2EE9212F9C2800F29B00 /* DoublyLinkedListSolution.swift in Sources */,
+				F640444C21B18D780066FF4D /* LibrarySolution4.swift in Sources */,
 				430AB70420AC111A0054949C /* MathSolution.swift in Sources */,
 				436BFFD22081E93500B5789A /* BinaryTree.swift in Sources */,
 				F635250E2195DB78004A9EE8 /* LibrarySolution3.swift in Sources */,
