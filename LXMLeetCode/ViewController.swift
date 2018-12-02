@@ -142,8 +142,8 @@ class ViewController: UIViewController {
         }
         block()
         
-        LibrarySolution().wordBreak("cars", ["car","ca","rs"])
-        
+//        LibrarySolution().wordBreak("cars", ["car","ca","rs"])
+        LibrarySolution().isAdditiveNumber("111")
         
     }
     

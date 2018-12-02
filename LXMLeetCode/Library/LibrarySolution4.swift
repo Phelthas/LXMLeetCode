@@ -73,7 +73,7 @@ class NumMatrix {
 
 extension LibrarySolution {
     
-    /// 306. 累加数
+    /// 306. 累加数,特殊情况1023，1203，101
     func isAdditiveNumber(_ num: String) -> Bool {
         let array = [Character](num)
         let n = array.count
@@ -94,12 +94,15 @@ extension LibrarySolution {
             }
         }
         
-        //设第一个数是以i结尾的，那第二个数是以j结尾的
-        for i in 0 ... (n - 1)/2 - 1 {
+        //设第一个数是以i结尾的，第二个数是以j结尾的
+        for i in 0 ... (n - 1)/2 - 1 { //i只能取到一半以下的值
             let one = String(array[0...i])
-            for j in i + 1 ... n - i {
+            if one != "0" && one.hasPrefix("0") { continue }
+            for j in i + 1 ... n - 2 - i { //j至少取一位，且 n - j >= i
                 let two = String(array[i+1 ... j])
-                let remain = String(array[j ... n-1])
+                if two != "0" && two.hasPrefix("0") { continue }
+                let remain = String(array[j+1 ... n-1])
+                if remain != "0" && remain.hasPrefix("0") { continue }
                 if helper(s1: one, s2: two, remain: remain) {
                     return true
                 }
