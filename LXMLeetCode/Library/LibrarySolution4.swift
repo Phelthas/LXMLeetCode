@@ -70,3 +70,43 @@ class NumMatrix {
         
     }
 }
+
+extension LibrarySolution {
+    
+    /// 306. 累加数
+    func isAdditiveNumber(_ num: String) -> Bool {
+        let array = [Character](num)
+        let n = array.count
+        if n < 3 { return false }
+        
+        func helper(s1: String, s2: String, remain: String) -> Bool {
+            let one = Int(s1)!
+            let two = Int(s2)!
+            let next = "\(one + two)"
+            if next == remain { return true }
+            var newRemain = remain
+            if remain.hasPrefix(next) {
+                let range = remain.range(of: next)!
+                newRemain.replaceSubrange(range, with: "")
+                return helper(s1: s2, s2: next, remain: newRemain)
+            } else {
+                return false
+            }
+        }
+        
+        //设第一个数是以i结尾的，那第二个数是以j结尾的
+        for i in 0 ... (n - 1)/2 - 1 {
+            let one = String(array[0...i])
+            for j in i + 1 ... n - i {
+                let two = String(array[i+1 ... j])
+                let remain = String(array[j ... n-1])
+                if helper(s1: one, s2: two, remain: remain) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    
+}
