@@ -71,6 +71,40 @@ class NumMatrix {
     }
 }
 
+/// 307. 区域和检索 - 数组可修改
+class NumArray307 {
+    
+    var nums: [Int]
+    var sumArray = [Int]()
+    
+    init(_ nums: [Int]) {
+        self.nums = nums
+        sumArray = nums
+        if nums.count > 1 {
+            for i in 1 ..< nums.count {
+                sumArray[i] = sumArray[i - 1] + nums[i]
+            }
+        }
+    }
+    
+    func update(_ i: Int, _ val: Int) {
+        let diff = val - nums[i]
+        self.nums[i] = val
+        for j in i ..< nums.count {
+            sumArray[j] += diff
+        }
+    }
+    
+    func sumRange(_ i: Int, _ j: Int) -> Int {
+        if i == 0 {
+            return sumArray[j]
+        } else {
+            return sumArray[j] - sumArray[i - 1]
+        }
+        
+    }
+}
+
 extension LibrarySolution {
     
     /// 306. 累加数,特殊情况1023，1203，101
