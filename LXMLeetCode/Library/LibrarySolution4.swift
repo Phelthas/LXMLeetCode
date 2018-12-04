@@ -146,4 +146,34 @@ extension LibrarySolution {
     }
     
     
+    /// 309. 最佳买卖股票时机含冷冻期
+    /*
+     参考https://blog.csdn.net/zjuPeco/article/details/76468185
+     s0[i] = max(s0[i - 1], s2[i - 1])
+     s1[i] = max(s0[i - 1] - prices[i], s1[i - 1])
+     s2[i] = s1[i - 1] + prices[i]
+     
+     其中s0，s1，s2分别表示三种状态下的最大利润值。
+     值得注意的是这里的s0，s1和s2不是单纯的buy，sell， rest，而应该是
+     
+     s0 —— sell后rest或者rest后rest
+     s1 —— rest后的buy或者buy后的rest
+     s2 —— rest后的sell
+     */
+    func maxProfit(_ prices: [Int]) -> Int {
+        if prices.count <= 1 { return 0 }
+        var s0: Int = 0
+        var s1: Int = -prices[0]
+        var s2: Int = Int.min
+        for i in 1 ..< prices.count {
+            let pre0 = s0
+            let pre1 = s1
+            let pre2 = s2
+            s0 = max(pre0, pre2)
+            s1 = max(pre0 - prices[i], pre1)
+            s2 = pre1 + prices[i]
+        }
+        //最大利润不可能出现在buy而未sell的时候，所以不考虑s1
+        return max(s0, s2)
+    }
 }
