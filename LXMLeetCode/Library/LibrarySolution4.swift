@@ -176,4 +176,26 @@ extension LibrarySolution {
         //最大利润不可能出现在buy而未sell的时候，所以不考虑s1
         return max(s0, s2)
     }
+    
+    
+    /// 318. 最大单词长度乘积 双循环遍历超时
+//    func maxProduct(_ words: [String]) -> Int {
+//        if words.count <= 1 { return 0 }
+//        var resultArray = [[Character]]()
+//        var result = 0
+//        for word in words {
+//            let array = [Character](word)
+//            resultArray.append(array)
+//        }
+//        for i in 0 ..< resultArray.count - 1 {
+//            let one = Set<Character>(resultArray[i])
+//            for j in i + 1 ..< resultArray.count {
+//                let two = Set<Character>(resultArray[j])
+//                if one.intersection(two).count == 0 {
+//                    result = max(result, resultArray[i].count * resultArray[j].count)
+//                }
+//            }
+//        }
+//        return result
+//    }
 }
