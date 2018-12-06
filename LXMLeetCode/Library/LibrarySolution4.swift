@@ -198,4 +198,29 @@ extension LibrarySolution {
 //        }
 //        return result
 //    }
+    
+    /// 318. 最大单词长度乘积 用26位二进制数表示，用位操作计算
+    func maxProduct(_ words: [String]) -> Int {
+        let aValue = "a".unicodeScalars.first!.value
+        if words.count <= 1 { return 0 }
+        var array = [Int]()
+        for word in words {
+            var a = 0
+            for c in word.unicodeScalars {
+                a = a | (1 << (c.value - aValue))
+            }
+            array.append(a)
+        }
+        
+        var result = 0
+        for i in 0 ..< array.count - 1 {
+            for j in 1 ..< array.count {
+                if array[i] & array[j] > 0 {
+                    continue
+                }
+                result = max(result, words[i].count * words[j].count)
+            }
+        }
+        return result
+    }
 }
