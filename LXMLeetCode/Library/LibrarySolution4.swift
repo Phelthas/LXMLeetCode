@@ -224,5 +224,38 @@ extension LibrarySolution {
         return result
     }
     
-    /// 319. 灯泡开关
+    /// 319. 灯泡开关, 遍历的方式超时
+    func bulbSwitch(_ n: Int) -> Int {
+        if n <= 1 { return n }
+        if n == 2 { return 1 }
+        var array = [Int](repeating: 1, count: n)
+        for i in 0 ..< array.count {
+            if i % 2 == 0 {
+                array[i] = 1
+            } else {
+                array[i] = 0
+            }
+        }
+//        for round in 3 ... n {
+//            for i in (round - 1) ..< n {
+//                if  (i+1) % round == 0 {
+//                    array[i] = array[i] == 1 ? 0 : 1
+//                }
+//            }
+//        }
+        
+        //比上面的循环稍微省时一点，但还是超时
+        for round in 3 ... n {
+            let count = n / round
+            for j in 1 ... count {
+                array[round * j - 1] = array[round * j - 1] == 1 ? 0 : 1
+            }
+        }
+        
+        var result = 0
+        for num in array {
+            result += num
+        }
+        return result
+    }
 }
