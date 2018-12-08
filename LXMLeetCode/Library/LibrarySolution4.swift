@@ -225,6 +225,18 @@ extension LibrarySolution {
     }
     
     /// 319. 灯泡开关, 遍历的方式超时
+    /*
+     完全的数学题，如果不是按数学思路的话，我的代码应该是可行的
+     当一个灯泡被执行偶数次switch操作时它是关着的，当被执行奇数次switch操作时它是开着的，那么这题就是要找出哪些编号的灯泡会被执行奇数次操作。
+     现在假如我们执行第ii次操作，即从编号i开始对编号每次+i+i进行switch操作，对于这些灯来说，
+     如果其编号j（j=1,2,3,⋯,n）j（j=1,2,3,⋯,n）能够整除i，则编号jj的灯需要执switch操作。
+     具备这样性质的ii是成对出现的，比如：
+     j=12j=12时，编号为12的灯，在第1次，第12次；第2次，第6次；第3次，第4次一定会被执行Switch操作，这样的话，编号为12的等肯定为灭。
+     但是当完全平方数36就不一样了，因为他有一个特殊的因数6，这样当i=6i=6时，只能被执行一次Switch操作，这样推出，完全平方数一定是亮着的，所以本题的关键在于找完全平方数的个数。
+     所以：只需：return sqrt(n) 即可
+     原文：https://blog.csdn.net/zhangxiao93/article/details/50370170
+     
+     */
     func bulbSwitch(_ n: Int) -> Int {
         if n <= 1 { return n }
         if n == 2 { return 1 }
@@ -258,4 +270,27 @@ extension LibrarySolution {
         }
         return result
     }
+    
+    /// 322. 零钱兑换 直接遍历排列组合算法超时
+//    func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+//        if amount == 0 { return 0 }
+//        var result = Int.max
+//        var sorted = coins.sorted()
+//        
+//        func helper(sum: Int, currentCount: Int) {
+//            for coin in sorted {
+//                let temp = coin + sum
+//                if temp == amount {
+//                    result = min(result, currentCount + 1)
+//                } else if temp > amount {
+//                    break
+//                } else {
+//                    helper(sum: temp, currentCount: currentCount + 1)
+//                }
+//            }
+//        }
+//        helper(sum: 0, currentCount: 0)
+//        return result == Int.max ? -1 : result
+//    }
+    
 }
