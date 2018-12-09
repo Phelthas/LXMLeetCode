@@ -276,7 +276,7 @@ extension LibrarySolution {
 //        if amount == 0 { return 0 }
 //        var result = Int.max
 //        var sorted = coins.sorted()
-//        
+//
 //        func helper(sum: Int, currentCount: Int) {
 //            for coin in sorted {
 //                let temp = coin + sum
@@ -292,5 +292,30 @@ extension LibrarySolution {
 //        helper(sum: 0, currentCount: 0)
 //        return result == Int.max ? -1 : result
 //    }
+    
+    /// 322. 零钱兑换 动态规划算法
+    func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+        if amount <= 0 { return 0 }
+        var dp = [Int](repeating: Int.max, count: amount + 1)
+        dp[0] = 0
+        for i in 1 ... amount {
+            for j in 0 ..< coins.count {
+                let coin = coins[j]
+                if coin <= i {
+                    // 注意：如果不判断，Int.max+1会溢出
+                    if dp[i - coin] == Int.max {
+                        continue
+                    } else {
+                        dp[i] = min(dp[i], dp[i - coin] + 1)
+                    }
+                }
+            }
+        }
+        if dp[amount] == Int.max {
+            return -1
+        } else {
+            return dp[amount]
+        }
+    }
     
 }
