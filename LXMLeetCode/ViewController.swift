@@ -145,6 +145,7 @@ class ViewController: UIViewController {
 //        LibrarySolution().wordBreak("cars", ["car","ca","rs"])
         LibrarySolution().isAdditiveNumber("111")
         LibrarySolution().coinChange([2], 3)
+        LibrarySolution().findItinerary([["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]])
     }
     
 }

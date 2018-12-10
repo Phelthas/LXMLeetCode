@@ -318,4 +318,27 @@ extension LibrarySolution {
         }
     }
     
+    /// 332. 重新安排行程,自己运行没问题啊，提交提示超时。。。
+    func findItinerary(_ tickets: [[String]]) -> [String] {
+        var sortedArray = tickets.sorted { (arrayOne, arrayTwo) -> Bool in
+            if arrayOne.first! == arrayTwo.first! {
+                return arrayOne.last! <= arrayTwo.last!
+            } else {
+                return arrayOne.first! <= arrayTwo.first!
+            }
+        }
+        var result = ["JFK"]
+        var from = "JFK"
+        while sortedArray.count > 0 {
+            for (index, value) in sortedArray.enumerated() {
+                if value.first! == from {
+                    from = value.last!
+                    result.append(from)
+                    sortedArray.remove(at: index)
+                    break
+                }
+            }
+        }
+        return result
+    }
 }
