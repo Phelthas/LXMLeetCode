@@ -342,5 +342,26 @@ extension LibrarySolution {
         return result
     }
     
-    /// 337. 打家劫舍 III
+    /// 337. 打家劫舍 III 直接递归居然超时了
+    func rob(_ root: TreeNode?) -> Int {
+        guard let node = root else { return 0 }
+        var sum1 = 0
+        sum1 += node.val
+        if let left = node.left {
+            sum1 += rob(left.left)
+            sum1 += rob(left.right)
+        }
+        if let right = node.right {
+            sum1 += rob(right.left)
+            sum1 += rob(right.right)
+        }
+        var sum2 = 0
+        if let left = node.left {
+            sum2 += rob(left)
+        }
+        if let right = node.right {
+            sum2 += rob(right)
+        }
+        return max(sum1, sum2)
+    }
 }
