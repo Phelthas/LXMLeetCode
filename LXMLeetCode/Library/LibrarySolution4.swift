@@ -365,5 +365,20 @@ extension LibrarySolution {
         return max(sum1, sum2)
     }
     
-    /// 338. 比特位计数
+    /// 338. 比特位计数, 思路是对的，但写法比较笨，可以优化一下
+    func countBits(_ num: Int) -> [Int] {
+        if num == 0 { return [0] }
+        if num == 1 { return [1] }
+        var result = [0, 1]
+        var k = 1
+        for i in 2 ... num {
+            if i == 1<<k {
+                k += 1
+                result.append(1)
+            } else {
+                result.append(result[i - 1<<k] + 1)
+            }
+        }
+        return result
+    }
 }
