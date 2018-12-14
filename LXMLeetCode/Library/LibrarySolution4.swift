@@ -397,4 +397,21 @@ extension LibrarySolution {
         }
         return result
     }
+    
+    /// 342. 4的幂
+    func isPowerOfFour(_ num: Int) -> Bool {
+        if num == 1 { return true }
+        var current = num
+        while current > 0 {
+            if current % 4 == 0 {
+                current = current / 4
+                if current == 1 {
+                    return true
+                }
+            } else {
+                return false
+            }
+        }
+        return false
+    }
 }
