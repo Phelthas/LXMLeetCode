@@ -414,4 +414,17 @@ extension LibrarySolution {
         }
         return false
     }
+    
+    /// 343. 整数拆分 动态规划的思想还是得好好学一下
+    func integerBreak(_ n: Int) -> Int {
+        if n == 2 { return 1 }
+        var dp = [Int](repeating: 0, count: n + 1)
+        dp[2] = 1
+        for i in 3 ... n {
+            for j in 1 ..< i {
+                dp[i] = max(max(dp[i], (dp[i - j] * j)), (i - j) * j)
+            }
+        }
+        return dp[n]
+    }
 }
