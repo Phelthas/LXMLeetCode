@@ -427,4 +427,24 @@ extension LibrarySolution {
         }
         return dp[n]
     }
+    
+    /// 345. 反转字符串中的元音字母
+    func reverseVowels(_ s: String) -> String {
+        // a e i o u
+        let set: Set<Character> = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+        var indexArray = [Int]()
+        var valueArray = [Character]()
+        var array = [Character](s)
+        for (index, c) in array.enumerated() {
+            if set.contains(c) {
+                indexArray.append(index)
+                valueArray.append(c)
+            }
+        }
+        let reversed = Array(valueArray.reversed())
+        for i in 0 ..< indexArray.count {
+            array[indexArray[i]] = reversed[i]
+        }
+        return String(array)
+    }
 }
