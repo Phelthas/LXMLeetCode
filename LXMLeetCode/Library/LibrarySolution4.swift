@@ -447,4 +447,23 @@ extension LibrarySolution {
         }
         return String(array)
     }
+    
+    /// 357. 计算各个位数不同的数字个数
+    /// 我的思路是：设array[i]是i位的各位数组都不同的x的个数，当i>10时，结果是不会变的，因为肯定至少有一位重复了，当i<=10时，结果就是前i为的个数之和
+    func countNumbersWithUniqueDigits(_ n: Int) -> Int {
+        if n == 0 { return 1 }
+        if n == 1 { return 10 }
+        var current = 9 //第一位可以是1-9，所以有9中情况，后面可以是0-9，但是要去掉已经选过的数
+        var count = 10
+        var n = n
+        if n > 10 {
+            n = 10
+        }
+        for i in 2 ... n {
+            //从第二位到第n位的情况数
+            current = current * (10 - i + 1)
+            count += current
+        }
+        return count
+    }
 }
