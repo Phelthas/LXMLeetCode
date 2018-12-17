@@ -466,4 +466,27 @@ extension LibrarySolution {
         }
         return count
     }
+    
+    /// 365. 水壶问题
+    /// 两个瓶子可能量出的水是两个瓶子容量最大公约数的倍数。所以只要判断z是否可以被x，y的最大公约数整除即可
+    func canMeasureWater(_ x: Int, _ y: Int, _ z: Int) -> Bool {
+        
+        //辗转相除法求最大公约数
+        func gcd(x: Int, y: Int) -> Int {
+            if y == 0 {
+                return x
+            } else {
+                return gcd(x: y, y: x%y)
+            }
+        }
+        
+        if z == 0 {
+            return true
+        }
+        if x + y < z {
+            return false
+        } else {
+            return z % gcd(x: x, y: y) == 0
+        }
+    }
 }
