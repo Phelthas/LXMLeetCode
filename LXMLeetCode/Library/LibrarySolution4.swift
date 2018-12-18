@@ -493,23 +493,20 @@ extension LibrarySolution {
     /// 372. 超级次方  用到的数学知识
 //    1. a^b % 1337 = (a%1337)^b % 1337
 //    2. xy % 1337 = ((x%1337) * (y%1337)) % 1337, 其中xy是一个数字如:45, 98等等
-//    func superPow(_ a: Int, _ b: [Int]) -> Int {
-//
-//        func helperPow(a: Int, b: Int) -> Int {
-//            if b == 0 { return 1 }
-//            var result = 1
-//            for _ in 1 ... b {
-//                result = (result * a) % 1337
-//            }
-//            return result
-//        }
-//
-//        if b.count == 0 {
-//            return 1
-//        }
-//        var a = a % 1337
-//        for temp in b.reversed() {
-//
-//        }
-//    }
+    //或者(a*b)%c = (a%c)*(b%c)%c
+    func superPow(_ a: Int, _ b: [Int]) -> Int {
+        
+        func helperPow(a: Int, b: Int) -> Int {
+            if b == 0 { return 1 }
+            if b == 1 { return a % 1337 }
+            return (helperPow(a: a % 1337, b: b / 2) * helperPow(a: a % 1337, b: b - b / 2)) % 1337
+            
+        }
+        
+        var result = 1
+        for i in 0 ..< b.count {
+            result = helperPow(a: result, b: 10) * helperPow(a: a, b: b[i]) % 1337
+        }
+        return result
+    }
 }
