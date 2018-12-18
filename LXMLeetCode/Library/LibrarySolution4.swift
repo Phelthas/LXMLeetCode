@@ -489,4 +489,27 @@ extension LibrarySolution {
             return z % gcd(x: x, y: y) == 0
         }
     }
+    
+    /// 372. 超级次方  用到的数学知识
+//    1. a^b % 1337 = (a%1337)^b % 1337
+//    2. xy % 1337 = ((x%1337) * (y%1337)) % 1337, 其中xy是一个数字如:45, 98等等
+//    func superPow(_ a: Int, _ b: [Int]) -> Int {
+//
+//        func helperPow(a: Int, b: Int) -> Int {
+//            if b == 0 { return 1 }
+//            var result = 1
+//            for _ in 1 ... b {
+//                result = (result * a) % 1337
+//            }
+//            return result
+//        }
+//
+//        if b.count == 0 {
+//            return 1
+//        }
+//        var a = a % 1337
+//        for temp in b.reversed() {
+//
+//        }
+//    }
 }
