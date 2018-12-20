@@ -511,4 +511,35 @@ extension LibrarySolution {
     }
     
     /// 373. 查找和最小的K对数字
+    
+    
+    /// 383. 赎金信
+    func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        let array1 = [Character](ransomNote)
+        let array2 = [Character](magazine)
+        var dict1 = [Character : Int]()
+        var dict2 = [Character : Int]()
+        for c in array1 {
+            if let count = dict1[c] {
+                dict1[c] = count + 1
+            } else {
+                dict1[c] = 1
+            }
+        }
+        for c in array2 {
+            if let count = dict2[c] {
+                dict2[c] = count + 1
+            } else {
+                dict2[c] = 1
+            }
+        }
+        for c in array1 {
+            if let temp = dict2[c], temp >= dict1[c]! {
+                
+            } else {
+                return false
+            }
+        }
+        return true
+    }
 }
