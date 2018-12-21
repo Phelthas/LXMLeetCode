@@ -544,28 +544,33 @@ extension LibrarySolution {
     }
     
     
-    /// 386. 字典序排数
-//    func lexicalOrder(_ n: Int) -> [Int] {
-//        var k = 1
-//        var temp = n
-//        while temp / 10 > 0 {
-//            temp = temp / 10
-//            k += 1
-//        }
-//        var result = [Int]()
-//        for i in 1 ... 9 {
-//            result.append(i)
-//            for j in 2 ... k {
-//                let start = i * Int(pow(Float(10), Float(j)))
-//                var end = (i + 1) * Int(pow(Float(10), Float(j))) - 1
-//                if end > n {
-//                    end = n
-//                }
-//                let array = Array(stride(from: start, to: end, by: 1))
-//                result.append(contentsOf: array)
-//                if end > n { return result }
-//            }
-//        }
-//        return result
-//    }
+    /// 386. 字典序排数, 自己的思路没考虑到所有情况，这是抄网上的答案
+    /*
+     1、如果一个数乘以十以后没有超过n，那它后面紧挨着的应该是它的十倍，比如1,10,100。
+     2、如果不满足1，那就应该是直接加一，比如n为13的时候，前一个数为12，120超过了n，那接着的应该是13。但是这里要注意如果前一个数的个位已经是9或者是它就是n了，那就不能加一了，比如 n = 25，前一个数为19，下一个数应该为2而不是19+1=20。25的下一个也没有26了。
+     3、如果不满足2，比如19后面应该接2而不是20，这时候应该将19除以10再加一，比如n=500，399的下一个应该是4，那就是除以十，个位还是9，继续除以10，得到3，加一得到4。
+     ---------------------
+     作者：Cloudox_
+     来源：CSDN
+     原文：https://blog.csdn.net/cloudox_/article/details/70224397
+     版权声明：本文为博主原创文章，转载请附上博文链接！
+     */
+    func lexicalOrder(_ n: Int) -> [Int] {
+        var result = [Int]()
+        var current = 1
+        for i in 1 ... n {
+            result.append(current)
+            if current * 10 <= n {
+                current = current * 10
+            } else if current % 10 != 9 && current + 1 <= n {
+                current += 1
+            } else {
+                while (current / 10) % 10 == 9 {
+                    current = current / 10
+                }
+                current = current / 10 + 1
+            }
+        }
+        return result
+    }
 }
