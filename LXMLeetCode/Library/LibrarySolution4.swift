@@ -542,4 +542,30 @@ extension LibrarySolution {
         }
         return true
     }
+    
+    
+    /// 386. 字典序排数
+//    func lexicalOrder(_ n: Int) -> [Int] {
+//        var k = 1
+//        var temp = n
+//        while temp / 10 > 0 {
+//            temp = temp / 10
+//            k += 1
+//        }
+//        var result = [Int]()
+//        for i in 1 ... 9 {
+//            result.append(i)
+//            for j in 2 ... k {
+//                let start = i * Int(pow(Float(10), Float(j)))
+//                var end = (i + 1) * Int(pow(Float(10), Float(j))) - 1
+//                if end > n {
+//                    end = n
+//                }
+//                let array = Array(stride(from: start, to: end, by: 1))
+//                result.append(contentsOf: array)
+//                if end > n { return result }
+//            }
+//        }
+//        return result
+//    }
 }
