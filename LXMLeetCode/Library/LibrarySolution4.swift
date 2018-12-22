@@ -573,4 +573,30 @@ extension LibrarySolution {
         }
         return result
     }
+    
+    /// 389. 找不同
+    func findTheDifference(_ s: String, _ t: String) -> Character {
+        let one = [Character](s)
+        let two = [Character](t)
+        var dict = [Character : Int]()
+        for c in one {
+            if let count = dict[c] {
+                dict[c] = count + 1
+            } else {
+                dict[c] = 1
+            }
+        }
+        
+        for c in two {
+            if let count = dict[c] {
+                dict[c] = count - 1
+                if count - 1 == 0 {
+                    dict[c] = nil
+                }
+            } else {
+                dict[c] = -1
+            }
+        }
+        return Array(dict.keys).first!
+    }
 }
