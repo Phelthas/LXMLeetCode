@@ -599,4 +599,24 @@ extension LibrarySolution {
         }
         return Array(dict.keys).first!
     }
+    
+    /// 390. 消除游戏 直接模拟操作会超时，得用数学的方法计算出递推公式
+    // func lastRemaining(_ n: Int) -> Int {
+    //     var array = Array(stride(from: 1, through: n, by: 1))
+    //     while array.count > 1 {
+    //         var temp = [Int]()
+    //         for i in stride(from: 1, through: array.count - 1, by: 2) {
+    //             temp.append(array[i])
+    //         }
+    //         array = temp.reversed()
+    //     }
+    //     return array[0]
+    // }
+    func lastRemaining(_ n: Int) -> Int {
+        if n == 1 {
+            return 1
+        } else {
+            return 2 * (n / 2 + 1 - lastRemaining(n / 2))
+        }
+    }
 }
