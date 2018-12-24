@@ -619,4 +619,29 @@ extension LibrarySolution {
             return 2 * (n / 2 + 1 - lastRemaining(n / 2))
         }
     }
+    
+    /// 392. 判断子序列 递归算法，居然过了
+    func isSubsequence(_ s: String, _ t: String) -> Bool {
+        if s == "" { return true }
+        else if t == "" { return false }
+        
+        var arrayS = [Character](s)
+        var arrayT = [Character](t)
+        
+        func helper(arrayS: [Character], arrayT: [Character], startS: Int, startT: Int) -> Bool {
+            
+            for i in startT ..< arrayT.count {
+                if arrayS[startS] == arrayT[i] {
+                    if startS == arrayS.count - 1 {
+                        return true
+                    } else {
+                        return helper(arrayS: arrayS, arrayT: arrayT, startS: startS + 1, startT: i + 1)
+                    }
+                }
+            }
+            return false
+        }
+        return helper(arrayS: arrayS, arrayT: arrayT, startS: 0, startT: 0)
+        
+    }
 }
