@@ -146,6 +146,7 @@ class ViewController: UIViewController {
         LibrarySolution().isAdditiveNumber("111")
         LibrarySolution().coinChange([2], 3)
         LibrarySolution().findItinerary([["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]])
+        LibrarySolution().decodeString("2[abc]3[cd]ef")
     }
     
 }
