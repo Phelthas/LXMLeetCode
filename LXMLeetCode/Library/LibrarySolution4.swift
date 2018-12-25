@@ -644,4 +644,39 @@ extension LibrarySolution {
         return helper(arrayS: arrayS, arrayT: arrayT, startS: 0, startT: 0)
         
     }
+    
+    /// 394. 字符串解码
+//    func decodeString(_ s: String) -> String {
+//        var result = ""
+//        guard s.count > 0 else { return result }
+//        var array = [Character](s)
+//        var stack = [Character]()
+//        for i in 0 ..< array.count {
+//            let c = array[i]
+//            if c == "]" {
+//                var temp = ""
+//                var count = 0
+//                while stack.count > 0 {
+//                    let one = stack.removeLast()
+//                    if one == "[" {
+//                        var numString = ""
+//                        while stack.count > 0 && stack.last! >= "1" && stack.last! <= "9" {
+//                            numString = String(stack.removeLast()) + numString
+//                        }
+//                        count = Int(numString)!
+//                        break
+//                    } else {
+//                        temp = String(one) + temp
+//                    }
+//                }
+//                for _ in 1 ... count {
+//                    temp += temp
+//                }
+//                result += temp
+//            } else {
+//                stack.append(c)
+//            }
+//        }
+//        return result
+//    }
 }
