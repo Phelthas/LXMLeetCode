@@ -688,4 +688,43 @@ extension LibrarySolution {
         }
         return result
     }
+    
+    /// 395. 至少有K个重复字符的最长子串 注意子串是连续的subString
+    func longestSubstring(_ s: String, _ k: Int) -> Int {
+        if k <= 1 { return s.count }
+        
+        let array = [Character](s)
+        var dict = [Character: Int]()
+        for c in array {
+            if let count = dict[c] {
+                dict[c] = count + 1
+            } else {
+                dict[c] = 1
+            }
+        }
+        
+        var result = 0
+        var separator: Character? = nil
+        for key in dict.keys {
+            if let count = dict[key], count < k {
+                separator = key
+                break
+            }
+        }
+        if let separator = separator {
+            let subStringArray = s.components(separatedBy: String(separator))
+            for subString in subStringArray {
+                let temp = longestSubstring(subString, k)
+                if temp > result {
+                    result = temp
+                }
+            }
+        } else {
+            return s.count
+        }
+        return result
+    }
+    
+    
+
 }
