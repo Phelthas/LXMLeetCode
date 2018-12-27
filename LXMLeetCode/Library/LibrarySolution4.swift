@@ -727,4 +727,27 @@ extension LibrarySolution {
     
     
 
+    /// 404. 左叶子之和
+    func sumOfLeftLeaves(_ root: TreeNode?) -> Int {
+        
+        func helper(_ node: TreeNode, isLeft: Bool) -> Int {
+            var result = 0
+            if node.left == nil && node.right == nil {
+                if isLeft {
+                    result += node.val
+                }
+            } else {
+                if let left = node.left {
+                    result += helper(left, isLeft: true)
+                }
+                if let right = node.right {
+                    result += helper(right, isLeft: false)
+                }
+            }
+            return result
+        }
+        guard let root = root else { return 0 }
+        return helper(root, isLeft: false)
+        
+    }
 }
