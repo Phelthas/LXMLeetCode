@@ -750,4 +750,34 @@ extension LibrarySolution {
         return helper(root, isLeft: false)
         
     }
+    
+    /// 409. 最长回文串
+    func longestPalindrome(_ s: String) -> Int {
+        let array = [Character](s)
+        var dict = [Character : Int]()
+        for c in array {
+            if let count = dict[c] {
+                dict[c] = count + 1
+            } else {
+                dict[c] = 1
+            }
+        }
+        var hasOdd = false
+        var odd = 0
+        var even = 0
+        for key in dict.keys {
+            let count = dict[key]!
+            if count % 2 == 0 {
+                even += count
+            } else {
+                hasOdd = true
+                odd += count - 1
+            }
+        }
+        if hasOdd {
+            return even + odd + 1
+        } else {
+            return even
+        }
+    }
 }
