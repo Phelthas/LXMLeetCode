@@ -786,6 +786,19 @@ extension LibrarySolution {
         return Int(String([Character]("\(num)")[mod]))!
     }
     
+    /// 401. 二进制手表
+    func readBinaryWatch(_ num: Int) -> [String] {
+        var result = [String]()
+        for hour in 0 ..< 12 {
+            for minute in 0 ..< 60 {
+                if hour.nonzeroBitCount + minute.nonzeroBitCount == num {
+                    let minuteString = minute < 10 ? "0\(minute)" : "\(minute)"
+                    result.append("\(hour):\(minuteString)")
+                }
+            }
+        }
+        return result
+    }
 
     /// 404. 左叶子之和
     func sumOfLeftLeaves(_ root: TreeNode?) -> Int {
