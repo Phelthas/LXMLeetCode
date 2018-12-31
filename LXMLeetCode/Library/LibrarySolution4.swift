@@ -799,6 +799,34 @@ extension LibrarySolution {
         }
         return result
     }
+    
+    /// 402. 移掉K位数字
+    func removeKdigits(_ num: String, _ k: Int) -> String {
+        if num.count == k { return "0" }
+        let array = [Character](num)
+        var stack = [Character]()
+        var count = k
+        for c in array {
+            while stack.count > 0 && stack.last! > c && count > 0 {
+                stack.removeLast()
+                count -= 1
+            }
+            stack.append(c)
+        }
+        while count > 0 {
+            stack.removeLast()
+            count -= 1
+        }
+        
+        while stack.count > 0 && stack.first! == "0" {
+            stack.removeFirst()
+        }
+        if stack.count == 0 {
+            return "0"
+        } else {
+            return String(stack)
+        }
+    }
 
     /// 404. 左叶子之和
     func sumOfLeftLeaves(_ root: TreeNode?) -> Int {
