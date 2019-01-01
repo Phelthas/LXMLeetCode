@@ -852,6 +852,27 @@ extension LibrarySolution {
         
     }
     
+    /// 406. 根据身高重建队列, 别人的解法，没太懂思路
+    func reconstructQueue(_ people: [[Int]]) -> [[Int]] {
+        guard people.count > 0 else { return [[Int]]() }
+        let sorted = people.sorted { (one, two) -> Bool in
+            if one[0] > two[0] {
+                return true
+            } else if one[0] == two[0] {
+                return one[1] <= two[1]
+            } else {
+                return false
+            }
+        }
+        var result = [[Int]]()
+        result.append(sorted[0])
+        for i in 1 ..< sorted.count {
+            let array = sorted[i]
+            result.insert(array, at: array[1])
+        }
+        return result
+    }
+    
     /// 409. 最长回文串
     func longestPalindrome(_ s: String) -> Int {
         let array = [Character](s)
@@ -881,4 +902,7 @@ extension LibrarySolution {
             return even
         }
     }
+    
+    
+    
 }
